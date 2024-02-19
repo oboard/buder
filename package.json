@@ -1,0 +1,42 @@
+{
+  "private": false,
+  "name": "buder",
+  "version": "0.0.7",
+  "keywords": [
+    "buder",
+    "framework",
+    "frontend"
+  ],
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/oboard/buder#readme",
+  "author": "oboard",
+  "packageManager": "pnpm@8.14.1",
+  "description": "A lightweight frontend framework based on Vite",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oboard/buder.git",
+    "directory": "/"
+  },
+  "bugs": {
+    "url": "https://github.com/oboard/buder/issues"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
+  },
+  "dependencies": {
+    "vite-plugin-dts": "^3.7.2"
+  }
+}

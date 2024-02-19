@@ -1,6 +1,7 @@
-import { BuderWidget } from "./base/widget";
+import { BuderWidget } from "./widget";
 
-class _View extends BuderWidget {
+// View is a widget that contains other widgets.
+export class _View extends BuderWidget {
   children: BuderWidget[];
 
   constructor(children: BuderWidget[] = []) {
@@ -8,12 +9,14 @@ class _View extends BuderWidget {
     this.children = children;
   }
 
-  render() {
-    const el = document.createElement("div");
+  render(el?: HTMLElement): HTMLElement {
+    if (!el) {
+      el = document.createElement("div");
+    }
     this.children.forEach((child) => {
       el.appendChild(child.render());
     });
-    return el;
+    return super.render(el);
   }
 }
 

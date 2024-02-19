@@ -1,15 +1,14 @@
-import { BuderApp, BuderUnit, BuderUnits, Text, View, px } from "./index.ts";
+import { BuderApp, Text, View, px } from "./index.ts";
+import { Row } from "./widgets/row.ts";
 
 BuderApp(
-  "App",
+  "Counter",
   View([
-    Text("Hello Buder!")
-      .style({
-        color: "red",
-        fontSize: px(20),
-      })
-      .onMouseUp((e) => {
-        console.log("Hello Buder!");
-      }),
+    Row([
+      Text("Hello, world!"),
+      Text("Hello, world!"),
+      Text("Hello, world!"),
+      
+    ]),
   ])
 ).mount("#app");

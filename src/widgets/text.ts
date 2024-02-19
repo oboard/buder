@@ -1,4 +1,4 @@
-import { BuderWidget } from "./base/widget";
+import { BuderWidget } from "./widget";
 
 class _Text extends BuderWidget {
   text: string;

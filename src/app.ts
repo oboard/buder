@@ -1,4 +1,4 @@
-import { BuderWidget } from "./widgets/base/widget";
+import { BuderWidget } from "./widgets/widget";
 
 class _BuderApp {
   name: string;

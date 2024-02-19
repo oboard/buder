@@ -1,9 +1,9 @@
-import { BuderStyle } from "../../styles";
+import { BuderStyle } from "../styles";
 
 export class BuderWidget {
   constructor() {}
 
-  protected _style: BuderStyle = {};
+  _style: BuderStyle = {};
   protected _events: { [key: string]: (e: any) => void } = {};
 
   render(el?: HTMLElement): HTMLElement {
@@ -29,6 +29,10 @@ export class BuderWidget {
   style(s: BuderStyle): BuderWidget {
     this._style = Object.assign(this._style, s);
     return this;
+  }
+
+  expand(): BuderWidget {
+    return this.style({ flex: "1" });
   }
 
   private _setEvent(event: string, func: (e: any) => void): BuderWidget {

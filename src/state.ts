@@ -20,7 +20,7 @@ export function State<T>(obj: T): BuderState<T> {
   return new Proxy(
     { value: obj, builder: currentBuilder },
     {
-      set(target: BuderState<T>, key: any, value: any, receiver: any) {
+      set(target: BuderState<T>, key: any, value: any, _: any) {
 
         target.builder?._states.set(index, value);
         // @ts-ignore

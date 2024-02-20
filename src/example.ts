@@ -1,5 +1,4 @@
 import { Builder, Button, Col, State, Text, bud, px } from "./index.ts";
-import { Input } from "./widgets/input.ts";
 import { TextArea } from "./widgets/textarea.ts";
 
 let text = State("");

@@ -14,7 +14,7 @@ export class _View extends BuderWidget {
       el = document.createElement("div");
     }
     this._children.forEach((child) => {
-      el.appendChild(child.render());
+      el?.appendChild(child.render());
     });
     return super.render(el);
   }

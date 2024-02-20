@@ -1,3 +1,4 @@
+import { BuderState } from "../state";
 import { _View } from "./view";
 import { BuderWidget } from "./widget";
 
@@ -5,20 +6,29 @@ let _globalBuilder: BuderWidget[] = [];
 
 export let _currentBuilder: _Builder | null = null;
 
-class _Builder extends BuderWidget {
+export class _Builder extends BuderWidget {
   _key: number;
   _func: (refresh: () => void) => BuderWidget;
   _element?: HTMLElement;
   _states: Map<number, any> = new Map();
   _statePointer = 0;
 
-  constructor(childFunc: (refresh: () => void) => BuderWidget) {
+  constructor(
+    childFunc: (refresh: () => void) => BuderWidget,
+    states: BuderState<any>[] | undefined
+  ) {
     super();
+    _currentBuilder = this;
+    if (states) {
+      states.forEach((state, index) => {
+        state.builder = this;
+        this._states.set(index, state.value);
+      });
+    }
+
     this._func = childFunc;
     this._key = _globalBuilder.length;
     _globalBuilder.push(this);
-
-    _currentBuilder = this;
   }
 
   render() {
@@ -33,8 +43,11 @@ class _Builder extends BuderWidget {
   }
 }
 
-export function Builder(childFunc: (refresh: () => void) => BuderWidget) {
-  return new _Builder(childFunc);
+export function Builder(
+  childFunc: (refresh: () => void) => BuderWidget,
+  states?: BuderState<any>[]
+) {
+  return new _Builder(childFunc, states);
 }
 
 export function queryRefresh(selector: string) {

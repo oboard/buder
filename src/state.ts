@@ -1,7 +1,12 @@
-import { _currentBuilder } from "./widgets/builder";
+import { _Builder, _currentBuilder } from "./widgets/builder";
 
-export function State<T>(obj: T): { value: T } {
-  const currentBuilder = _currentBuilder;
+export interface BuderState<T> {
+  value: T;
+  builder?: _Builder | null;
+}
+
+export function State<T>(obj: T): BuderState<T> {
+  const currentBuilder =  _currentBuilder;
   let index = 0;
   if (currentBuilder) {
     index = currentBuilder._statePointer;
@@ -13,12 +18,16 @@ export function State<T>(obj: T): { value: T } {
     }
   }
   return new Proxy(
-    { value: obj },
+    { value: obj, builder: currentBuilder },
     {
-      set(target: any, key: any, value: any, receiver: any) {
-        currentBuilder?._states.set(index, value);
-        currentBuilder?.build();
-        return Reflect.set(target, key, value, receiver);
+      set(target: BuderState<T>, key: any, value: any, receiver: any) {
+
+        target.builder?._states.set(index, value);
+        // @ts-ignore
+        target[key] = value;
+        target.builder?.build();
+        // return Reflect.set(target, key, value, receiver);
+        return true;
       },
     }
   );

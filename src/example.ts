@@ -1,27 +1,17 @@
-import { Builder, Button, Col, Text, bud, px } from "./index.ts";
+import { Builder, Button, Col, State, Text, bud, px } from "./index.ts";
+import { Input } from "./widgets/input.ts";
+import { TextArea } from "./widgets/textarea.ts";
 
-let counter = 0;
-
+let text = State("");
 Col([
-  Builder(() => Text("Counter: " + counter))
-    .class("counter")
-    .padding({ vertical: px(20) }),
-  Button("Increment")
-    .color("red")
-    .bold.onClick(() => {
-      counter++;
-      bud("counter");
-    }),
-  Button("Decrement")
-    .color("blue")
-    .bold.onClick(() => {
-      counter--;
-      bud("counter");
-    }),
+  TextArea(text),
+  Builder(() => Text(text.value), [text]),
   Button("Reset")
     .color("green")
     .bold.onClick(() => {
-      counter = 0;
-      bud("counter");
+      text.value = "";
+      bud("text");
     }),
-]).gap(px(4)).center.fullScreen.mount("#app");
+])
+  .gap(px(4))
+  .center.fullScreen.mount("#app");

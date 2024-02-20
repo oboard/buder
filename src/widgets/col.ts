@@ -7,13 +7,7 @@ class _Col extends _View {
   constructor(children: BuderWidget[] = []) {
     super();
     this._children = children;
-  }
-
-  render() {
-    const el = document.createElement("div");
-    el.style.display = "flex";
-    el.style.flexDirection = "column";
-    return super.render(el);
+    this.style({ display: "flex", flexDirection: "column" });
   }
 }
 

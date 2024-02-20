@@ -7,15 +7,10 @@ class _Stack extends _View {
   constructor(children: BuderWidget[] = []) {
     super();
     this._children = children;
-  }
-
-  render() {
-    const el = document.createElement("div");
-    el.style.position = "relative";
     this._children.forEach((child) => {
       child._style.position = "absolute";
     });
-    return super.render(el);
+    this.style({position: "relative"})
   }
 }
 

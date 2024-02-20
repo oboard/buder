@@ -6,11 +6,22 @@ Col([
   Builder(() => Text("Counter: " + counter))
     .class("counter")
     .padding({ vertical: px(20) }),
-  Button()
-    .text("Increment")
+  Button("Increment")
     .color("red")
-    .onClick(() => {
+    .bold.onClick(() => {
       counter++;
       bud("counter");
     }),
-]).center.fullScreen.mount("#app");
+  Button("Decrement")
+    .color("blue")
+    .bold.onClick(() => {
+      counter--;
+      bud("counter");
+    }),
+  Button("Reset")
+    .color("green")
+    .bold.onClick(() => {
+      counter = 0;
+      bud("counter");
+    }),
+]).gap(px(4)).center.fullScreen.mount("#app");

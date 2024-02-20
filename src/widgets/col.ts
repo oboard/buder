@@ -1,13 +1,11 @@
-import { _View } from "./view";
+import { _Flex } from "./flex";
 import { BuderWidget } from "./widget";
 
-class _Col extends _View {
-  _children: BuderWidget[];
+class _Col extends _Flex {
 
   constructor(children: BuderWidget[] = []) {
-    super();
-    this._children = children;
-    this.style({ display: "flex", flexDirection: "column" });
+    super(children);
+    this.style({ flexDirection: "column" });
   }
 }
 

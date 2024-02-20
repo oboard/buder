@@ -1,13 +1,10 @@
-import { _View } from "./view";
+import { _Flex } from "./flex";
 import { BuderWidget } from "./widget";
 
-class _Row extends _View {
-  _children: BuderWidget[];
-
+class _Row extends _Flex {
   constructor(children: BuderWidget[] = []) {
-    super();
-    this._children = children;
-    this.style({ display: "flex", flexDirection: "row" });
+    super(children);
+    this.style({ flexDirection: "row" });
   }
 }
 

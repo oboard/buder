@@ -5,20 +5,20 @@ import {
   State,
   Text,
   TextArea,
-  bud,
+  // bud,
   px,
 } from "./index.ts";
 
-let text = State("");
-Col([
-  TextArea(text),
-  Builder(() => Text(text.value), [text]),
-  Button("Reset")
-    .color("green")
-    .bold.onClick(() => {
-      text.value = "";
-      bud("text");
-    }),
-])
-  .gap(px(4))
-  .center.fullScreen.mount("#app");
+Builder(() => {
+  let text = State("1");
+
+  return Col([
+    TextArea(text),
+    Text(text.value),
+    Button("Reset")
+      .color("green")
+      .bold.onClick(() => {
+        text.value = "";
+      }),
+  ]).gap(px(4));
+}).center.fullScreen.mount("#app");

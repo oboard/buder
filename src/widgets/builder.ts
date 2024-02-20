@@ -2,12 +2,12 @@ import { BuderState } from "../state";
 import { _View } from "./view";
 import { BuderWidget } from "./widget";
 
-let _globalBuilder: BuderWidget[] = [];
+// let _globalBuilder: BuderWidget[] = [];
 
 export let _currentBuilder: _Builder | null = null;
 
 export class _Builder extends BuderWidget {
-  _key: number;
+  // _key: number;
   _func: (refresh: () => void) => BuderWidget;
   _element?: HTMLElement;
   _states: Map<number, any> = new Map();
@@ -27,20 +27,88 @@ export class _Builder extends BuderWidget {
     }
 
     this._func = childFunc;
-    this._key = _globalBuilder.length;
-    _globalBuilder.push(this);
   }
 
-  render() {
-    const el = this._func(this.build.bind(this)).render();
-    el.setAttribute("bud", this._key.toString());
-    this._element = el;
+  subscribe(callback: () => void) {
+    this._states.forEach((_, index) => {
+      const state = this._states.get(index);
+      if (state instanceof BuderState) {
+        state.builder = this;
+        state.subscribe(callback);
+      }
+    });
+  }
+
+  render(): HTMLElement {
+    const el = super.render(this._func(this.build.bind(this)).render());
+    if (!this._element) {
+      // el.setAttribute("bud", this._key.toString());
+      this._element = el;
+    } else {
+      diffApply(this._element, el);
+    }
     this._statePointer = 0;
-    return super.render(el);
+    // console.log(this._element, el);
+    return el;
   }
   build() {
-    this._element?.replaceWith(this.render());
+    this.render();
   }
+}
+
+export function diffApply(target: HTMLElement, el: HTMLElement) {
+  if (!target || !el) return;
+  if (target.isEqualNode(el)) return;
+  if (target.tagName !== el.tagName) {
+    target.replaceWith(el);
+  }
+  const targetAttrs = target.attributes;
+  const elAttrs = el.attributes;
+
+  // 比较content
+  if (targetAttrs && elAttrs) {
+    // 比较属性
+    for (let i = 0; i < targetAttrs.length; i++) {
+      const attr = targetAttrs[i];
+      const elAttr = elAttrs.getNamedItem(attr.name);
+      if (!elAttr) {
+        target.removeAttribute(attr.name);
+      } else if (elAttr.value !== attr.value) {
+        target.setAttribute(attr.name, elAttr.value);
+      }
+    }
+    for (let i = 0; i < elAttrs.length; i++) {
+      const attr = elAttrs[i];
+      if (!targetAttrs.getNamedItem(attr.name)) {
+        target.setAttribute(attr.name, attr.value);
+      }
+    }
+  }
+  // 比较子节点
+  const targetChildren = target.childNodes;
+  const elChildren = el.childNodes;
+
+  const length = Math.max(targetChildren.length, elChildren.length);
+  // console.log(target, el, length, targetChildren, elChildren);
+  if (length == 0) {
+    if (target.textContent !== el.textContent) {
+      target.textContent = el.textContent;
+    }
+  } else {
+    for (let i = 0; i < length; i++) {
+      if (i >= targetChildren.length) {
+        target.appendChild(elChildren[i]);
+        continue;
+      }
+      if (i >= elChildren.length) {
+        target.removeChild(targetChildren[i]);
+        continue;
+      }
+      diffApply(targetChildren[i] as HTMLElement, elChildren[i] as HTMLElement);
+    }
+  }
+
+  return target;
 }
 
 export function Builder(
@@ -50,18 +118,19 @@ export function Builder(
   return new _Builder(childFunc, states);
 }
 
-export function queryRefresh(selector: string) {
-  const targets = document.querySelectorAll(selector);
-  for (const target of targets) {
-    const key = target.getAttribute("bud");
-    if (!key) continue;
-    const builder = _globalBuilder[Number(key)];
-    if (builder) {
-      target.replaceWith(builder.render());
-    }
-  }
-}
+// export function queryRefresh(selector: string) {
+//   const targets = document.querySelectorAll(selector);
+//   for (const target of targets) {
+//     const key = target.getAttribute("bud");
+//     if (!key) continue;
+//     const builder = _globalBuilder[Number(key)];
+//     if (builder) {
+//       // target.replaceWith(builder.render());
+//       diffApply(target as HTMLElement, builder.render());
+//     }
+//   }
+// }
 
-export function bud(...classNames: string[]) {
-  return queryRefresh("." + classNames.join(",."));
-}
+// export function bud(...classNames: string[]) {
+//   return queryRefresh("." + classNames.join(",."));
+// }

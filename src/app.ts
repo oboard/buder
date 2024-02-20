@@ -1,21 +1,20 @@
 import { BuderWidget } from "./widgets/widget";
 
 class _BuderApp {
-  name: string;
   content: BuderWidget;
 
-  constructor(name: string, content: BuderWidget) {
-    this.name = name;
+  constructor(content: BuderWidget) {
     this.content = content;
   }
 
-  mount(selector: string) {
+  mount(selector: string): _BuderApp {
     const target = document.querySelector(selector);
-    target?.appendChild(this.content.render());
+    target?.replaceWith(this.content.render());
+    return this;
   }
 }
 
-export function BuderApp(name: string, content: BuderWidget) {
-  const app = new _BuderApp(name, content);
+export function BuderApp(content: BuderWidget) {
+  const app = new _BuderApp(content);
   return app;
 }

@@ -4,7 +4,10 @@ export class BuderWidget {
   constructor() {}
 
   _style: BuderStyle = {};
-  protected _events: { [key: string]: (e: any) => void } = {};
+  _events: { [key: string]: (e: any) => void } = {};
+  _id?: string;
+  _classes: string[] = [];
+  _text?: string;
 
   render(el?: HTMLElement): HTMLElement {
     if (!el) {
@@ -23,12 +26,59 @@ export class BuderWidget {
     for (const key in this._events) {
       el.addEventListener(key, this._events[key]);
     }
+
+    // Add id and classes
+    if (this._id) {
+      el.id = this._id;
+    }
+    if (this._classes.length > 0) {
+      el.classList.add(...this._classes);
+    }
+    if (this._text) {
+      el.textContent = this._text;
+    }
     return el;
+  }
+
+  id(id: string): BuderWidget {
+    this._id = id;
+    return this;
+  }
+
+  classes(...classes: string[]): BuderWidget {
+    if (classes.length === 1) {
+      this._classes = classes[0].split(" ");
+    } else {
+      this._classes = classes;
+    }
+    return this;
   }
 
   style(s: BuderStyle): BuderWidget {
     this._style = Object.assign(this._style, s);
     return this;
+  }
+
+  text(text: string): BuderWidget {
+    this._text = text;
+    return this;
+  }
+
+  fullScreen(): BuderWidget {
+    return this.style({
+      position: "fixed",
+      top: "0",
+      left: "0",
+      width: "100%",
+      height: "100%",
+    });
+  }
+
+  full(): BuderWidget {
+    return this.style({
+      width: "100%",
+      height: "100%",
+    });
   }
 
   expand(): BuderWidget {

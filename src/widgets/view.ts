@@ -9,6 +9,13 @@ export class _View extends BuderWidget {
     this.children = children;
   }
 
+  center() {
+    this._style.display = "flex";
+    this._style.justifyContent = "center";
+    this._style.alignItems = "center";
+    return this;
+  }
+
   render(el?: HTMLElement): HTMLElement {
     if (!el) {
       el = document.createElement("div");

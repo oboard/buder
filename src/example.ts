@@ -1,14 +1,19 @@
-import { BuderApp, Text, View, px } from "./index.ts";
-import { Row } from "./widgets/row.ts";
+import { BuderApp, Builder, Button, Col, Text, View } from "./index.ts";
+
+let counter = 0;
 
 BuderApp(
-  "Counter",
   View([
-    Row([
-      Text("Hello, world!"),
-      Text("Hello, world!"),
-      Text("Hello, world!"),
-      
-    ]),
+    Builder((refresh) =>
+      Col([
+        Text("Counter: " + counter),
+        Button().text("Increment").onClick(() => {
+          counter++;
+          refresh();
+        }),
+      ]).center()
+    ),
   ])
+    .center()
+    .fullScreen()
 ).mount("#app");

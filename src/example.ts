@@ -1,12 +1,15 @@
-import { Builder, Button, Col, Text, bud } from "./index.ts";
+import { Builder, Button, Col, Text, bud, px } from "./index.ts";
 
 let counter = 0;
 
 Builder(() => {
   return Col([
-    Builder(() => Text("Counter: " + counter)).class("counter"),
+    Builder(() => Text("Counter: " + counter))
+      .class("counter")
+      .padding({ vertical: px(20) }),
     Button()
       .text("Increment")
+      .color("red")
       .onClick(() => {
         counter++;
         bud("counter");

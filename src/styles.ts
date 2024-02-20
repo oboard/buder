@@ -1,9 +1,5 @@
 import { BuderUnit } from "./units";
 
-// export interface BuderStyle {
-//   [key: string]: string | BuderUnit;
-// }
-
 export interface BuderStyle {
   /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/accent-color) */
   accentColor?: string | BuderUnit;

@@ -5,7 +5,7 @@ let _globalBuilder: BuderWidget[] = [];
 
 export let _currentBuilder: _Builder | null = null;
 
-class _Builder extends _View {
+class _Builder extends BuderWidget {
   _key: number;
   _func: (refresh: () => void) => BuderWidget;
   _element?: HTMLElement;
@@ -22,9 +22,7 @@ class _Builder extends _View {
   }
 
   render() {
-    this._children = [this._func(this.build.bind(this))];
-
-    const el = document.createElement("div");
+    const el = this._func(this.build.bind(this)).render();
     el.setAttribute("bud", this._key.toString());
     this._element = el;
     this._statePointer = 0;

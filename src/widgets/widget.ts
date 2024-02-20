@@ -1,4 +1,5 @@
 import { BuderStyle } from "../styles";
+import { BuderUnit } from "../units";
 
 export class BuderWidget {
   constructor() {}
@@ -68,6 +69,103 @@ export class BuderWidget {
   text(text: string): BuderWidget {
     this._text = text;
     return this;
+  }
+
+  padding(
+    value:
+      | BuderUnit
+      | {
+          top?: BuderUnit;
+          left?: BuderUnit;
+          right?: BuderUnit;
+          bottom?: BuderUnit;
+          vertical?: BuderUnit;
+          horizontal?: BuderUnit;
+        }
+  ): BuderWidget {
+    // @ts-ignore
+    if (value.unit) {
+      // @ts-ignore
+      return this.style({ padding: value });
+    } else {
+      // @ts-ignore
+      const { top, left, right, bottom, vertical, horizontal } = value;
+      if (vertical || horizontal) {
+        return this.style({
+          paddingTop: vertical,
+          paddingBottom: vertical,
+          paddingLeft: horizontal,
+          paddingRight: horizontal,
+        });
+      } else {
+        return this.style({
+          paddingTop: top,
+          paddingBottom: bottom,
+          paddingLeft: left,
+          paddingRight: right,
+        });
+      }
+    }
+  }
+
+  color(color: string): BuderWidget {
+    return this.style({ color });
+  }
+
+  get center() {
+    switch (this._style.display) {
+      case "flex":
+        this._style.alignItems = "center";
+        this._style.justifyContent = "center";
+        break;
+      case "grid":
+        this._style.placeItems = "center";
+        break;
+      case "block":
+        this._style.margin = "auto";
+        break;
+      case "inline-flex":
+        this._style.alignItems = "center";
+        this._style.justifyContent = "center";
+        break;
+      case "inline-grid":
+        this._style.placeItems = "center";
+        break;
+      case "table":
+        this._style.display = "table";
+        this._style.margin = "auto";
+        break;
+      case "inline":
+      case "inline-block":
+      case "table-cell":
+      case "table-row":
+      case "table-column":
+      case "table-column-group":
+      case "table-footer-group":
+      case "table-header-group":
+        this._style.verticalAlign = "middle";
+        this._style.textAlign = "center";
+        break;
+      default:
+        this._style.textAlign = "center";
+    }
+    return this;
+  }
+
+  get sticky(): BuderWidget {
+    return this.style({ position: "sticky" });
+  }
+
+  get absolute(): BuderWidget {
+    return this.style({ position: "absolute" });
+  }
+
+  get relative(): BuderWidget {
+    return this.style({ position: "relative" });
+  }
+
+  get fixed(): BuderWidget {
+    return this.style({ position: "fixed" });
   }
 
   get fullScreen(): BuderWidget {

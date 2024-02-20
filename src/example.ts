@@ -6,21 +6,24 @@ import {
   State,
   Text,
   TextArea,
-  // bud,
   px,
 } from "./index.ts";
 
+let text = State({
+  name: "text",
+  address: "address",
+  phone: "13000000000",
+});
 Builder(() => {
-  let text = State("1");
-
   return Col([
-    TextArea(text),
-    Input(text),
-    Text(text.value),
+    TextArea(text.get("name")),
+    Input(text.get("address")),
+    Text(text.value.address),
+    Text(JSON.stringify(text.value)),
     Button("Reset")
       .color("green")
       .bold.onClick(() => {
-        text.value = "";
+        text.get("address").value = "";
       }),
   ]).gap(px(4));
 }).center.fullScreen.mount("#app");

@@ -10,6 +10,16 @@ export class BuderState<T> {
     this.builder = builder;
   }
 
+  // 重载“.”
+  get(key: any) {
+    const state = State((this.value as any)[key]);
+    // state.builder = this.builder;
+    state.subscribe(() => {
+      (this.value as any)[key] = state.value;
+    });
+    return state;
+  }
+
   subscribe(callback: (value: T) => void) {
     this.callbacks.push(callback);
   }

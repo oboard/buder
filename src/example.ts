@@ -2,6 +2,7 @@ import {
   Builder,
   Button,
   Col,
+  Input,
   State,
   Text,
   TextArea,
@@ -14,6 +15,7 @@ Builder(() => {
 
   return Col([
     TextArea(text),
+    Input(text),
     Text(text.value),
     Button("Reset")
       .color("green")

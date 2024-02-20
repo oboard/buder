@@ -7,7 +7,7 @@ class _TextArea extends BuderWidget {
     super();
     this._model = model;
     if (model) {
-      this.attribute({ value: model.value }).onInput((e) => {
+      this.onInput((e) => {
         model.value = (e.target as HTMLTextAreaElement).value;
       });
     }
@@ -15,7 +15,7 @@ class _TextArea extends BuderWidget {
 
   render() {
     const el = document.createElement("textarea");
-
+    el.value = this._model?.value || "";
     this._model?.subscribe((newValue) => {
       el.value = newValue;
     });

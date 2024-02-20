@@ -17,6 +17,9 @@ class _Input extends BuderWidget {
 
   render() {
     const el = document.createElement("input");
+    this._model?.subscribe((newValue) => {
+      el.value = newValue;
+    });
     return super.render(el);
   }
 }

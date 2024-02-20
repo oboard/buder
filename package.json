@@ -13,7 +13,7 @@
   "homepage": "https://github.com/oboard/buder#readme",
   "author": "oboard",
   "packageManager": "pnpm@8.14.1",
-  "description": "A lightweight frontend framework based on Vite",
+  "description": "Buder is a UI framework that provides a concise syntax for defining components, enabling efficient state management, and offering styling options for enhanced visual customization.",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",

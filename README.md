@@ -1,14 +1,17 @@
 # buder [![npm](https://img.shields.io/npm/v/buder.svg)](https://www.npmjs.com/package/buder)
 
+Buder is a UI framework that provides a concise syntax for defining components, enabling efficient state management, and offering styling options for enhanced visual customization.
+
 ## Getting Started
 
 ```bash
 pnpm i buder
 ```
 
-### Example1
+### Counter Example
+
 ```typescript
-import { Builder, Button, Col, Text, bud, px } from "./index.ts";
+import { Builder, Button, Col, Text, bud, px } from "buder";
 
 let counter = 0;
 
@@ -34,19 +37,19 @@ Col([
       counter = 0;
       bud("counter");
     }),
-]).gap(px(4)).center.fullScreen.mount("#app");
-
+])
+  .gap(px(4))
+  .center.fullScreen.mount("#app");
 ```
 
-
-## 编译方式
+## How to build
 
 ```bash
 pnpm i
 pnpm build
 ```
 
-## Git 提交规范
+## Git
 
 - `ci`: ci 配置文件和脚本的变动;
 - `chore`: 构建系统或辅助工具的变动;

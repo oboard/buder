@@ -8,6 +8,8 @@ export class BuderWidget {
   _events: { [key: string]: (e: any) => void } = {};
   _id?: string;
   _classes: string[] = [];
+  _tag?: string;
+  _attribute: { [key: string]: string } = {};
   _text?: string;
 
   mount(selector: string): BuderWidget {
@@ -18,7 +20,7 @@ export class BuderWidget {
 
   render(el?: HTMLElement): HTMLElement {
     if (!el) {
-      el = document.createElement("div");
+      el = document.createElement(this._tag ?? "div");
     }
     for (const key in this._style) {
       const value = (this._style as any)[key];
@@ -34,12 +36,15 @@ export class BuderWidget {
       el.addEventListener(key, this._events[key]);
     }
 
-    // Add id and classes
+    // Add id and classes and attributes
     if (this._id) {
       el.id = this._id;
     }
     if (this._classes.length > 0) {
       el.classList.add(...this._classes);
+    }
+    for (const key in this._attribute) {
+      el.setAttribute(key, this._attribute[key]);
     }
     if (this._text) {
       el.textContent = this._text;
@@ -58,6 +63,16 @@ export class BuderWidget {
     } else {
       this._classes = classes;
     }
+    return this;
+  }
+
+  tag(tag: string): BuderWidget {
+    this._tag = tag;
+    return this;
+  }
+
+  attribute(s: { [key: string]: string }): BuderWidget {
+    this._attribute = Object.assign(this._attribute, s);
     return this;
   }
 
@@ -110,6 +125,80 @@ export class BuderWidget {
 
   color(color: string): BuderWidget {
     return this.style({ color });
+  }
+
+  fontSize(size: BuderUnit): BuderWidget {
+    return this.style({ fontSize: size });
+  }
+
+  fontWeight(weight: BuderUnit): BuderWidget {
+    return this.style({ fontWeight: weight });
+  }
+
+  width(width: BuderUnit): BuderWidget {
+    return this.style({ width });
+  }
+
+  height(height: BuderUnit): BuderWidget {
+    return this.style({ height });
+  }
+
+  minWidth(width: BuderUnit): BuderWidget {
+    return this.style({ minWidth: width });
+  }
+
+  minHeight(height: BuderUnit): BuderWidget {
+    return this.style({ minHeight: height });
+  }
+
+  maxWidth(width: BuderUnit): BuderWidget {
+    return this.style({ maxWidth: width });
+  }
+
+  maxHeight(height: BuderUnit): BuderWidget {
+    return this.style({ maxHeight: height });
+  }
+
+  get bold(): BuderWidget {
+    return this.style({ fontWeight: "bold" });
+  }
+
+  get italic(): BuderWidget {
+    return this.style({ fontStyle: "italic" });
+  }
+
+  get underline(): BuderWidget {
+    return this.style({ textDecoration: "underline" });
+  }
+
+  get lineThrough(): BuderWidget {
+    return this.style({ textDecoration: "line-through" });
+  }
+
+  get noWrap(): BuderWidget {
+    return this.style({ whiteSpace: "nowrap" });
+  }
+
+  get wrap(): BuderWidget {
+    return this.style({ whiteSpace: "wrap" });
+  }
+
+  get wrapReverse(): BuderWidget {
+    return this.style({ whiteSpace: "wrap-reverse" });
+  }
+
+  float(value: "left" | "right"): BuderWidget {
+    return this.style({ float: value });
+  }
+
+  clear(value: "left" | "right" | "both" | "none"): BuderWidget {
+    return this.style({ clear: value });
+  }
+
+  position(
+    value: "static" | "relative" | "absolute" | "fixed" | "sticky"
+  ): BuderWidget {
+    return this.style({ position: value });
   }
 
   get center() {

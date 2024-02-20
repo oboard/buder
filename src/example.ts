@@ -1,5 +1,13 @@
-import { Builder, Button, Col, State, Text, bud, px } from "./index.ts";
-import { TextArea } from "./widgets/textarea.ts";
+import {
+  Builder,
+  Button,
+  Col,
+  State,
+  Text,
+  TextArea,
+  bud,
+  px,
+} from "./index.ts";
 
 let text = State("");
 Col([

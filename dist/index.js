@@ -1,47 +1,47 @@
 var _ = /* @__PURE__ */ ((e) => (e.px = "px", e.em = "em", e.rem = "rem", e.vw = "vw", e.vh = "vh", e.percent = "%", e))(_ || {});
-function b(e) {
+function C(e) {
   return {
     value: e,
     unit: "px"
     /* px */
   };
 }
-function x(e) {
+function P(e) {
   return {
     value: e,
     unit: "em"
     /* em */
   };
 }
-function w(e) {
+function D(e) {
   return {
     value: e,
     unit: "rem"
     /* rem */
   };
 }
-function k(e) {
+function W(e) {
   return {
     value: e,
     unit: "vw"
     /* vw */
   };
 }
-function S(e) {
+function T(e) {
   return {
     value: e,
     unit: "vh"
     /* vh */
   };
 }
-function C(e) {
+function A(e) {
   return {
     value: e,
     unit: "%"
     /* percent */
   };
 }
-class l {
+class i {
   constructor() {
   }
   _style = {};
@@ -89,15 +89,15 @@ class l {
     if (t.unit)
       return this.style({ padding: t });
     {
-      const { top: n, left: r, right: s, bottom: i, vertical: o, horizontal: h } = t;
-      return o || h ? this.style({
-        paddingTop: o,
-        paddingBottom: o,
+      const { top: n, left: r, right: s, bottom: o, vertical: u, horizontal: h } = t;
+      return u || h ? this.style({
+        paddingTop: u,
+        paddingBottom: u,
         paddingLeft: h,
         paddingRight: h
       }) : this.style({
         paddingTop: n,
-        paddingBottom: i,
+        paddingBottom: o,
         paddingLeft: r,
         paddingRight: s
       });
@@ -475,7 +475,7 @@ class l {
     return this._setEvent("transitionstart", t);
   }
 }
-class u extends l {
+class a extends i {
   _children;
   constructor(t = []) {
     super(), this._children = t;
@@ -486,10 +486,10 @@ class u extends l {
     }), super.render(t);
   }
 }
-function P(e) {
-  return new u(e);
+function I(e) {
+  return new a(e);
 }
-class v extends l {
+class v extends i {
   constructor(t) {
     super(), this._text = t;
   }
@@ -498,20 +498,20 @@ class v extends l {
     return super.render(t);
   }
 }
-function D(e) {
+function M(e) {
   return new v(e);
 }
-let a = [], c = null;
-class p extends l {
+let l = [], d = null;
+class p extends i {
   _key;
   _func;
   _element;
   _states = /* @__PURE__ */ new Map();
   _statePointer = 0;
   constructor(t, n) {
-    super(), c = this, n && n.forEach((r, s) => {
+    super(), d = this, n && n.forEach((r, s) => {
       r.builder = this, this._states.set(s, r.value);
-    }), this._func = t, this._key = a.length, a.push(this);
+    }), this._func = t, this._key = l.length, l.push(this);
   }
   render() {
     const t = this._func(this.build.bind(this)).render();
@@ -521,35 +521,35 @@ class p extends l {
     this._element?.replaceWith(this.render());
   }
 }
-function W(e, t) {
+function L(e, t) {
   return new p(e, t);
 }
-function E(e) {
+function g(e) {
   const t = document.querySelectorAll(e);
   for (const n of t) {
     const r = n.getAttribute("bud");
     if (!r)
       continue;
-    const s = a[Number(r)];
+    const s = l[Number(r)];
     s && n.replaceWith(s.render());
   }
 }
-function M(...e) {
-  return E("." + e.join(",."));
+function O(...e) {
+  return g("." + e.join(",."));
 }
-function T(e) {
-  const t = c;
+function R(e) {
+  const t = d;
   let n = 0;
   return t && (n = t._statePointer, t._statePointer++, t._states.has(n) ? e = t._states.get(n) : t._states.set(n, e)), new Proxy(
     { value: e, builder: t },
     {
-      set(r, s, i, o) {
-        return r.builder?._states.set(n, i), r[s] = i, r.builder?.build(), !0;
+      set(r, s, o, u) {
+        return r.builder?._states.set(n, o), r[s] = o, r.builder?.build(), !0;
       }
     }
   );
 }
-class g extends u {
+class E extends a {
   constructor(t = []) {
     super(), typeof t == "string" ? this.text(t) : this._children = t;
   }
@@ -558,10 +558,10 @@ class g extends u {
     return super.render(t);
   }
 }
-function A(e) {
-  return new g(e);
+function B(e) {
+  return new E(e);
 }
-class d extends u {
+class c extends a {
   _children;
   constructor(t = []) {
     super(), this._children = t, this.style({ display: "flex" });
@@ -570,23 +570,26 @@ class d extends u {
     return this.style({ gap: t });
   }
 }
-class y extends d {
+function H(e) {
+  return new c(e);
+}
+class y extends c {
   constructor(t = []) {
     super(t), this.style({ flexDirection: "column" });
   }
 }
-function L(e) {
+function F(e) {
   return new y(e);
 }
-class f extends d {
+class m extends c {
   constructor(t = []) {
     super(t), this.style({ flexDirection: "row" });
   }
 }
-function I(e) {
-  return new f(e);
+function j(e) {
+  return new m(e);
 }
-class m extends u {
+class f extends a {
   _children;
   constructor(t = []) {
     super(), this._children = t, this._children.forEach((n) => {
@@ -594,29 +597,95 @@ class m extends u {
     }), this.style({ position: "relative" });
   }
 }
-function O(e) {
-  return new m(e);
+function q(e) {
+  return new f(e);
+}
+class x extends i {
+  _model;
+  constructor(t) {
+    super(), this._model = t;
+  }
+  render() {
+    const t = document.createElement("textarea");
+    return t.value = this._model?.value ?? "", t.addEventListener("input", (n) => {
+      this._model.value = n.target.value;
+    }), super.render(t);
+  }
+}
+function z(e) {
+  return new x(e);
+}
+class b extends i {
+  _model;
+  constructor(t) {
+    super(), t && (this._model = t, this.attribute({ value: t.value }), this.onInput((n) => {
+      t.value = n.target.value;
+    }));
+  }
+  render() {
+    const t = document.createElement("input");
+    return super.render(t);
+  }
+}
+function K(e) {
+  return new b(e);
+}
+class w extends i {
+  constructor(t) {
+    super(), this.style({ height: t });
+  }
+}
+function V(e) {
+  return new w(e);
+}
+class k extends i {
+  constructor(t) {
+    super(), this.style({ width: t });
+  }
+}
+function $(e) {
+  return new k(e);
+}
+class S extends i {
+  _src;
+  constructor(t) {
+    super(), this.attribute({ src: t });
+  }
+  render() {
+    const t = document.createElement("img");
+    return super.render(t);
+  }
+}
+function N(e) {
+  return new S(e);
 }
 export {
   _ as BuderUnits,
-  l as BuderWidget,
-  W as Builder,
-  A as Button,
-  L as Col,
-  I as Row,
-  O as Stack,
-  T as State,
-  D as Text,
-  P as View,
+  i as BuderWidget,
+  L as Builder,
+  B as Button,
+  F as Col,
+  H as Flex,
+  V as H,
+  N as Img,
+  K as Input,
+  j as Row,
+  q as Stack,
+  R as State,
+  M as Text,
+  z as TextArea,
+  I as View,
+  $ as W,
   p as _Builder,
-  u as _View,
-  c as _currentBuilder,
-  M as bud,
-  x as em,
-  C as percent,
-  b as px,
-  E as queryRefresh,
-  w as rem,
-  S as vh,
-  k as vw
+  c as _Flex,
+  a as _View,
+  d as _currentBuilder,
+  O as bud,
+  P as em,
+  A as percent,
+  C as px,
+  g as queryRefresh,
+  D as rem,
+  T as vh,
+  W as vw
 };

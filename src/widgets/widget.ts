@@ -9,6 +9,12 @@ export class BuderWidget {
   _classes: string[] = [];
   _text?: string;
 
+  mount(selector: string): BuderWidget {
+    const target = document.querySelector(selector);
+    target?.replaceWith(this.render());
+    return this;
+  }
+
   render(el?: HTMLElement): HTMLElement {
     if (!el) {
       el = document.createElement("div");
@@ -45,7 +51,7 @@ export class BuderWidget {
     return this;
   }
 
-  classes(...classes: string[]): BuderWidget {
+  class(...classes: string[]): BuderWidget {
     if (classes.length === 1) {
       this._classes = classes[0].split(" ");
     } else {
@@ -64,7 +70,7 @@ export class BuderWidget {
     return this;
   }
 
-  fullScreen(): BuderWidget {
+  get fullScreen(): BuderWidget {
     return this.style({
       position: "fixed",
       top: "0",
@@ -74,14 +80,14 @@ export class BuderWidget {
     });
   }
 
-  full(): BuderWidget {
+  get full(): BuderWidget {
     return this.style({
       width: "100%",
       height: "100%",
     });
   }
 
-  expand(): BuderWidget {
+  get expand(): BuderWidget {
     return this.style({ flex: "1" });
   }
 

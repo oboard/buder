@@ -2,17 +2,17 @@ import { _View } from "./view";
 import { BuderWidget } from "./widget";
 
 class _Stack extends _View {
-  children: BuderWidget[];
+  _children: BuderWidget[];
 
   constructor(children: BuderWidget[] = []) {
     super();
-    this.children = children;
+    this._children = children;
   }
 
   render() {
     const el = document.createElement("div");
     el.style.position = "relative";
-    this.children.forEach((child) => {
+    this._children.forEach((child) => {
       child._style.position = "absolute";
     });
     return super.render(el);

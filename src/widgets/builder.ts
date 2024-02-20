@@ -3,25 +3,31 @@ import { BuderWidget } from "./widget";
 
 let _globalBuilder: BuderWidget[] = [];
 
+export let _currentBuilder: _Builder | null = null;
+
 class _Builder extends _View {
-  children: BuderWidget[] = [];
   _key: number;
   _func: (refresh: () => void) => BuderWidget;
   _element?: HTMLElement;
+  _states: Map<number, any> = new Map();
+  _statePointer = 0;
 
   constructor(childFunc: (refresh: () => void) => BuderWidget) {
     super();
     this._func = childFunc;
     this._key = _globalBuilder.length;
     _globalBuilder.push(this);
+
+    _currentBuilder = this;
   }
 
   render() {
-    this.children = [this._func(this.build.bind(this))];
+    this._children = [this._func(this.build.bind(this))];
 
     const el = document.createElement("div");
     el.setAttribute("bud", this._key.toString());
     this._element = el;
+    this._statePointer = 0;
     return super.render(el);
   }
   build() {
@@ -43,4 +49,8 @@ export function queryRefresh(selector: string) {
       target.replaceWith(builder.render());
     }
   }
+}
+
+export function bud(...classNames: string[]) {
+  return queryRefresh("." + classNames.join(",."));
 }

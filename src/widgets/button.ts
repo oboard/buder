@@ -2,11 +2,14 @@ import { _View } from "./view";
 import { BuderWidget } from "./widget";
 
 class _Button extends _View {
-  children: BuderWidget[];
 
-  constructor(children: BuderWidget[] = []) {
+  constructor(children: BuderWidget[] | string = []) {
     super();
-    this.children = children;
+    if (typeof children === "string") {
+      this.text(children);
+    } else {
+      this._children = children;
+    }
   }
 
   render() {
@@ -15,6 +18,6 @@ class _Button extends _View {
   }
 }
 
-export function Button(children?: BuderWidget[]) {
+export function Button(children?: BuderWidget[] | string) {
   return new _Button(children);
 }

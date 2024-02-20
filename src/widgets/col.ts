@@ -2,11 +2,11 @@ import { _View } from "./view";
 import { BuderWidget } from "./widget";
 
 class _Col extends _View {
-  children: BuderWidget[];
+  _children: BuderWidget[];
 
   constructor(children: BuderWidget[] = []) {
     super();
-    this.children = children;
+    this._children = children;
   }
 
   render() {

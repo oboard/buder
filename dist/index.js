@@ -1,40 +1,40 @@
 var E = /* @__PURE__ */ ((e) => (e.px = "px", e.em = "em", e.rem = "rem", e.vw = "vw", e.vh = "vh", e.percent = "%", e))(E || {});
-function D(e) {
+function I(e) {
   return {
     value: e,
     unit: "px"
     /* px */
   };
 }
-function I(e) {
+function T(e) {
   return {
     value: e,
     unit: "em"
     /* em */
   };
 }
-function T(e) {
+function W(e) {
   return {
     value: e,
     unit: "rem"
     /* rem */
   };
 }
-function W(e) {
+function M(e) {
   return {
     value: e,
     unit: "vw"
     /* vw */
   };
 }
-function M(e) {
+function L(e) {
   return {
     value: e,
     unit: "vh"
     /* vh */
   };
 }
-function L(e) {
+function O(e) {
   return {
     value: e,
     unit: "%"
@@ -490,7 +490,7 @@ class l extends h {
     }), super.render(t);
   }
 }
-function O(e) {
+function R(e) {
   return new l(e);
 }
 class f extends h {
@@ -502,20 +502,22 @@ class f extends h {
     return super.render(t);
   }
 }
-function R(e) {
+function B(e) {
   return new f(e);
 }
-let _ = null;
-class g extends h {
+let v = null;
+class m extends h {
   // _key: number;
   _func;
-  _element;
+  _instanceElement;
   _states = /* @__PURE__ */ new Map();
   _statePointer = 0;
   constructor(t, n) {
-    super(), _ = this, n && n.forEach((s, i) => {
-      s.builder = this, this._states.set(i, s.value);
-    }), this._func = t;
+    super(), v = this, this._func = t, n && n.forEach((s) => {
+      s.subscribe(() => {
+        this.build();
+      });
+    });
   }
   subscribe(t) {
     this._states.forEach((n, s) => {
@@ -525,13 +527,13 @@ class g extends h {
   }
   render() {
     const t = super.render(this._func(this.build.bind(this)).render());
-    return this._element ? v(this._element, t) : this._element = t, this._statePointer = 0, t;
+    return this._instanceElement ? d(this._instanceElement, t) : this._instanceElement = t, this._statePointer = 0, t;
   }
   build() {
     this.render();
   }
 }
-function v(e, t) {
+function d(e, t) {
   if (!e || !t || e.isEqualNode(t))
     return;
   e.tagName !== t.tagName && e.replaceWith(t);
@@ -559,12 +561,12 @@ function v(e, t) {
         e.removeChild(i[r]);
         continue;
       }
-      v(i[r], o[r]);
+      d(i[r], o[r]);
     }
   return e;
 }
-function B(e, t) {
-  return new g(e, t);
+function F(e, t) {
+  return new m(e, t);
 }
 class p {
   value;
@@ -575,7 +577,7 @@ class p {
   }
   // 重载“.”
   get(t) {
-    const n = m(this.value[t]);
+    const n = g(this.value[t]);
     return n.subscribe(() => {
       this.value[t] = n.value;
     }), n;
@@ -589,8 +591,8 @@ class p {
     });
   }
 }
-function m(e) {
-  const t = _;
+function g(e) {
+  const t = v;
   let n = 0;
   return t && (n = t._statePointer, t._statePointer++, t._states.has(n) ? e = t._states.get(n) : t._states.set(n, e)), new Proxy(new p(e, t), {
     set(s, i, o, u) {
@@ -610,7 +612,7 @@ class y extends l {
 function N(e) {
   return new y(e);
 }
-class d extends l {
+class _ extends l {
   constructor(t = []) {
     super(t), this.style({ display: "flex" });
   }
@@ -619,22 +621,22 @@ class d extends l {
   }
 }
 function H(e = []) {
-  return new d(e);
+  return new _(e);
 }
-class b extends d {
+class b extends _ {
   constructor(t = []) {
     super(t), this.style({ flexDirection: "column" });
   }
 }
-function F(e) {
+function $(e) {
   return new b(e);
 }
-class x extends d {
+class x extends _ {
   constructor(t = []) {
     super(t), this.style({ flexDirection: "row" });
   }
 }
-function $(e) {
+function j(e) {
   return new x(e);
 }
 class w extends l {
@@ -645,7 +647,7 @@ class w extends l {
     }), this.style({ position: "relative" });
   }
 }
-function j(e) {
+function z(e) {
   return new w(e);
 }
 class C extends h {
@@ -662,7 +664,7 @@ class C extends h {
     }), super.render(t);
   }
 }
-function z(e) {
+function K(e) {
   return new C(e);
 }
 class k extends h {
@@ -679,7 +681,7 @@ class k extends h {
     }), super.render(t);
   }
 }
-function K(e) {
+function q(e) {
   return new k(e);
 }
 class S extends h {
@@ -687,7 +689,7 @@ class S extends h {
     super(), this.style({ height: t });
   }
 }
-function q(e) {
+function V(e) {
   return new S(e);
 }
 class P extends h {
@@ -695,7 +697,7 @@ class P extends h {
     super(), this.style({ width: t });
   }
 }
-function V(e) {
+function G(e) {
   return new P(e);
 }
 class A extends h {
@@ -708,36 +710,65 @@ class A extends h {
     return super.render(t);
   }
 }
-function G(e) {
+function J(e) {
   return new A(e);
+}
+class D extends l {
+  _state;
+  _builder;
+  _instanceElement;
+  _parent;
+  constructor(t, n, s) {
+    super(), this._state = t, this._builder = n, this._parent = s, this._state.subscribe(() => {
+      console.log("subscribed"), this.build();
+    });
+  }
+  build() {
+    this._instanceElement && (console.log(this._instanceElement, this.render()), d(this._instanceElement, this.render()));
+  }
+  render() {
+    let t = 0;
+    this._children = [];
+    for (const s of this._state.value) {
+      const i = this._builder(s, t++);
+      this._children.push(i);
+    }
+    const n = super.render(this._parent?.render());
+    return this._instanceElement ? n : this._instanceElement = n;
+  }
+}
+function Q(e, t, n) {
+  return new D(e, t, n);
 }
 export {
   p as BuderState,
   E as BuderUnits,
   h as BuderWidget,
-  B as Builder,
+  F as Builder,
   N as Button,
-  F as Col,
+  $ as Col,
   H as Flex,
-  q as H,
-  G as Image,
-  K as Input,
-  $ as Row,
-  j as Stack,
-  m as State,
-  R as Text,
-  z as TextArea,
-  O as View,
-  V as W,
-  g as _Builder,
-  d as _Flex,
+  Q as ForEach,
+  V as H,
+  J as Image,
+  q as Input,
+  j as Row,
+  z as Stack,
+  g as State,
+  B as Text,
+  K as TextArea,
+  R as View,
+  G as W,
+  m as _Builder,
+  _ as _Flex,
+  D as _ForEach,
   l as _View,
-  _ as _currentBuilder,
-  v as diffApply,
-  I as em,
-  L as percent,
-  D as px,
-  T as rem,
-  M as vh,
-  W as vw
+  v as _currentBuilder,
+  d as diffApply,
+  T as em,
+  O as percent,
+  I as px,
+  W as rem,
+  L as vh,
+  M as vw
 };

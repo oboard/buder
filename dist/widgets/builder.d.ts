@@ -3,7 +3,7 @@ import { BuderWidget } from "./widget";
 export declare let _currentBuilder: _Builder | null;
 export declare class _Builder extends BuderWidget {
     _func: (refresh: () => void) => BuderWidget;
-    _element?: HTMLElement;
+    _instanceElement?: HTMLElement;
     _states: Map<number, any>;
     _statePointer: number;
     constructor(childFunc: (refresh: () => void) => BuderWidget, states: BuderState<any>[] | undefined);

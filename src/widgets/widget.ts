@@ -26,7 +26,13 @@ export class BuderWidget {
     for (const key in this._style) {
       const value = (this._style as any)[key];
       if (value instanceof Object) {
-        (el.style as any)[key] = `${value.value}${value.unit}`;
+        if (value.value.subscribe) {
+          value.value.subscribe((newValue: BuderUnit) => {
+            (el.style as any)[key] = `${newValue}${value.unit}`;
+          });
+        } else {
+          (el.style as any)[key] = `${value.value}${value.unit}`;
+        }
       } else {
         (el.style as any)[key] = value;
       }

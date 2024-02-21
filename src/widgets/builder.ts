@@ -9,7 +9,7 @@ export let _currentBuilder: _Builder | null = null;
 export class _Builder extends BuderWidget {
   // _key: number;
   _func: (refresh: () => void) => BuderWidget;
-  _element?: HTMLElement;
+  _instanceElement?: HTMLElement;
   _states: Map<number, any> = new Map();
   _statePointer = 0;
 
@@ -19,14 +19,14 @@ export class _Builder extends BuderWidget {
   ) {
     super();
     _currentBuilder = this;
+    this._func = childFunc;
     if (states) {
-      states.forEach((state, index) => {
-        state.builder = this;
-        this._states.set(index, state.value);
+      states.forEach((state) => {
+        state.subscribe(() => {
+          this.build();
+        });
       });
     }
-
-    this._func = childFunc;
   }
 
   subscribe(callback: () => void) {
@@ -41,11 +41,11 @@ export class _Builder extends BuderWidget {
 
   render(): HTMLElement {
     const el = super.render(this._func(this.build.bind(this)).render());
-    if (!this._element) {
+    if (!this._instanceElement) {
       // el.setAttribute("bud", this._key.toString());
-      this._element = el;
+      this._instanceElement = el;
     } else {
-      diffApply(this._element, el);
+      diffApply(this._instanceElement, el);
     }
     this._statePointer = 0;
     // console.log(this._element, el);

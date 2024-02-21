@@ -14,6 +14,7 @@ export * from "./widgets/textarea";
 export * from "./widgets/input";
 export * from "./widgets/placeholder";
 export * from "./widgets/image";
+export * from "./widgets/for_each";
 // export * from "./widgets/label";
 // export * from "./widgets/checkbox";
 // export * from "./widgets/select";

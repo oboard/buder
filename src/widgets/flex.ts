@@ -3,11 +3,8 @@ import { _View } from "./view";
 import { BuderWidget } from "./widget";
 
 export class _Flex extends _View {
-  _children: BuderWidget[];
-
-  constructor(children: BuderWidget[] = []) {
-    super();
-    this._children = children;
+  constructor(children: BuderWidget[] | string = []) {
+    super(children);
     this.style({ display: "flex" });
   }
 
@@ -16,6 +13,6 @@ export class _Flex extends _View {
   }
 }
 
-export function Flex(children?: BuderWidget[]) {
+export function Flex(children: BuderWidget[] | string = []) {
   return new _Flex(children);
 }

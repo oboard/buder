@@ -4,12 +4,7 @@ import { BuderWidget } from "./widget";
 class _Button extends _View {
 
   constructor(children: BuderWidget[] | string = []) {
-    super();
-    if (typeof children === "string") {
-      this.text(children);
-    } else {
-      this._children = children;
-    }
+    super(children);
   }
 
   render() {

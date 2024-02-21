@@ -1,8 +1,8 @@
+import { BuderState } from "../state";
 import { BuderWidget } from "./widget";
 
 class _Text extends BuderWidget {
-
-  constructor(text: string) {
+  constructor(text: string | BuderState<any>) {
     super();
     this._text = text;
   }
@@ -13,6 +13,6 @@ class _Text extends BuderWidget {
   }
 }
 
-export function Text(text: string) {
+export function Text(text: string | BuderState<any>) {
   return new _Text(text);
 }

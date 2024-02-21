@@ -1,6 +1,6 @@
 import { BuderWidget } from "./widget";
 
-class _Img extends BuderWidget {
+class _Image extends BuderWidget {
   _src?: string;
   constructor(src: string) {
     super();
@@ -13,6 +13,6 @@ class _Img extends BuderWidget {
   }
 }
 
-export function Img(src: string) {
-  return new _Img(src);
+export function Image(src: string) {
+  return new _Image(src);
 }

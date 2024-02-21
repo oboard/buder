@@ -1,3 +1,4 @@
+import { BuderState } from "../state";
 import { BuderStyle } from "../styles";
 import { BuderUnit } from "../units";
 
@@ -10,7 +11,7 @@ export class BuderWidget {
   _classes: string[] = [];
   _tag?: string;
   _attribute: { [key: string]: string } = {};
-  _text?: string;
+  _text?: string | BuderState<any>;
 
   mount(selector: string): BuderWidget {
     const target = document.querySelector(selector);
@@ -47,7 +48,18 @@ export class BuderWidget {
       el.setAttribute(key, this._attribute[key]);
     }
     if (this._text) {
-      el.textContent = this._text;
+      if (this._text instanceof BuderState) {
+        el.textContent = this._text.value;
+        this._text.subscribe((newValue) => {
+          if (el) {
+            if (el.textContent !== newValue) {
+              el.textContent = newValue;
+            }
+          }
+        });
+      } else {
+        el.textContent = this._text;
+      }
     }
     return el;
   }

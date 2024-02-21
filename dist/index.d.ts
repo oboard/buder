@@ -13,4 +13,4 @@ export * from "./widgets/flex";
 export * from "./widgets/textarea";
 export * from "./widgets/input";
 export * from "./widgets/placeholder";
-export * from "./widgets/Img";
+export * from "./widgets/image";

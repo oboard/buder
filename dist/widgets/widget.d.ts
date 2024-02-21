@@ -1,3 +1,4 @@
+import { BuderState } from "../state";
 import { BuderStyle } from "../styles";
 import { BuderUnit } from "../units";
 export declare class BuderWidget {
@@ -12,7 +13,7 @@ export declare class BuderWidget {
     _attribute: {
         [key: string]: string;
     };
-    _text?: string;
+    _text?: string | BuderState<any>;
     mount(selector: string): BuderWidget;
     render(el?: HTMLElement): HTMLElement;
     id(id: string): BuderWidget;

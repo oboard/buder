@@ -48,17 +48,14 @@ export class BuderWidget {
       el.setAttribute(key, this._attribute[key]);
     }
     if (this._text) {
-      if (this._text instanceof BuderState) {
+      // @ts-ignore
+      if (typeof this._text === "string") {
+        el.textContent = this._text;
+      } else {
         el.textContent = this._text.value;
         this._text.subscribe((newValue) => {
-          if (el) {
-            if (el.textContent !== newValue) {
-              el.textContent = newValue;
-            }
-          }
+          el.textContent = newValue;
         });
-      } else {
-        el.textContent = this._text;
       }
     }
     return el;

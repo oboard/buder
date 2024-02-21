@@ -14,11 +14,12 @@ let text = State({
   address: "address",
   phone: "13000000000",
 });
+let a = text.get("address");
 Builder(() => {
   return Col([
     TextArea(text.get("name")),
-    Input(text.get("address")),
-    Text(text.value.address),
+    Input(a),
+    Text(a),
     Text(JSON.stringify(text.value)),
     Button("Reset")
       .color("green")

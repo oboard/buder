@@ -1,1218 +1,1221 @@
+import { BuderState } from "./state";
 import { BuderUnit } from "./units";
+type BuderStyleType = string | BuderUnit | BuderState<string>;
 export interface BuderStyle {
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/accent-color) */
-    accentColor?: string | BuderUnit;
+    accentColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/align-content) */
-    alignContent?: string | BuderUnit;
+    alignContent?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/align-items) */
-    alignItems?: string | BuderUnit;
+    alignItems?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/align-self) */
-    alignSelf?: string | BuderUnit;
-    alignmentBaseline?: string | BuderUnit;
+    alignSelf?: BuderStyleType;
+    alignmentBaseline?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/all) */
-    all?: string | BuderUnit;
+    all?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation) */
-    animation?: string | BuderUnit;
+    animation?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-composition) */
-    animationComposition?: string | BuderUnit;
+    animationComposition?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-delay) */
-    animationDelay?: string | BuderUnit;
+    animationDelay?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-direction) */
-    animationDirection?: string | BuderUnit;
+    animationDirection?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-duration) */
-    animationDuration?: string | BuderUnit;
+    animationDuration?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode) */
-    animationFillMode?: string | BuderUnit;
+    animationFillMode?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-iteration-count) */
-    animationIterationCount?: string | BuderUnit;
+    animationIterationCount?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-name) */
-    animationName?: string | BuderUnit;
+    animationName?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-play-state) */
-    animationPlayState?: string | BuderUnit;
+    animationPlayState?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-timing-function) */
-    animationTimingFunction?: string | BuderUnit;
+    animationTimingFunction?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/appearance) */
-    appearance?: string | BuderUnit;
+    appearance?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/aspect-ratio) */
-    aspectRatio?: string | BuderUnit;
+    aspectRatio?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/backdrop-filter) */
-    backdropFilter?: string | BuderUnit;
+    backdropFilter?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/backface-visibility) */
-    backfaceVisibility?: string | BuderUnit;
+    backfaceVisibility?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background) */
-    background?: string | BuderUnit;
+    background?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-attachment) */
-    backgroundAttachment?: string | BuderUnit;
+    backgroundAttachment?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-blend-mode) */
-    backgroundBlendMode?: string | BuderUnit;
+    backgroundBlendMode?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-clip) */
-    backgroundClip?: string | BuderUnit;
+    backgroundClip?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-color) */
-    backgroundColor?: string | BuderUnit;
+    backgroundColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-image) */
-    backgroundImage?: string | BuderUnit;
+    backgroundImage?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-origin) */
-    backgroundOrigin?: string | BuderUnit;
+    backgroundOrigin?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-position) */
-    backgroundPosition?: string | BuderUnit;
+    backgroundPosition?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-position-x) */
-    backgroundPositionX?: string | BuderUnit;
+    backgroundPositionX?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-position-y) */
-    backgroundPositionY?: string | BuderUnit;
+    backgroundPositionY?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-repeat) */
-    backgroundRepeat?: string | BuderUnit;
+    backgroundRepeat?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-size) */
-    backgroundSize?: string | BuderUnit;
-    baselineShift?: string | BuderUnit;
+    backgroundSize?: BuderStyleType;
+    baselineShift?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/baseline-source) */
-    baselineSource?: string | BuderUnit;
+    baselineSource?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/block-size) */
-    blockSize?: string | BuderUnit;
+    blockSize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border) */
-    border?: string | BuderUnit;
+    border?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block) */
-    borderBlock?: string | BuderUnit;
+    borderBlock?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-color) */
-    borderBlockColor?: string | BuderUnit;
+    borderBlockColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-end) */
-    borderBlockEnd?: string | BuderUnit;
+    borderBlockEnd?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-end-color) */
-    borderBlockEndColor?: string | BuderUnit;
+    borderBlockEndColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-end-style) */
-    borderBlockEndStyle?: string | BuderUnit;
+    borderBlockEndStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-end-width) */
-    borderBlockEndWidth?: string | BuderUnit;
+    borderBlockEndWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-start) */
-    borderBlockStart?: string | BuderUnit;
+    borderBlockStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-start-color) */
-    borderBlockStartColor?: string | BuderUnit;
+    borderBlockStartColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-start-style) */
-    borderBlockStartStyle?: string | BuderUnit;
+    borderBlockStartStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-start-width) */
-    borderBlockStartWidth?: string | BuderUnit;
+    borderBlockStartWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-style) */
-    borderBlockStyle?: string | BuderUnit;
+    borderBlockStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-block-width) */
-    borderBlockWidth?: string | BuderUnit;
+    borderBlockWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom) */
-    borderBottom?: string | BuderUnit;
+    borderBottom?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-color) */
-    borderBottomColor?: string | BuderUnit;
+    borderBottomColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius) */
-    borderBottomLeftRadius?: string | BuderUnit;
+    borderBottomLeftRadius?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius) */
-    borderBottomRightRadius?: string | BuderUnit;
+    borderBottomRightRadius?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-style) */
-    borderBottomStyle?: string | BuderUnit;
+    borderBottomStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-width) */
-    borderBottomWidth?: string | BuderUnit;
+    borderBottomWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-collapse) */
-    borderCollapse?: string | BuderUnit;
+    borderCollapse?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-color) */
-    borderColor?: string | BuderUnit;
+    borderColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius) */
-    borderEndEndRadius?: string | BuderUnit;
+    borderEndEndRadius?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius) */
-    borderEndStartRadius?: string | BuderUnit;
+    borderEndStartRadius?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image) */
-    borderImage?: string | BuderUnit;
+    borderImage?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-outset) */
-    borderImageOutset?: string | BuderUnit;
+    borderImageOutset?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-repeat) */
-    borderImageRepeat?: string | BuderUnit;
+    borderImageRepeat?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-slice) */
-    borderImageSlice?: string | BuderUnit;
+    borderImageSlice?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-source) */
-    borderImageSource?: string | BuderUnit;
+    borderImageSource?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-image-width) */
-    borderImageWidth?: string | BuderUnit;
+    borderImageWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline) */
-    borderInline?: string | BuderUnit;
+    borderInline?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-color) */
-    borderInlineColor?: string | BuderUnit;
+    borderInlineColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-end) */
-    borderInlineEnd?: string | BuderUnit;
+    borderInlineEnd?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color) */
-    borderInlineEndColor?: string | BuderUnit;
+    borderInlineEndColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style) */
-    borderInlineEndStyle?: string | BuderUnit;
+    borderInlineEndStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width) */
-    borderInlineEndWidth?: string | BuderUnit;
+    borderInlineEndWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-start) */
-    borderInlineStart?: string | BuderUnit;
+    borderInlineStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color) */
-    borderInlineStartColor?: string | BuderUnit;
+    borderInlineStartColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style) */
-    borderInlineStartStyle?: string | BuderUnit;
+    borderInlineStartStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width) */
-    borderInlineStartWidth?: string | BuderUnit;
+    borderInlineStartWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-style) */
-    borderInlineStyle?: string | BuderUnit;
+    borderInlineStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-inline-width) */
-    borderInlineWidth?: string | BuderUnit;
+    borderInlineWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-left) */
-    borderLeft?: string | BuderUnit;
+    borderLeft?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-left-color) */
-    borderLeftColor?: string | BuderUnit;
+    borderLeftColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-left-style) */
-    borderLeftStyle?: string | BuderUnit;
+    borderLeftStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-left-width) */
-    borderLeftWidth?: string | BuderUnit;
+    borderLeftWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-radius) */
-    borderRadius?: string | BuderUnit;
+    borderRadius?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-right) */
-    borderRight?: string | BuderUnit;
+    borderRight?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-right-color) */
-    borderRightColor?: string | BuderUnit;
+    borderRightColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-right-style) */
-    borderRightStyle?: string | BuderUnit;
+    borderRightStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-right-width) */
-    borderRightWidth?: string | BuderUnit;
+    borderRightWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-spacing) */
-    borderSpacing?: string | BuderUnit;
+    borderSpacing?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius) */
-    borderStartEndRadius?: string | BuderUnit;
+    borderStartEndRadius?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius) */
-    borderStartStartRadius?: string | BuderUnit;
+    borderStartStartRadius?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-style) */
-    borderStyle?: string | BuderUnit;
+    borderStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top) */
-    borderTop?: string | BuderUnit;
+    borderTop?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-color) */
-    borderTopColor?: string | BuderUnit;
+    borderTopColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius) */
-    borderTopLeftRadius?: string | BuderUnit;
+    borderTopLeftRadius?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius) */
-    borderTopRightRadius?: string | BuderUnit;
+    borderTopRightRadius?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-style) */
-    borderTopStyle?: string | BuderUnit;
+    borderTopStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-width) */
-    borderTopWidth?: string | BuderUnit;
+    borderTopWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-width) */
-    borderWidth?: string | BuderUnit;
+    borderWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/bottom) */
-    bottom?: string | BuderUnit;
+    bottom?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-shadow) */
-    boxShadow?: string | BuderUnit;
+    boxShadow?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-sizing) */
-    boxSizing?: string | BuderUnit;
+    boxSizing?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/break-after) */
-    breakAfter?: string | BuderUnit;
+    breakAfter?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/break-before) */
-    breakBefore?: string | BuderUnit;
+    breakBefore?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/break-inside) */
-    breakInside?: string | BuderUnit;
+    breakInside?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/caption-side) */
-    captionSide?: string | BuderUnit;
+    captionSide?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/caret-color) */
-    caretColor?: string | BuderUnit;
+    caretColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/clear) */
-    clear?: string | BuderUnit;
+    clear?: BuderStyleType;
     /**
      * @deprecated
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/clip)
      */
-    clip?: string | BuderUnit;
+    clip?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/clip-path) */
-    clipPath?: string | BuderUnit;
-    clipRule?: string | BuderUnit;
+    clipPath?: BuderStyleType;
+    clipRule?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/color) */
-    color?: string | BuderUnit;
-    colorInterpolation?: string | BuderUnit;
-    colorInterpolationFilters?: string | BuderUnit;
+    color?: BuderStyleType;
+    colorInterpolation?: BuderStyleType;
+    colorInterpolationFilters?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/color-scheme) */
-    colorScheme?: string | BuderUnit;
+    colorScheme?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-count) */
-    columnCount?: string | BuderUnit;
+    columnCount?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-fill) */
-    columnFill?: string | BuderUnit;
+    columnFill?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-gap) */
-    columnGap?: string | BuderUnit;
+    columnGap?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-rule) */
-    columnRule?: string | BuderUnit;
+    columnRule?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-rule-color) */
-    columnRuleColor?: string | BuderUnit;
+    columnRuleColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-rule-style) */
-    columnRuleStyle?: string | BuderUnit;
+    columnRuleStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-rule-width) */
-    columnRuleWidth?: string | BuderUnit;
+    columnRuleWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-span) */
-    columnSpan?: string | BuderUnit;
+    columnSpan?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/column-width) */
-    columnWidth?: string | BuderUnit;
+    columnWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/columns) */
-    columns?: string | BuderUnit;
+    columns?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/contain) */
-    contain?: string | BuderUnit;
+    contain?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-contain-intrinsic-block-size) */
-    containIntrinsicBlockSize?: string | BuderUnit;
+    containIntrinsicBlockSize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-height) */
-    containIntrinsicHeight?: string | BuderUnit;
+    containIntrinsicHeight?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-contain-intrinsic-inline-size) */
-    containIntrinsicInlineSize?: string | BuderUnit;
+    containIntrinsicInlineSize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-size) */
-    containIntrinsicSize?: string | BuderUnit;
+    containIntrinsicSize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-width) */
-    containIntrinsicWidth?: string | BuderUnit;
+    containIntrinsicWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/container) */
-    container?: string | BuderUnit;
+    container?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/container-name) */
-    containerName?: string | BuderUnit;
+    containerName?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/container-type) */
-    containerType?: string | BuderUnit;
+    containerType?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/content) */
-    content?: string | BuderUnit;
+    content?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/counter-increment) */
-    counterIncrement?: string | BuderUnit;
+    counterIncrement?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/counter-reset) */
-    counterReset?: string | BuderUnit;
+    counterReset?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/counter-set) */
-    counterSet?: string | BuderUnit;
+    counterSet?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/CSSStyleDeclaration/cssFloat) */
-    cssFloat?: string | BuderUnit;
+    cssFloat?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/CSSStyleDeclaration/cssText) */
-    cssText?: string | BuderUnit;
+    cssText?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/cursor) */
-    cursor?: string | BuderUnit;
-    cx?: string | BuderUnit;
-    cy?: string | BuderUnit;
-    d?: string | BuderUnit;
+    cursor?: BuderStyleType;
+    cx?: BuderStyleType;
+    cy?: BuderStyleType;
+    d?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/direction) */
-    direction?: string | BuderUnit;
+    direction?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/display) */
-    display?: string | BuderUnit;
-    dominantBaseline?: string | BuderUnit;
+    display?: BuderStyleType;
+    dominantBaseline?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/empty-cells) */
-    emptyCells?: string | BuderUnit;
-    fill?: string | BuderUnit;
-    fillOpacity?: string | BuderUnit;
-    fillRule?: string | BuderUnit;
+    emptyCells?: BuderStyleType;
+    fill?: BuderStyleType;
+    fillOpacity?: BuderStyleType;
+    fillRule?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/filter) */
-    filter?: string | BuderUnit;
+    filter?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex) */
-    flex?: string | BuderUnit;
+    flex?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-basis) */
-    flexBasis?: string | BuderUnit;
+    flexBasis?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-direction) */
-    flexDirection?: string | BuderUnit;
+    flexDirection?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-flow) */
-    flexFlow?: string | BuderUnit;
+    flexFlow?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-grow) */
-    flexGrow?: string | BuderUnit;
+    flexGrow?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-shrink) */
-    flexShrink?: string | BuderUnit;
+    flexShrink?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-wrap) */
-    flexWrap?: string | BuderUnit;
+    flexWrap?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/float) */
-    float?: string | BuderUnit;
-    floodColor?: string | BuderUnit;
-    floodOpacity?: string | BuderUnit;
+    float?: BuderStyleType;
+    floodColor?: BuderStyleType;
+    floodOpacity?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font) */
-    font?: string | BuderUnit;
+    font?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-family) */
-    fontFamily?: string | BuderUnit;
+    fontFamily?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-feature-settings) */
-    fontFeatureSettings?: string | BuderUnit;
+    fontFeatureSettings?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-kerning) */
-    fontKerning?: string | BuderUnit;
+    fontKerning?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-optical-sizing) */
-    fontOpticalSizing?: string | BuderUnit;
+    fontOpticalSizing?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-palette) */
-    fontPalette?: string | BuderUnit;
+    fontPalette?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-size) */
-    fontSize?: string | BuderUnit;
+    fontSize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-size-adjust) */
-    fontSizeAdjust?: string | BuderUnit;
+    fontSizeAdjust?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-stretch) */
-    fontStretch?: string | BuderUnit;
+    fontStretch?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-style) */
-    fontStyle?: string | BuderUnit;
+    fontStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-synthesis) */
-    fontSynthesis?: string | BuderUnit;
+    fontSynthesis?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-synthesis-small-caps) */
-    fontSynthesisSmallCaps?: string | BuderUnit;
+    fontSynthesisSmallCaps?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-synthesis-style) */
-    fontSynthesisStyle?: string | BuderUnit;
+    fontSynthesisStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-synthesis-weight) */
-    fontSynthesisWeight?: string | BuderUnit;
+    fontSynthesisWeight?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant) */
-    fontVariant?: string | BuderUnit;
+    fontVariant?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-alternates) */
-    fontVariantAlternates?: string | BuderUnit;
+    fontVariantAlternates?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-caps) */
-    fontVariantCaps?: string | BuderUnit;
+    fontVariantCaps?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-east-asian) */
-    fontVariantEastAsian?: string | BuderUnit;
+    fontVariantEastAsian?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-ligatures) */
-    fontVariantLigatures?: string | BuderUnit;
+    fontVariantLigatures?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-numeric) */
-    fontVariantNumeric?: string | BuderUnit;
+    fontVariantNumeric?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variant-position) */
-    fontVariantPosition?: string | BuderUnit;
+    fontVariantPosition?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-variation-settings) */
-    fontVariationSettings?: string | BuderUnit;
+    fontVariationSettings?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/font-weight) */
-    fontWeight?: string | BuderUnit;
+    fontWeight?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/forced-color-adjust) */
-    forcedColorAdjust?: string | BuderUnit;
+    forcedColorAdjust?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/gap) */
-    gap?: string | BuderUnit;
+    gap?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid) */
-    grid?: string | BuderUnit;
+    grid?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-area) */
-    gridArea?: string | BuderUnit;
+    gridArea?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-auto-columns) */
-    gridAutoColumns?: string | BuderUnit;
+    gridAutoColumns?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-auto-flow) */
-    gridAutoFlow?: string | BuderUnit;
+    gridAutoFlow?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-auto-rows) */
-    gridAutoRows?: string | BuderUnit;
+    gridAutoRows?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-column) */
-    gridColumn?: string | BuderUnit;
+    gridColumn?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-column-end) */
-    gridColumnEnd?: string | BuderUnit;
+    gridColumnEnd?: BuderStyleType;
     /** @deprecated This is a legacy alias of `columnGap`. */
-    gridColumnGap?: string | BuderUnit;
+    gridColumnGap?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-column-start) */
-    gridColumnStart?: string | BuderUnit;
+    gridColumnStart?: BuderStyleType;
     /** @deprecated This is a legacy alias of `gap`. */
-    gridGap?: string | BuderUnit;
+    gridGap?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-row) */
-    gridRow?: string | BuderUnit;
+    gridRow?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-row-end) */
-    gridRowEnd?: string | BuderUnit;
+    gridRowEnd?: BuderStyleType;
     /** @deprecated This is a legacy alias of `rowGap`. */
-    gridRowGap?: string | BuderUnit;
+    gridRowGap?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-row-start) */
-    gridRowStart?: string | BuderUnit;
+    gridRowStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-template) */
-    gridTemplate?: string | BuderUnit;
+    gridTemplate?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-template-areas) */
-    gridTemplateAreas?: string | BuderUnit;
+    gridTemplateAreas?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-template-columns) */
-    gridTemplateColumns?: string | BuderUnit;
+    gridTemplateColumns?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/grid-template-rows) */
-    gridTemplateRows?: string | BuderUnit;
+    gridTemplateRows?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/height) */
-    height?: string | BuderUnit;
+    height?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/hyphenate-character) */
-    hyphenateCharacter?: string | BuderUnit;
+    hyphenateCharacter?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/hyphens) */
-    hyphens?: string | BuderUnit;
+    hyphens?: BuderStyleType;
     /**
      * @deprecated
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/image-orientation)
      */
-    imageOrientation?: string | BuderUnit;
+    imageOrientation?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/image-rendering) */
-    imageRendering?: string | BuderUnit;
+    imageRendering?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inline-size) */
-    inlineSize?: string | BuderUnit;
+    inlineSize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset) */
-    inset?: string | BuderUnit;
+    inset?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-block) */
-    insetBlock?: string | BuderUnit;
+    insetBlock?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-block-end) */
-    insetBlockEnd?: string | BuderUnit;
+    insetBlockEnd?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-block-start) */
-    insetBlockStart?: string | BuderUnit;
+    insetBlockStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-inline) */
-    insetInline?: string | BuderUnit;
+    insetInline?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-inline-end) */
-    insetInlineEnd?: string | BuderUnit;
+    insetInlineEnd?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/inset-inline-start) */
-    insetInlineStart?: string | BuderUnit;
+    insetInlineStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/isolation) */
-    isolation?: string | BuderUnit;
+    isolation?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/justify-content) */
-    justifyContent?: string | BuderUnit;
+    justifyContent?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/justify-items) */
-    justifyItems?: string | BuderUnit;
+    justifyItems?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/justify-self) */
-    justifySelf?: string | BuderUnit;
+    justifySelf?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/left) */
-    left?: string | BuderUnit;
+    left?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/CSSStyleDeclaration/length) */
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/letter-spacing) */
-    letterSpacing?: string | BuderUnit;
-    lightingColor?: string | BuderUnit;
+    letterSpacing?: BuderStyleType;
+    lightingColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/line-break) */
-    lineBreak?: string | BuderUnit;
+    lineBreak?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/line-height) */
-    lineHeight?: string | BuderUnit;
+    lineHeight?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/list-style) */
-    listStyle?: string | BuderUnit;
+    listStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/list-style-image) */
-    listStyleImage?: string | BuderUnit;
+    listStyleImage?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/list-style-position) */
-    listStylePosition?: string | BuderUnit;
+    listStylePosition?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/list-style-type) */
-    listStyleType?: string | BuderUnit;
+    listStyleType?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin) */
-    margin?: string | BuderUnit;
+    margin?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-block) */
-    marginBlock?: string | BuderUnit;
+    marginBlock?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-block-end) */
-    marginBlockEnd?: string | BuderUnit;
+    marginBlockEnd?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-block-start) */
-    marginBlockStart?: string | BuderUnit;
+    marginBlockStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-bottom) */
-    marginBottom?: string | BuderUnit;
+    marginBottom?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline) */
-    marginInline?: string | BuderUnit;
+    marginInline?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline-end) */
-    marginInlineEnd?: string | BuderUnit;
+    marginInlineEnd?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-inline-start) */
-    marginInlineStart?: string | BuderUnit;
+    marginInlineStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-left) */
-    marginLeft?: string | BuderUnit;
+    marginLeft?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-right) */
-    marginRight?: string | BuderUnit;
+    marginRight?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/margin-top) */
-    marginTop?: string | BuderUnit;
-    marker?: string | BuderUnit;
-    markerEnd?: string | BuderUnit;
-    markerMid?: string | BuderUnit;
-    markerStart?: string | BuderUnit;
+    marginTop?: BuderStyleType;
+    marker?: BuderStyleType;
+    markerEnd?: BuderStyleType;
+    markerMid?: BuderStyleType;
+    markerStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask) */
-    mask?: string | BuderUnit;
+    mask?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-clip) */
-    maskClip?: string | BuderUnit;
+    maskClip?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-composite) */
-    maskComposite?: string | BuderUnit;
+    maskComposite?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-image) */
-    maskImage?: string | BuderUnit;
+    maskImage?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-mode) */
-    maskMode?: string | BuderUnit;
+    maskMode?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-origin) */
-    maskOrigin?: string | BuderUnit;
+    maskOrigin?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-position) */
-    maskPosition?: string | BuderUnit;
+    maskPosition?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-repeat) */
-    maskRepeat?: string | BuderUnit;
+    maskRepeat?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-size) */
-    maskSize?: string | BuderUnit;
+    maskSize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-type) */
-    maskType?: string | BuderUnit;
+    maskType?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/math-depth) */
-    mathDepth?: string | BuderUnit;
+    mathDepth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/math-style) */
-    mathStyle?: string | BuderUnit;
+    mathStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/max-block-size) */
-    maxBlockSize?: string | BuderUnit;
+    maxBlockSize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/max-height) */
-    maxHeight?: string | BuderUnit;
+    maxHeight?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/max-inline-size) */
-    maxInlineSize?: string | BuderUnit;
+    maxInlineSize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/max-width) */
-    maxWidth?: string | BuderUnit;
+    maxWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/min-block-size) */
-    minBlockSize?: string | BuderUnit;
+    minBlockSize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/min-height) */
-    minHeight?: string | BuderUnit;
+    minHeight?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/min-inline-size) */
-    minInlineSize?: string | BuderUnit;
+    minInlineSize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/min-width) */
-    minWidth?: string | BuderUnit;
+    minWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode) */
-    mixBlendMode?: string | BuderUnit;
+    mixBlendMode?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/object-fit) */
-    objectFit?: string | BuderUnit;
+    objectFit?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/object-position) */
-    objectPosition?: string | BuderUnit;
+    objectPosition?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset) */
-    offset?: string | BuderUnit;
+    offset?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-anchor) */
-    offsetAnchor?: string | BuderUnit;
+    offsetAnchor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-distance) */
-    offsetDistance?: string | BuderUnit;
+    offsetDistance?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-path) */
-    offsetPath?: string | BuderUnit;
+    offsetPath?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-position) */
-    offsetPosition?: string | BuderUnit;
+    offsetPosition?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/offset-rotate) */
-    offsetRotate?: string | BuderUnit;
+    offsetRotate?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/opacity) */
-    opacity?: string | BuderUnit;
+    opacity?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/order) */
-    order?: string | BuderUnit;
+    order?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/orphans) */
-    orphans?: string | BuderUnit;
+    orphans?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/outline) */
-    outline?: string | BuderUnit;
+    outline?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/outline-color) */
-    outlineColor?: string | BuderUnit;
+    outlineColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/outline-offset) */
-    outlineOffset?: string | BuderUnit;
+    outlineOffset?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/outline-style) */
-    outlineStyle?: string | BuderUnit;
+    outlineStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/outline-width) */
-    outlineWidth?: string | BuderUnit;
+    outlineWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow) */
-    overflow?: string | BuderUnit;
+    overflow?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow-anchor) */
-    overflowAnchor?: string | BuderUnit;
+    overflowAnchor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow-clip-margin) */
-    overflowClipMargin?: string | BuderUnit;
+    overflowClipMargin?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow-wrap) */
-    overflowWrap?: string | BuderUnit;
+    overflowWrap?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow-x) */
-    overflowX?: string | BuderUnit;
+    overflowX?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overflow-y) */
-    overflowY?: string | BuderUnit;
+    overflowY?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior) */
-    overscrollBehavior?: string | BuderUnit;
+    overscrollBehavior?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-block) */
-    overscrollBehaviorBlock?: string | BuderUnit;
+    overscrollBehaviorBlock?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-inline) */
-    overscrollBehaviorInline?: string | BuderUnit;
+    overscrollBehaviorInline?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x) */
-    overscrollBehaviorX?: string | BuderUnit;
+    overscrollBehaviorX?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y) */
-    overscrollBehaviorY?: string | BuderUnit;
+    overscrollBehaviorY?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding) */
-    padding?: string | BuderUnit;
+    padding?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-block) */
-    paddingBlock?: string | BuderUnit;
+    paddingBlock?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-block-end) */
-    paddingBlockEnd?: string | BuderUnit;
+    paddingBlockEnd?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-block-start) */
-    paddingBlockStart?: string | BuderUnit;
+    paddingBlockStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-bottom) */
-    paddingBottom?: string | BuderUnit;
+    paddingBottom?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-inline) */
-    paddingInline?: string | BuderUnit;
+    paddingInline?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-inline-end) */
-    paddingInlineEnd?: string | BuderUnit;
+    paddingInlineEnd?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-inline-start) */
-    paddingInlineStart?: string | BuderUnit;
+    paddingInlineStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-left) */
-    paddingLeft?: string | BuderUnit;
+    paddingLeft?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-right) */
-    paddingRight?: string | BuderUnit;
+    paddingRight?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/padding-top) */
-    paddingTop?: string | BuderUnit;
+    paddingTop?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/page) */
-    page?: string | BuderUnit;
+    page?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/page-break-after) */
-    pageBreakAfter?: string | BuderUnit;
+    pageBreakAfter?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/page-break-before) */
-    pageBreakBefore?: string | BuderUnit;
+    pageBreakBefore?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/page-break-inside) */
-    pageBreakInside?: string | BuderUnit;
+    pageBreakInside?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/paint-order) */
-    paintOrder?: string | BuderUnit;
+    paintOrder?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/CSSStyleDeclaration/parentRule) */
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/perspective) */
-    perspective?: string | BuderUnit;
+    perspective?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/perspective-origin) */
-    perspectiveOrigin?: string | BuderUnit;
+    perspectiveOrigin?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/place-content) */
-    placeContent?: string | BuderUnit;
+    placeContent?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/place-items) */
-    placeItems?: string | BuderUnit;
+    placeItems?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/place-self) */
-    placeSelf?: string | BuderUnit;
+    placeSelf?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/pointer-events) */
-    pointerEvents?: string | BuderUnit;
+    pointerEvents?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/position) */
-    position?: string | BuderUnit;
+    position?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/print-color-adjust) */
-    printColorAdjust?: string | BuderUnit;
+    printColorAdjust?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/quotes) */
-    quotes?: string | BuderUnit;
-    r?: string | BuderUnit;
+    quotes?: BuderStyleType;
+    r?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/resize) */
-    resize?: string | BuderUnit;
+    resize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/right) */
-    right?: string | BuderUnit;
+    right?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/rotate) */
-    rotate?: string | BuderUnit;
+    rotate?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/row-gap) */
-    rowGap?: string | BuderUnit;
+    rowGap?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/ruby-position) */
-    rubyPosition?: string | BuderUnit;
-    rx?: string | BuderUnit;
-    ry?: string | BuderUnit;
+    rubyPosition?: BuderStyleType;
+    rx?: BuderStyleType;
+    ry?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scale) */
-    scale?: string | BuderUnit;
+    scale?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-behavior) */
-    scrollBehavior?: string | BuderUnit;
+    scrollBehavior?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin) */
-    scrollMargin?: string | BuderUnit;
+    scrollMargin?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block) */
-    scrollMarginBlock?: string | BuderUnit;
+    scrollMarginBlock?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-end) */
-    scrollMarginBlockEnd?: string | BuderUnit;
+    scrollMarginBlockEnd?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-start) */
-    scrollMarginBlockStart?: string | BuderUnit;
+    scrollMarginBlockStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom) */
-    scrollMarginBottom?: string | BuderUnit;
+    scrollMarginBottom?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline) */
-    scrollMarginInline?: string | BuderUnit;
+    scrollMarginInline?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-end) */
-    scrollMarginInlineEnd?: string | BuderUnit;
+    scrollMarginInlineEnd?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-start) */
-    scrollMarginInlineStart?: string | BuderUnit;
+    scrollMarginInlineStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left) */
-    scrollMarginLeft?: string | BuderUnit;
+    scrollMarginLeft?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right) */
-    scrollMarginRight?: string | BuderUnit;
+    scrollMarginRight?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top) */
-    scrollMarginTop?: string | BuderUnit;
+    scrollMarginTop?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding) */
-    scrollPadding?: string | BuderUnit;
+    scrollPadding?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block) */
-    scrollPaddingBlock?: string | BuderUnit;
+    scrollPaddingBlock?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-end) */
-    scrollPaddingBlockEnd?: string | BuderUnit;
+    scrollPaddingBlockEnd?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-start) */
-    scrollPaddingBlockStart?: string | BuderUnit;
+    scrollPaddingBlockStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom) */
-    scrollPaddingBottom?: string | BuderUnit;
+    scrollPaddingBottom?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline) */
-    scrollPaddingInline?: string | BuderUnit;
+    scrollPaddingInline?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-end) */
-    scrollPaddingInlineEnd?: string | BuderUnit;
+    scrollPaddingInlineEnd?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-start) */
-    scrollPaddingInlineStart?: string | BuderUnit;
+    scrollPaddingInlineStart?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left) */
-    scrollPaddingLeft?: string | BuderUnit;
+    scrollPaddingLeft?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right) */
-    scrollPaddingRight?: string | BuderUnit;
+    scrollPaddingRight?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top) */
-    scrollPaddingTop?: string | BuderUnit;
+    scrollPaddingTop?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align) */
-    scrollSnapAlign?: string | BuderUnit;
+    scrollSnapAlign?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop) */
-    scrollSnapStop?: string | BuderUnit;
+    scrollSnapStop?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type) */
-    scrollSnapType?: string | BuderUnit;
+    scrollSnapType?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scrollbar-color) */
-    scrollbarColor?: string | BuderUnit;
+    scrollbarColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scrollbar-gutter) */
-    scrollbarGutter?: string | BuderUnit;
+    scrollbarGutter?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/scrollbar-width) */
-    scrollbarWidth?: string | BuderUnit;
+    scrollbarWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/shape-image-threshold) */
-    shapeImageThreshold?: string | BuderUnit;
+    shapeImageThreshold?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/shape-margin) */
-    shapeMargin?: string | BuderUnit;
+    shapeMargin?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/shape-outside) */
-    shapeOutside?: string | BuderUnit;
-    shapeRendering?: string | BuderUnit;
-    stopColor?: string | BuderUnit;
-    stopOpacity?: string | BuderUnit;
-    stroke?: string | BuderUnit;
-    strokeDasharray?: string | BuderUnit;
-    strokeDashoffset?: string | BuderUnit;
-    strokeLinecap?: string | BuderUnit;
-    strokeLinejoin?: string | BuderUnit;
-    strokeMiterlimit?: string | BuderUnit;
-    strokeOpacity?: string | BuderUnit;
-    strokeWidth?: string | BuderUnit;
+    shapeOutside?: BuderStyleType;
+    shapeRendering?: BuderStyleType;
+    stopColor?: BuderStyleType;
+    stopOpacity?: BuderStyleType;
+    stroke?: BuderStyleType;
+    strokeDasharray?: BuderStyleType;
+    strokeDashoffset?: BuderStyleType;
+    strokeLinecap?: BuderStyleType;
+    strokeLinejoin?: BuderStyleType;
+    strokeMiterlimit?: BuderStyleType;
+    strokeOpacity?: BuderStyleType;
+    strokeWidth?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/tab-size) */
-    tabSize?: string | BuderUnit;
+    tabSize?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/table-layout) */
-    tableLayout?: string | BuderUnit;
+    tableLayout?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-align) */
-    textAlign?: string | BuderUnit;
+    textAlign?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-align-last) */
-    textAlignLast?: string | BuderUnit;
-    textAnchor?: string | BuderUnit;
+    textAlignLast?: BuderStyleType;
+    textAnchor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-combine-upright) */
-    textCombineUpright?: string | BuderUnit;
+    textCombineUpright?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration) */
-    textDecoration?: string | BuderUnit;
+    textDecoration?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration-color) */
-    textDecorationColor?: string | BuderUnit;
+    textDecorationColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration-line) */
-    textDecorationLine?: string | BuderUnit;
+    textDecorationLine?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip-ink) */
-    textDecorationSkipInk?: string | BuderUnit;
+    textDecorationSkipInk?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration-style) */
-    textDecorationStyle?: string | BuderUnit;
+    textDecorationStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-decoration-thickness) */
-    textDecorationThickness?: string | BuderUnit;
+    textDecorationThickness?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-emphasis) */
-    textEmphasis?: string | BuderUnit;
+    textEmphasis?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-emphasis-color) */
-    textEmphasisColor?: string | BuderUnit;
+    textEmphasisColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-emphasis-position) */
-    textEmphasisPosition?: string | BuderUnit;
+    textEmphasisPosition?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-emphasis-style) */
-    textEmphasisStyle?: string | BuderUnit;
+    textEmphasisStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-indent) */
-    textIndent?: string | BuderUnit;
+    textIndent?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-orientation) */
-    textOrientation?: string | BuderUnit;
+    textOrientation?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-overflow) */
-    textOverflow?: string | BuderUnit;
+    textOverflow?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-rendering) */
-    textRendering?: string | BuderUnit;
+    textRendering?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-shadow) */
-    textShadow?: string | BuderUnit;
+    textShadow?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-transform) */
-    textTransform?: string | BuderUnit;
+    textTransform?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-underline-offset) */
-    textUnderlineOffset?: string | BuderUnit;
+    textUnderlineOffset?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-underline-position) */
-    textUnderlinePosition?: string | BuderUnit;
+    textUnderlinePosition?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-wrap) */
-    textWrap?: string | BuderUnit;
+    textWrap?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/top) */
-    top?: string | BuderUnit;
+    top?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/touch-action) */
-    touchAction?: string | BuderUnit;
+    touchAction?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transform) */
-    transform?: string | BuderUnit;
+    transform?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transform-box) */
-    transformBox?: string | BuderUnit;
+    transformBox?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transform-origin) */
-    transformOrigin?: string | BuderUnit;
+    transformOrigin?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transform-style) */
-    transformStyle?: string | BuderUnit;
+    transformStyle?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition) */
-    transition?: string | BuderUnit;
+    transition?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition-delay) */
-    transitionDelay?: string | BuderUnit;
+    transitionDelay?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition-duration) */
-    transitionDuration?: string | BuderUnit;
+    transitionDuration?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition-property) */
-    transitionProperty?: string | BuderUnit;
+    transitionProperty?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition-timing-function) */
-    transitionTimingFunction?: string | BuderUnit;
+    transitionTimingFunction?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/translate) */
-    translate?: string | BuderUnit;
+    translate?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/unicode-bidi) */
-    unicodeBidi?: string | BuderUnit;
+    unicodeBidi?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/user-select) */
-    userSelect?: string | BuderUnit;
-    vectorEffect?: string | BuderUnit;
+    userSelect?: BuderStyleType;
+    vectorEffect?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/vertical-align) */
-    verticalAlign?: string | BuderUnit;
+    verticalAlign?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/visibility) */
-    visibility?: string | BuderUnit;
+    visibility?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `alignContent`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/align-content)
      */
-    webkitAlignContent?: string | BuderUnit;
+    webkitAlignContent?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `alignItems`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/align-items)
      */
-    webkitAlignItems?: string | BuderUnit;
+    webkitAlignItems?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `alignSelf`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/align-self)
      */
-    webkitAlignSelf?: string | BuderUnit;
+    webkitAlignSelf?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `animation`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation)
      */
-    webkitAnimation?: string | BuderUnit;
+    webkitAnimation?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `animationDelay`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-delay)
      */
-    webkitAnimationDelay?: string | BuderUnit;
+    webkitAnimationDelay?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `animationDirection`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-direction)
      */
-    webkitAnimationDirection?: string | BuderUnit;
+    webkitAnimationDirection?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `animationDuration`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-duration)
      */
-    webkitAnimationDuration?: string | BuderUnit;
+    webkitAnimationDuration?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `animationFillMode`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode)
      */
-    webkitAnimationFillMode?: string | BuderUnit;
+    webkitAnimationFillMode?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `animationIterationCount`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-iteration-count)
      */
-    webkitAnimationIterationCount?: string | BuderUnit;
+    webkitAnimationIterationCount?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `animationName`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-name)
      */
-    webkitAnimationName?: string | BuderUnit;
+    webkitAnimationName?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `animationPlayState`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-play-state)
      */
-    webkitAnimationPlayState?: string | BuderUnit;
+    webkitAnimationPlayState?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `animationTimingFunction`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/animation-timing-function)
      */
-    webkitAnimationTimingFunction?: string | BuderUnit;
+    webkitAnimationTimingFunction?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `appearance`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/appearance)
      */
-    webkitAppearance?: string | BuderUnit;
+    webkitAppearance?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `backfaceVisibility`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/backface-visibility)
      */
-    webkitBackfaceVisibility?: string | BuderUnit;
+    webkitBackfaceVisibility?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `backgroundClip`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-clip)
      */
-    webkitBackgroundClip?: string | BuderUnit;
+    webkitBackgroundClip?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `backgroundOrigin`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-origin)
      */
-    webkitBackgroundOrigin?: string | BuderUnit;
+    webkitBackgroundOrigin?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `backgroundSize`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/background-size)
      */
-    webkitBackgroundSize?: string | BuderUnit;
+    webkitBackgroundSize?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `borderBottomLeftRadius`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius)
      */
-    webkitBorderBottomLeftRadius?: string | BuderUnit;
+    webkitBorderBottomLeftRadius?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `borderBottomRightRadius`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius)
      */
-    webkitBorderBottomRightRadius?: string | BuderUnit;
+    webkitBorderBottomRightRadius?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `borderRadius`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-radius)
      */
-    webkitBorderRadius?: string | BuderUnit;
+    webkitBorderRadius?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `borderTopLeftRadius`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius)
      */
-    webkitBorderTopLeftRadius?: string | BuderUnit;
+    webkitBorderTopLeftRadius?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `borderTopRightRadius`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius)
      */
-    webkitBorderTopRightRadius?: string | BuderUnit;
+    webkitBorderTopRightRadius?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `boxAlign`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-align)
      */
-    webkitBoxAlign?: string | BuderUnit;
+    webkitBoxAlign?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `boxFlex`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-flex)
      */
-    webkitBoxFlex?: string | BuderUnit;
+    webkitBoxFlex?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `boxOrdinalGroup`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-ordinal-group)
      */
-    webkitBoxOrdinalGroup?: string | BuderUnit;
+    webkitBoxOrdinalGroup?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `boxOrient`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-orient)
      */
-    webkitBoxOrient?: string | BuderUnit;
+    webkitBoxOrient?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `boxPack`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-pack)
      */
-    webkitBoxPack?: string | BuderUnit;
+    webkitBoxPack?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `boxShadow`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-shadow)
      */
-    webkitBoxShadow?: string | BuderUnit;
+    webkitBoxShadow?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `boxSizing`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/box-sizing)
      */
-    webkitBoxSizing?: string | BuderUnit;
+    webkitBoxSizing?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `filter`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/filter)
      */
-    webkitFilter?: string | BuderUnit;
+    webkitFilter?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `flex`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex)
      */
-    webkitFlex?: string | BuderUnit;
+    webkitFlex?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `flexBasis`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-basis)
      */
-    webkitFlexBasis?: string | BuderUnit;
+    webkitFlexBasis?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `flexDirection`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-direction)
      */
-    webkitFlexDirection?: string | BuderUnit;
+    webkitFlexDirection?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `flexFlow`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-flow)
      */
-    webkitFlexFlow?: string | BuderUnit;
+    webkitFlexFlow?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `flexGrow`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-grow)
      */
-    webkitFlexGrow?: string | BuderUnit;
+    webkitFlexGrow?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `flexShrink`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-shrink)
      */
-    webkitFlexShrink?: string | BuderUnit;
+    webkitFlexShrink?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `flexWrap`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/flex-wrap)
      */
-    webkitFlexWrap?: string | BuderUnit;
+    webkitFlexWrap?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `justifyContent`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/justify-content)
      */
-    webkitJustifyContent?: string | BuderUnit;
+    webkitJustifyContent?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-webkit-line-clamp) */
-    webkitLineClamp?: string | BuderUnit;
+    webkitLineClamp?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `mask`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask)
      */
-    webkitMask?: string | BuderUnit;
+    webkitMask?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskBorder`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border)
      */
-    webkitMaskBoxImage?: string | BuderUnit;
+    webkitMaskBoxImage?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskBorderOutset`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-outset)
      */
-    webkitMaskBoxImageOutset?: string | BuderUnit;
+    webkitMaskBoxImageOutset?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskBorderRepeat`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-repeat)
      */
-    webkitMaskBoxImageRepeat?: string | BuderUnit;
+    webkitMaskBoxImageRepeat?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskBorderSlice`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-slice)
      */
-    webkitMaskBoxImageSlice?: string | BuderUnit;
+    webkitMaskBoxImageSlice?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskBorderSource`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-source)
      */
-    webkitMaskBoxImageSource?: string | BuderUnit;
+    webkitMaskBoxImageSource?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskBorderWidth`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-border-width)
      */
-    webkitMaskBoxImageWidth?: string | BuderUnit;
+    webkitMaskBoxImageWidth?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskClip`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-clip)
      */
-    webkitMaskClip?: string | BuderUnit;
+    webkitMaskClip?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskComposite`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-composite)
      */
-    webkitMaskComposite?: string | BuderUnit;
+    webkitMaskComposite?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskImage`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-image)
      */
-    webkitMaskImage?: string | BuderUnit;
+    webkitMaskImage?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskOrigin`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-origin)
      */
-    webkitMaskOrigin?: string | BuderUnit;
+    webkitMaskOrigin?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskPosition`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-position)
      */
-    webkitMaskPosition?: string | BuderUnit;
+    webkitMaskPosition?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskRepeat`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-repeat)
      */
-    webkitMaskRepeat?: string | BuderUnit;
+    webkitMaskRepeat?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `maskSize`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/mask-size)
      */
-    webkitMaskSize?: string | BuderUnit;
+    webkitMaskSize?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `order`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/order)
      */
-    webkitOrder?: string | BuderUnit;
+    webkitOrder?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `perspective`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/perspective)
      */
-    webkitPerspective?: string | BuderUnit;
+    webkitPerspective?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `perspectiveOrigin`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/perspective-origin)
      */
-    webkitPerspectiveOrigin?: string | BuderUnit;
+    webkitPerspectiveOrigin?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-webkit-text-fill-color) */
-    webkitTextFillColor?: string | BuderUnit;
+    webkitTextFillColor?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `textSizeAdjust`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/text-size-adjust)
      */
-    webkitTextSizeAdjust?: string | BuderUnit;
+    webkitTextSizeAdjust?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-webkit-text-stroke) */
-    webkitTextStroke?: string | BuderUnit;
+    webkitTextStroke?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-webkit-text-stroke-color) */
-    webkitTextStrokeColor?: string | BuderUnit;
+    webkitTextStrokeColor?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/-webkit-text-stroke-width) */
-    webkitTextStrokeWidth?: string | BuderUnit;
+    webkitTextStrokeWidth?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `transform`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transform)
      */
-    webkitTransform?: string | BuderUnit;
+    webkitTransform?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `transformOrigin`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transform-origin)
      */
-    webkitTransformOrigin?: string | BuderUnit;
+    webkitTransformOrigin?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `transformStyle`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transform-style)
      */
-    webkitTransformStyle?: string | BuderUnit;
+    webkitTransformStyle?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `transition`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition)
      */
-    webkitTransition?: string | BuderUnit;
+    webkitTransition?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `transitionDelay`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition-delay)
      */
-    webkitTransitionDelay?: string | BuderUnit;
+    webkitTransitionDelay?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `transitionDuration`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition-duration)
      */
-    webkitTransitionDuration?: string | BuderUnit;
+    webkitTransitionDuration?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `transitionProperty`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition-property)
      */
-    webkitTransitionProperty?: string | BuderUnit;
+    webkitTransitionProperty?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `transitionTimingFunction`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/transition-timing-function)
      */
-    webkitTransitionTimingFunction?: string | BuderUnit;
+    webkitTransitionTimingFunction?: BuderStyleType;
     /**
      * @deprecated This is a legacy alias of `userSelect`.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/user-select)
      */
-    webkitUserSelect?: string | BuderUnit;
+    webkitUserSelect?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/white-space) */
-    whiteSpace?: string | BuderUnit;
+    whiteSpace?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/widows) */
-    widows?: string | BuderUnit;
+    widows?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/width) */
-    width?: string | BuderUnit;
+    width?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/will-change) */
-    willChange?: string | BuderUnit;
+    willChange?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/word-break) */
-    wordBreak?: string | BuderUnit;
+    wordBreak?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/word-spacing) */
-    wordSpacing?: string | BuderUnit;
+    wordSpacing?: BuderStyleType;
     /** @deprecated */
-    wordWrap?: string | BuderUnit;
+    wordWrap?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/writing-mode) */
-    writingMode?: string | BuderUnit;
-    x?: string | BuderUnit;
-    y?: string | BuderUnit;
+    writingMode?: BuderStyleType;
+    x?: BuderStyleType;
+    y?: BuderStyleType;
     /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/z-index) */
-    zIndex?: string | BuderUnit;
+    zIndex?: BuderStyleType;
 }
+export {};

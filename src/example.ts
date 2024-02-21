@@ -1,23 +1,15 @@
-import {
-  Button,
-  Col,
-  Input,
-  State,
-  Text,
-  px,
-} from "./index.ts";
+import { Button, Col, Input, State, Text, px } from "./index.ts";
 
-let a = State("14");
+let a = State("14px");
 
 Col([
   Input(a),
   Text(a),
   Button("Reset")
-    .color("green")
-    .fontSize(px(a))
-    .bold.onClick(() => {
+    .style({ backgroundColor: "red", color: "white", fontSize: a })
+    .onClick(() => {
       a.value = "14";
     }),
 ])
-  .gap(px(10))
-  .center.fullScreen.mount("#app");
+  .style({ gap: px(10) })
+  .center.mount("#app");

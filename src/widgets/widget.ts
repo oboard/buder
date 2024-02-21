@@ -32,6 +32,12 @@ export class BuderWidget {
               (el.style as any)[key] = `${newValue}${value.unit}`;
             }
           });
+        } else if (value.subscribe) {
+          value.subscribe((newValue: string) => {
+            if (el) {
+              (el.style as any)[key] = newValue;
+            }
+          });
         } else {
           (el.style as any)[key] = `${value.value}${value.unit}`;
         }
@@ -142,87 +148,10 @@ export class BuderWidget {
     }
   }
 
-  color(color: string): BuderWidget {
-    return this.style({ color });
-  }
-
-  fontSize(size: BuderUnit): BuderWidget {
-    return this.style({ fontSize: size });
-  }
-
-  fontWeight(weight: BuderUnit): BuderWidget {
-    return this.style({ fontWeight: weight });
-  }
-
-  width(width: BuderUnit): BuderWidget {
-    return this.style({ width });
-  }
-
-  height(height: BuderUnit): BuderWidget {
-    return this.style({ height });
-  }
-
-  minWidth(width: BuderUnit): BuderWidget {
-    return this.style({ minWidth: width });
-  }
-
-  minHeight(height: BuderUnit): BuderWidget {
-    return this.style({ minHeight: height });
-  }
-
-  maxWidth(width: BuderUnit): BuderWidget {
-    return this.style({ maxWidth: width });
-  }
-
-  maxHeight(height: BuderUnit): BuderWidget {
-    return this.style({ maxHeight: height });
-  }
-
-  get bold(): BuderWidget {
-    return this.style({ fontWeight: "bold" });
-  }
-
-  get italic(): BuderWidget {
-    return this.style({ fontStyle: "italic" });
-  }
-
-  get underline(): BuderWidget {
-    return this.style({ textDecoration: "underline" });
-  }
-
-  get lineThrough(): BuderWidget {
-    return this.style({ textDecoration: "line-through" });
-  }
-
-  get noWrap(): BuderWidget {
-    return this.style({ whiteSpace: "nowrap" });
-  }
-
-  get wrap(): BuderWidget {
-    return this.style({ whiteSpace: "wrap" });
-  }
-
-  get wrapReverse(): BuderWidget {
-    return this.style({ whiteSpace: "wrap-reverse" });
-  }
-
-  float(value: "left" | "right"): BuderWidget {
-    return this.style({ float: value });
-  }
-
-  clear(value: "left" | "right" | "both" | "none"): BuderWidget {
-    return this.style({ clear: value });
-  }
-
-  position(
-    value: "static" | "relative" | "absolute" | "fixed" | "sticky"
-  ): BuderWidget {
-    return this.style({ position: value });
-  }
-
   get center() {
     switch (this._style.display) {
       case "flex":
+      case "inline-flex":
         this._style.alignItems = "center";
         this._style.justifyContent = "center";
         break;
@@ -232,10 +161,6 @@ export class BuderWidget {
       case "block":
         this._style.margin = "auto";
         break;
-      case "inline-flex":
-        this._style.alignItems = "center";
-        this._style.justifyContent = "center";
-        break;
       case "inline-grid":
         this._style.placeItems = "center";
         break;
@@ -243,18 +168,8 @@ export class BuderWidget {
         this._style.display = "table";
         this._style.margin = "auto";
         break;
-      case "inline":
-      case "inline-block":
-      case "table-cell":
-      case "table-row":
-      case "table-column":
-      case "table-column-group":
-      case "table-footer-group":
-      case "table-header-group":
-        this._style.verticalAlign = "middle";
-        this._style.textAlign = "center";
-        break;
       default:
+        this._style.verticalAlign = "middle";
         this._style.textAlign = "center";
     }
     return this;

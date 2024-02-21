@@ -1,3 +1,4 @@
+import { BuderState } from "./state";
 export declare enum BuderUnits {
     px = "px",
     em = "em",
@@ -6,13 +7,15 @@ export declare enum BuderUnits {
     vh = "vh",
     percent = "%"
 }
+type BuderUnitType = number | BuderState<number> | BuderState<string>;
 export interface BuderUnit {
-    value: number;
+    value: BuderUnitType;
     unit: BuderUnits;
 }
-export declare function px(num: number): BuderUnit;
-export declare function em(num: number): BuderUnit;
-export declare function rem(num: number): BuderUnit;
-export declare function vw(num: number): BuderUnit;
-export declare function vh(num: number): BuderUnit;
-export declare function percent(num: number): BuderUnit;
+export declare function px(num: BuderUnitType): BuderUnit;
+export declare function em(num: BuderUnitType): BuderUnit;
+export declare function rem(num: BuderUnitType): BuderUnit;
+export declare function vw(num: BuderUnitType): BuderUnit;
+export declare function vh(num: BuderUnitType): BuderUnit;
+export declare function percent(num: BuderUnitType): BuderUnit;
+export {};

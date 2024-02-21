@@ -28,7 +28,9 @@ export class BuderWidget {
       if (value instanceof Object) {
         if (value.value.subscribe) {
           value.value.subscribe((newValue: BuderUnit) => {
-            (el.style as any)[key] = `${newValue}${value.unit}`;
+            if (el) {
+              (el.style as any)[key] = `${newValue}${value.unit}`;
+            }
           });
         } else {
           (el.style as any)[key] = `${value.value}${value.unit}`;
@@ -60,7 +62,9 @@ export class BuderWidget {
       } else {
         el.textContent = this._text.value;
         this._text.subscribe((newValue) => {
-          el.textContent = newValue;
+          if (el) {
+            el.textContent = newValue;
+          }
         });
       }
     }

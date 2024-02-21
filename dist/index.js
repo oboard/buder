@@ -41,99 +41,6 @@ function L(e) {
     /* percent */
   };
 }
-let v = null;
-class f extends h {
-  // _key: number;
-  _func;
-  _element;
-  _states = /* @__PURE__ */ new Map();
-  _statePointer = 0;
-  constructor(t, n) {
-    super(), v = this, n && n.forEach((s, i) => {
-      s.builder = this, this._states.set(i, s.value);
-    }), this._func = t;
-  }
-  subscribe(t) {
-    this._states.forEach((n, s) => {
-      const i = this._states.get(s);
-      i instanceof d && (i.builder = this, i.subscribe(t));
-    });
-  }
-  render() {
-    const t = super.render(this._func(this.build.bind(this)).render());
-    return this._element ? p(this._element, t) : this._element = t, this._statePointer = 0, t;
-  }
-  build() {
-    this.render();
-  }
-}
-function p(e, t) {
-  if (!e || !t || e.isEqualNode(t))
-    return;
-  e.tagName !== t.tagName && e.replaceWith(t);
-  const n = e.attributes, s = t.attributes;
-  if (n && s) {
-    for (let r = 0; r < n.length; r++) {
-      const a = n[r], c = s.getNamedItem(a.name);
-      c ? c.value !== a.value && e.setAttribute(a.name, c.value) : e.removeAttribute(a.name);
-    }
-    for (let r = 0; r < s.length; r++) {
-      const a = s[r];
-      n.getNamedItem(a.name) || e.setAttribute(a.name, a.value);
-    }
-  }
-  const i = e.childNodes, o = t.childNodes, u = Math.max(i.length, o.length);
-  if (u == 0)
-    e.textContent !== t.textContent && (e.textContent = t.textContent);
-  else
-    for (let r = 0; r < u; r++) {
-      if (r >= i.length) {
-        e.appendChild(o[r]);
-        continue;
-      }
-      if (r >= o.length) {
-        e.removeChild(i[r]);
-        continue;
-      }
-      p(i[r], o[r]);
-    }
-  return e;
-}
-function O(e, t) {
-  return new f(e, t);
-}
-class d {
-  value;
-  builder;
-  callbacks = [];
-  constructor(t, n) {
-    this.value = t, this.builder = n;
-  }
-  // 重载“.”
-  get(t) {
-    const n = g(this.value[t]);
-    return n.subscribe(() => {
-      this.value[t] = n.value;
-    }), n;
-  }
-  subscribe(t) {
-    this.callbacks.push(t);
-  }
-  set(t) {
-    this.value = t, this.callbacks.forEach((n) => {
-      n(t);
-    });
-  }
-}
-function g(e) {
-  const t = v;
-  let n = 0;
-  return t && (n = t._statePointer, t._statePointer++, t._states.has(n) ? e = t._states.get(n) : t._states.set(n, e)), new Proxy(new d(e, t), {
-    set(s, i, o, u) {
-      return s.builder?._states.set(n, o), i == "value" ? s.set(o) : Reflect.set(s, i, o, u), s.builder?.build(), !0;
-    }
-  });
-}
 class h {
   constructor() {
   }
@@ -151,16 +58,18 @@ class h {
     t || (t = document.createElement(this._tag ?? "div"));
     for (const n in this._style) {
       const s = this._style[n];
-      s instanceof Object ? t.style[n] = `${s.value}${s.unit}` : t.style[n] = s;
+      s instanceof Object ? s.value.subscribe ? s.value.subscribe((i) => {
+        t && (t.style[n] = `${i}${s.unit}`);
+      }) : t.style[n] = `${s.value}${s.unit}` : t.style[n] = s;
     }
     for (const n in this._events)
       t.addEventListener(n, this._events[n]);
     this._id && (t.id = this._id), this._classes.length > 0 && t.classList.add(...this._classes);
     for (const n in this._attribute)
       t.setAttribute(n, this._attribute[n]);
-    return this._text && (this._text instanceof d ? (t.textContent = this._text.value, this._text.subscribe((n) => {
-      t && t.textContent !== n && (t.textContent = n);
-    })) : t.textContent = this._text), t;
+    return this._text && (typeof this._text == "string" ? t.textContent = this._text : (t.textContent = this._text.value, this._text.subscribe((n) => {
+      t && (t.textContent = n);
+    }))), t;
   }
   id(t) {
     return this._id = t, this;
@@ -581,10 +490,10 @@ class l extends h {
     }), super.render(t);
   }
 }
-function R(e) {
+function O(e) {
   return new l(e);
 }
-class m extends h {
+class f extends h {
   constructor(t) {
     super(), this._text = t;
   }
@@ -593,8 +502,101 @@ class m extends h {
     return super.render(t);
   }
 }
-function B(e) {
-  return new m(e);
+function R(e) {
+  return new f(e);
+}
+let _ = null;
+class g extends h {
+  // _key: number;
+  _func;
+  _element;
+  _states = /* @__PURE__ */ new Map();
+  _statePointer = 0;
+  constructor(t, n) {
+    super(), _ = this, n && n.forEach((s, i) => {
+      s.builder = this, this._states.set(i, s.value);
+    }), this._func = t;
+  }
+  subscribe(t) {
+    this._states.forEach((n, s) => {
+      const i = this._states.get(s);
+      i instanceof p && (i.builder = this, i.subscribe(t));
+    });
+  }
+  render() {
+    const t = super.render(this._func(this.build.bind(this)).render());
+    return this._element ? v(this._element, t) : this._element = t, this._statePointer = 0, t;
+  }
+  build() {
+    this.render();
+  }
+}
+function v(e, t) {
+  if (!e || !t || e.isEqualNode(t))
+    return;
+  e.tagName !== t.tagName && e.replaceWith(t);
+  const n = e.attributes, s = t.attributes;
+  if (n && s) {
+    for (let r = 0; r < n.length; r++) {
+      const a = n[r], c = s.getNamedItem(a.name);
+      c ? c.value !== a.value && e.setAttribute(a.name, c.value) : e.removeAttribute(a.name);
+    }
+    for (let r = 0; r < s.length; r++) {
+      const a = s[r];
+      n.getNamedItem(a.name) || e.setAttribute(a.name, a.value);
+    }
+  }
+  const i = e.childNodes, o = t.childNodes, u = Math.max(i.length, o.length);
+  if (u == 0)
+    e.textContent !== t.textContent && (e.textContent = t.textContent);
+  else
+    for (let r = 0; r < u; r++) {
+      if (r >= i.length) {
+        e.appendChild(o[r]);
+        continue;
+      }
+      if (r >= o.length) {
+        e.removeChild(i[r]);
+        continue;
+      }
+      v(i[r], o[r]);
+    }
+  return e;
+}
+function B(e, t) {
+  return new g(e, t);
+}
+class p {
+  value;
+  builder;
+  callbacks = [];
+  constructor(t, n) {
+    this.value = t, this.builder = n;
+  }
+  // 重载“.”
+  get(t) {
+    const n = m(this.value[t]);
+    return n.subscribe(() => {
+      this.value[t] = n.value;
+    }), n;
+  }
+  subscribe(t) {
+    this.callbacks.push(t);
+  }
+  set(t) {
+    this.value = t, this.callbacks.forEach((n) => {
+      n(t);
+    });
+  }
+}
+function m(e) {
+  const t = _;
+  let n = 0;
+  return t && (n = t._statePointer, t._statePointer++, t._states.has(n) ? e = t._states.get(n) : t._states.set(n, e)), new Proxy(new p(e, t), {
+    set(s, i, o, u) {
+      return s.builder?._states.set(n, o), i == "value" ? s.set(o) : Reflect.set(s, i, o, u), s.builder?.build(), !0;
+    }
+  });
 }
 class y extends l {
   constructor(t = []) {
@@ -608,7 +610,7 @@ class y extends l {
 function N(e) {
   return new y(e);
 }
-class _ extends l {
+class d extends l {
   constructor(t = []) {
     super(t), this.style({ display: "flex" });
   }
@@ -617,9 +619,9 @@ class _ extends l {
   }
 }
 function H(e = []) {
-  return new _(e);
+  return new d(e);
 }
-class b extends _ {
+class b extends d {
   constructor(t = []) {
     super(t), this.style({ flexDirection: "column" });
   }
@@ -627,12 +629,12 @@ class b extends _ {
 function F(e) {
   return new b(e);
 }
-class x extends _ {
+class x extends d {
   constructor(t = []) {
     super(t), this.style({ flexDirection: "row" });
   }
 }
-function j(e) {
+function $(e) {
   return new x(e);
 }
 class w extends l {
@@ -643,7 +645,7 @@ class w extends l {
     }), this.style({ position: "relative" });
   }
 }
-function z(e) {
+function j(e) {
   return new w(e);
 }
 class C extends h {
@@ -660,7 +662,7 @@ class C extends h {
     }), super.render(t);
   }
 }
-function K(e) {
+function z(e) {
   return new C(e);
 }
 class k extends h {
@@ -677,7 +679,7 @@ class k extends h {
     }), super.render(t);
   }
 }
-function q(e) {
+function K(e) {
   return new k(e);
 }
 class S extends h {
@@ -685,7 +687,7 @@ class S extends h {
     super(), this.style({ height: t });
   }
 }
-function $(e) {
+function q(e) {
   return new S(e);
 }
 class P extends h {
@@ -710,28 +712,28 @@ function G(e) {
   return new A(e);
 }
 export {
-  d as BuderState,
+  p as BuderState,
   E as BuderUnits,
   h as BuderWidget,
-  O as Builder,
+  B as Builder,
   N as Button,
   F as Col,
   H as Flex,
-  $ as H,
+  q as H,
   G as Image,
-  q as Input,
-  j as Row,
-  z as Stack,
-  g as State,
-  B as Text,
-  K as TextArea,
-  R as View,
+  K as Input,
+  $ as Row,
+  j as Stack,
+  m as State,
+  R as Text,
+  z as TextArea,
+  O as View,
   V as W,
-  f as _Builder,
-  _ as _Flex,
+  g as _Builder,
+  d as _Flex,
   l as _View,
-  v as _currentBuilder,
-  p as diffApply,
+  _ as _currentBuilder,
+  v as diffApply,
   I as em,
   L as percent,
   D as px,

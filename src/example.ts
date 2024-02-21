@@ -7,9 +7,11 @@ Col([
   Text(a),
   Button("Reset")
     .style({ backgroundColor: "red", color: "white", fontSize: a })
-    .onClick(() => {
-      a.value = "14";
+    .event({
+      click: () => {
+        a.set("14px");
+      },
     }),
 ])
-  .style({ gap: px(10) })
-  .center.mount("#app");
+  .center.style({ gap: px(10) })
+  .mount("#app");

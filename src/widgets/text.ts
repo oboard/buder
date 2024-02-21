@@ -11,6 +11,12 @@ class _Text extends BuderWidget {
     const el = document.createElement("span");
     return super.render(el);
   }
+
+  get center() {
+    this._style.verticalAlign = "middle";
+    this._style.textAlign = "center";
+    return this;
+  }
 }
 
 export function Text(text: string | BuderState<any>) {

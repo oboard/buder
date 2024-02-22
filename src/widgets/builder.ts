@@ -42,13 +42,11 @@ export class _Builder extends BuderWidget {
   render(): HTMLElement {
     const el = super.render(this._func(this.build.bind(this)).render());
     if (!this._instanceElement) {
-      // el.setAttribute("bud", this._key.toString());
       this._instanceElement = el;
     } else {
       diffApply(this._instanceElement, el);
     }
     this._statePointer = 0;
-    // console.log(this._element, el);
     return el;
   }
   build() {
@@ -89,7 +87,6 @@ export function diffApply(target: HTMLElement, el: HTMLElement) {
   const elChildren = el.childNodes;
 
   const length = Math.max(targetChildren.length, elChildren.length);
-  // console.log(target, el, length, targetChildren, elChildren);
   if (length == 0) {
     if (target.textContent !== el.textContent) {
       target.textContent = el.textContent;

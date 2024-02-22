@@ -11,35 +11,24 @@ pnpm i buder
 ### Counter Example
 
 ```typescript
-import { Builder, Button, Col, Text, bud, px } from "buder";
+import { Button, Col, Input, State, Text, px } from "./index.ts";
 
-let counter = 0;
+let a = State("14px");
 
 Col([
-  Builder(() => Text("Counter: " + counter))
-    .class("counter")
-    .padding({ vertical: px(20) }),
-  Button("Increment")
-    .color("red")
-    .bold.onClick(() => {
-      counter++;
-      bud("counter");
-    }),
-  Button("Decrement")
-    .color("blue")
-    .bold.onClick(() => {
-      counter--;
-      bud("counter");
-    }),
+  Input(a),
+  Text(a),
   Button("Reset")
-    .color("green")
-    .bold.onClick(() => {
-      counter = 0;
-      bud("counter");
+    .style({ backgroundColor: "red", color: "white", fontSize: a })
+    .event({
+      click: () => {
+        a.set("14px");
+      },
     }),
 ])
-  .gap(px(4))
-  .center.fullScreen.mount("#app");
+  .center.style({ gap: px(10) })
+  .mount("#app");
+
 ```
 
 ## How to build

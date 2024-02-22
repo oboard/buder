@@ -19,14 +19,12 @@ export class _ForEach<T> extends _View {
     this._parent = parent;
 
     this._state.subscribe(() => {
-      console.log("subscribed");
       this.build();
     });
   }
 
   build() {
     if (this._instanceElement) {
-      console.log(this._instanceElement, this.render());
       diffApply(this._instanceElement, this.render());
     }
   }

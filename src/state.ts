@@ -1,4 +1,6 @@
-import { _Builder, _currentBuilder } from "./widgets/builder";
+// import { _Builder, _currentBuilder } from "./widgets/builder";
+
+import { _Builder, _currentBuilder } from "./widgets/widget";
 
 export class BuderState<T> {
   value: T;

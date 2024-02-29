@@ -1,9 +1,8 @@
 import { BuderWidget } from "./widget";
 import { BuderState } from "../state";
-import { BuderThemeType } from "./theme";
 
 class _TextArea extends BuderWidget {
-  _type = BuderThemeType.textarea;
+  _type = "textarea";
 
   _model?: BuderState<string>;
   constructor(model?: BuderState<string>) {

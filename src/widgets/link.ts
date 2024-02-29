@@ -1,9 +1,8 @@
-import { BuderThemeType } from "./theme";
 import { _View } from "./view";
 import { BuderWidget } from "./widget";
 
 class _Link extends _View {
-  _type = BuderThemeType.link
+  _type = "link";
 
   constructor(href: string, children?: BuderWidget[]) {
     super(children);

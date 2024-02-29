@@ -1,7 +1,6 @@
-import { BuderThemeType } from "./theme";
 import { BuderWidget } from "./widget";
 declare class _Image extends BuderWidget {
-    _type: BuderThemeType;
+    _type: string;
     _src?: string;
     constructor(src: string);
     render(): HTMLElement;

@@ -2,7 +2,7 @@ import { _View } from "./view";
 import { BuderWidget } from "./widget";
 
 class _Button extends _View {
-
+  _type = "button";
   constructor(children: BuderWidget[] | string = []) {
     super(children);
   }

@@ -2,7 +2,7 @@ import { BuderEvents } from "../events";
 import { BuderState } from "../state";
 import { BuderStyle } from "../styles";
 import { BuderUnit } from "../units";
-import { BuderClassType, BuderThemeType } from "./theme";
+import { BuderClassType } from "./theme";
 
 type AttributesType = Record<string, string | BuderState<string>>;
 
@@ -17,7 +17,7 @@ export class BuderWidget {
   _tag?: string;
   _attribute: AttributesType = {};
   _text?: string | BuderState<any>;
-  _type?: BuderThemeType;
+  _type?: string;
 
   mount(selector: string): BuderWidget {
     const target = document.querySelector(selector);
@@ -61,26 +61,31 @@ export class BuderWidget {
     if (this._id) {
       el.id = this._id;
     }
-    if (typeof this._classes === "string") {
-      el.classList.add(this._classes);
-    } else if (this._classes instanceof Array) {
-      // @ts-ignore
-      el.classList.add(...this._classes);
-    } else if (this._classes instanceof BuderState) {
-      this._classes.subscribe((newValue: string[]) => {
-        if (el) {
-          // 差量更新class
-          el.classList.add(
-            ...newValue.filter((c) => el && !el.classList.contains(c))
-          );
-          for (const c of el.classList) {
-            if (!newValue.includes(c)) {
-              el.classList.remove(c);
+    this._classes.forEach((classes: BuderClassType) => {
+      if (typeof classes === "string") {
+        if (classes && el) {
+          el.classList.add(classes);
+        }
+      } else if (classes instanceof Array) {
+        // @ts-ignore
+        el.classList.add(...classes);
+      } else if (classes instanceof BuderState) {
+        classes.subscribe((newValue: string[]) => {
+          if (el) {
+            // 差量更新class
+            el.classList.add(
+              ...newValue.filter((c) => el && !el.classList.contains(c))
+            );
+            for (const c of el.classList) {
+              if (!newValue.includes(c)) {
+                el.classList.remove(c);
+              }
             }
           }
-        }
-      });
-    }
+        });
+      }
+    });
+
     for (const key in this._attribute) {
       if (typeof this._attribute[key] === "string") {
         // @ts-ignore
@@ -118,7 +123,6 @@ export class BuderWidget {
   }
 
   class(classes: BuderClassType): BuderWidget {
-    this._classes ??= [];
     this._classes.push(classes);
     return this;
   }
@@ -143,7 +147,7 @@ export class BuderWidget {
     return this;
   }
 
-  type(type: BuderThemeType): BuderWidget {
+  type(type: string): BuderWidget {
     this._type = type;
     return this;
   }
@@ -201,3 +205,137 @@ export class BuderWidget {
     return this;
   }
 }
+
+// import { BuderState } from "../state";
+// import { _View } from "./view";
+// import { BuderWidget } from "./widget";
+
+// let _globalBuilder: BuderWidget[] = [];
+
+export let _currentBuilder: _Builder | null = null;
+
+export class _Builder extends BuderWidget {
+  // _key: number;
+  _func: (refresh: () => void) => BuderWidget;
+  _instanceElement?: HTMLElement;
+  _states: Map<number, any> = new Map();
+  _statePointer = 0;
+
+  constructor(
+    childFunc: (refresh: () => void) => BuderWidget,
+    states: BuderState<any>[] | undefined
+  ) {
+    super();
+    _currentBuilder = this;
+    this._func = childFunc;
+    if (states) {
+      states.forEach((state) => {
+        state.subscribe(() => {
+          this.build();
+        });
+      });
+    }
+  }
+
+  subscribe(callback: () => void) {
+    this._states.forEach((_, index) => {
+      const state = this._states.get(index);
+      if (state instanceof BuderState) {
+        state.builder = this;
+        state.subscribe(callback);
+      }
+    });
+  }
+
+  render(): HTMLElement {
+    const el = super.render(this._func(this.build.bind(this)).render());
+    if (!this._instanceElement) {
+      this._instanceElement = el;
+    } else {
+      diffApply(this._instanceElement, el);
+    }
+    this._statePointer = 0;
+    return el;
+  }
+  build() {
+    this.render();
+  }
+}
+
+export function diffApply(target: HTMLElement, el: HTMLElement) {
+  if (!target || !el) return;
+  if (target.isEqualNode(el)) return;
+  if (target.tagName !== el.tagName) {
+    target.replaceWith(el);
+  }
+  const targetAttrs = target.attributes;
+  const elAttrs = el.attributes;
+
+  // 比较content
+  if (targetAttrs && elAttrs) {
+    // 比较属性
+    for (let i = 0; i < targetAttrs.length; i++) {
+      const attr = targetAttrs[i];
+      const elAttr = elAttrs.getNamedItem(attr.name);
+      if (!elAttr) {
+        target.removeAttribute(attr.name);
+      } else if (elAttr.value !== attr.value) {
+        target.setAttribute(attr.name, elAttr.value);
+      }
+    }
+    for (let i = 0; i < elAttrs.length; i++) {
+      const attr = elAttrs[i];
+      if (!targetAttrs.getNamedItem(attr.name)) {
+        target.setAttribute(attr.name, attr.value);
+      }
+    }
+  }
+  // 比较子节点
+  const targetChildren = target.childNodes;
+  const elChildren = el.childNodes;
+
+  const length = Math.max(targetChildren.length, elChildren.length);
+  if (length == 0) {
+    if (target.textContent !== el.textContent) {
+      target.textContent = el.textContent;
+    }
+  } else {
+    for (let i = 0; i < length; i++) {
+      if (i >= targetChildren.length) {
+        target.appendChild(elChildren[i]);
+        continue;
+      }
+      if (i >= elChildren.length) {
+        target.removeChild(targetChildren[i]);
+        continue;
+      }
+      diffApply(targetChildren[i] as HTMLElement, elChildren[i] as HTMLElement);
+    }
+  }
+
+  return target;
+}
+
+export function Builder(
+  childFunc: (refresh: () => void) => BuderWidget,
+  states?: BuderState<any>[]
+) {
+  return new _Builder(childFunc, states);
+}
+
+// export function queryRefresh(selector: string) {
+//   const targets = document.querySelectorAll(selector);
+//   for (const target of targets) {
+//     const key = target.getAttribute("bud");
+//     if (!key) continue;
+//     const builder = _globalBuilder[Number(key)];
+//     if (builder) {
+//       // target.replaceWith(builder.render());
+//       diffApply(target as HTMLElement, builder.render());
+//     }
+//   }
+// }
+
+// export function bud(...classNames: string[]) {
+//   return queryRefresh("." + classNames.join(",."));
+// }

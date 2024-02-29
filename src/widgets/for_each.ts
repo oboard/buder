@@ -1,7 +1,6 @@
 import { BuderState } from "../state";
-import { diffApply } from "./builder";
 import { _View } from "./view";
-import { BuderWidget } from "./widget";
+import { BuderWidget, diffApply } from "./widget";
 
 export class _ForEach<T> extends _View {
   _state: BuderState<Array<T>>;

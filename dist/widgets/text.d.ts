@@ -1,8 +1,7 @@
 import { BuderState } from "../state";
-import { BuderThemeType } from "./theme";
 import { BuderWidget } from "./widget";
 declare class _Text extends BuderWidget {
-    _type: BuderThemeType;
+    _type: string;
     constructor(text: string | BuderState<any>);
     render(): HTMLElement;
     get center(): this;

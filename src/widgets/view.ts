@@ -2,7 +2,6 @@ import { BuderWidget } from "./widget";
 
 // View is a widget that contains other widgets.
 export class _View extends BuderWidget {
-  _children?: BuderWidget[];
 
   constructor(children: string | BuderWidget[] = []) {
     super();

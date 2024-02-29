@@ -1,7 +1,9 @@
+import { BuderThemeType } from "./theme";
 import { _View } from "./view";
 import { BuderWidget } from "./widget";
 
 class _List extends _View {
+  _type = BuderThemeType.list;
   _order?: boolean;
   constructor(children?: BuderWidget[], order?: boolean) {
     super(children);
@@ -18,8 +20,8 @@ export function List(children?: BuderWidget[], order?: boolean) {
   return new _List(children, order);
 }
 
-
 class _ListItem extends _View {
+  _type = BuderThemeType.listitem;
   constructor(children?: BuderWidget[]) {
     super(children);
   }

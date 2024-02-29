@@ -2,19 +2,22 @@ import { BuderEvents } from "../events";
 import { BuderState } from "../state";
 import { BuderStyle } from "../styles";
 import { BuderUnit } from "../units";
+import { BuderClassType, BuderThemeType } from "./theme";
 
 type AttributesType = Record<string, string | BuderState<string>>;
 
 export class BuderWidget {
   constructor() {}
 
+  _children?: BuderWidget[];
   _style: BuderStyle = {};
   _events: { [key: string]: (e: any) => void } = {};
   _id?: string;
-  _classes: string[] = [];
+  _classes: BuderClassType[] | any = [];
   _tag?: string;
   _attribute: AttributesType = {};
   _text?: string | BuderState<any>;
+  _type?: BuderThemeType;
 
   mount(selector: string): BuderWidget {
     const target = document.querySelector(selector);
@@ -58,8 +61,25 @@ export class BuderWidget {
     if (this._id) {
       el.id = this._id;
     }
-    if (this._classes.length > 0) {
+    if (typeof this._classes === "string") {
+      el.classList.add(this._classes);
+    } else if (this._classes instanceof Array) {
+      // @ts-ignore
       el.classList.add(...this._classes);
+    } else if (this._classes instanceof BuderState) {
+      this._classes.subscribe((newValue: string[]) => {
+        if (el) {
+          // 差量更新class
+          el.classList.add(
+            ...newValue.filter((c) => el && !el.classList.contains(c))
+          );
+          for (const c of el.classList) {
+            if (!newValue.includes(c)) {
+              el.classList.remove(c);
+            }
+          }
+        }
+      });
     }
     for (const key in this._attribute) {
       if (typeof this._attribute[key] === "string") {
@@ -97,12 +117,9 @@ export class BuderWidget {
     return this;
   }
 
-  class(...classes: string[]): BuderWidget {
-    if (classes.length === 1) {
-      this._classes = classes[0].split(" ");
-    } else {
-      this._classes = classes;
-    }
+  class(classes: BuderClassType): BuderWidget {
+    this._classes ??= [];
+    this._classes.push(classes);
     return this;
   }
 
@@ -123,6 +140,11 @@ export class BuderWidget {
 
   text(text: string): BuderWidget {
     this._text = text;
+    return this;
+  }
+
+  type(type: BuderThemeType): BuderWidget {
+    this._type = type;
     return this;
   }
 

@@ -1,7 +1,10 @@
 import { BuderWidget } from "./widget";
 import { BuderState } from "../state";
+import { BuderThemeType } from "./theme";
 
 class _Input extends BuderWidget {
+  _type = BuderThemeType.input;
+
   _model?: BuderState<string>;
   constructor(model?: BuderState<string>) {
     super();

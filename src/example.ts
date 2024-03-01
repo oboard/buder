@@ -1,4 +1,4 @@
-import { Button, Col, Input, State, Text, Theme, px } from "./index.ts";
+import { Button, Col, Input, State, Text, TextArea, Theme, px } from "./index.ts";
 
 let a = State("14px");
 
@@ -8,6 +8,7 @@ Theme(
   },
   Col([
     Input(a),
+    TextArea(a),
     Text(a),
     Button("Reset")
       .style({ backgroundColor: "red", color: "white", fontSize: a })

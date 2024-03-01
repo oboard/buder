@@ -1,8 +1,9 @@
 import { BuderWidget } from "./widget";
 import { BuderState } from "../state";
 
-class _Input extends BuderWidget {
+export class _Input extends BuderWidget {
   _type = "input";
+  _tag = "input";
 
   _model?: BuderState<string>;
   constructor(model?: BuderState<string>) {
@@ -20,10 +21,20 @@ class _Input extends BuderWidget {
   }
 
   render() {
-    const el = document.createElement("input");
-    this._model?.subscribe((newValue) => {
-      el.value = newValue;
-    });
+    const el = document.createElement(this._tag);
+    if (
+      el instanceof HTMLInputElement ||
+      el instanceof HTMLTextAreaElement ||
+      el instanceof HTMLSelectElement ||
+      el instanceof HTMLButtonElement
+    ) {
+      this._model?.subscribe((newValue) => {
+        if (el) {
+          el.value = newValue;
+        }
+      });
+      el.value = this._model?.value ?? "";
+    }
     return super.render(el);
   }
 }

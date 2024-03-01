@@ -1,29 +1,16 @@
-import { BuderWidget } from "./widget";
 import { BuderState } from "../state";
+import { _Input } from "./input";
 
-class _TextArea extends BuderWidget {
+class _TextArea extends _Input {
   _type = "textarea";
+  _tag = "textarea";
 
-  _model?: BuderState<string>;
   constructor(model?: BuderState<string>) {
-    super();
-    this._model = model;
-    if (model) {
-      this.event({
-        input: (e: any) => {
-          model.value = (e.target as HTMLInputElement).value;
-        },
-      });
-    }
+    super(model);
   }
 
   render() {
-    const el = document.createElement("textarea");
-    el.value = this._model?.value || "";
-    this._model?.subscribe((newValue) => {
-      el.value = newValue;
-    });
-    return super.render(el);
+    return super.render();
   }
 }
 

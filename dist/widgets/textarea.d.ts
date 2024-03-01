@@ -1,8 +1,8 @@
-import { BuderWidget } from "./widget";
 import { BuderState } from "../state";
-declare class _TextArea extends BuderWidget {
+import { _Input } from "./input";
+declare class _TextArea extends _Input {
     _type: string;
-    _model?: BuderState<string>;
+    _tag: string;
     constructor(model?: BuderState<string>);
     render(): HTMLElement;
 }

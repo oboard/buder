@@ -10,7 +10,7 @@ function k(e, t) {
   }
   return s(t), t;
 }
-var b = /* @__PURE__ */ ((e) => (e.px = "px", e.em = "em", e.rem = "rem", e.vw = "vw", e.vh = "vh", e.percent = "%", e))(b || {});
+var m = /* @__PURE__ */ ((e) => (e.px = "px", e.em = "em", e.rem = "rem", e.vw = "vw", e.vh = "vh", e.percent = "%", e))(m || {});
 function B(e) {
   return {
     value: e,
@@ -18,14 +18,14 @@ function B(e) {
     /* px */
   };
 }
-function P(e) {
+function H(e) {
   return {
     value: e,
     unit: "em"
     /* em */
   };
 }
-function R(e) {
+function M(e) {
   return {
     value: e,
     unit: "rem"
@@ -39,14 +39,14 @@ function S(e) {
     /* vw */
   };
 }
-function W(e) {
+function P(e) {
   return {
     value: e,
     unit: "vh"
     /* vh */
   };
 }
-function F(e) {
+function R(e) {
   return {
     value: e,
     unit: "%"
@@ -62,7 +62,7 @@ class d {
   }
   // 重载“.”
   get(t) {
-    const s = m(this.value[t]);
+    const s = x(this.value[t]);
     return s.subscribe(() => {
       this.value[t] = s.value;
     }), s;
@@ -76,7 +76,7 @@ class d {
     });
   }
 }
-function m(e) {
+function x(e) {
   const t = p;
   let s = 0;
   return t && (s = t._statePointer, t._statePointer++, t._states.has(s) ? e = t._states.get(s) : t._states.set(s, e)), new Proxy(new d(e, t), {
@@ -205,13 +205,13 @@ class v extends o {
   }
   render() {
     const t = super.render(this._func(this.build.bind(this)).render());
-    return this._instanceElement ? _(this._instanceElement, t) : this._instanceElement = t, this._statePointer = 0, t;
+    return this._instanceElement ? f(this._instanceElement, t) : this._instanceElement = t, this._statePointer = 0, t;
   }
   build() {
     this.render();
   }
 }
-function _(e, t) {
+function f(e, t) {
   if (!e || !t || e.isEqualNode(t))
     return;
   e.tagName !== t.tagName && e.replaceWith(t);
@@ -239,11 +239,11 @@ function _(e, t) {
         e.removeChild(i[r]);
         continue;
       }
-      _(i[r], u[r]);
+      f(i[r], u[r]);
     }
   return e;
 }
-function O(e, t) {
+function W(e, t) {
   return new v(e, t);
 }
 class l extends o {
@@ -256,10 +256,10 @@ class l extends o {
     }), super.render(t);
   }
 }
-function $(e) {
+function F(e) {
   return new l(e);
 }
-class x extends o {
+class y extends o {
   _type = "text";
   constructor(t) {
     super(), this._text = t;
@@ -272,10 +272,10 @@ class x extends o {
     return this._style.verticalAlign = "middle", this._style.textAlign = "center", this;
   }
 }
-function j(e) {
-  return new x(e);
+function O(e) {
+  return new y(e);
 }
-class y extends l {
+class g extends l {
   _type = "button";
   constructor(t = []) {
     super(t);
@@ -285,10 +285,10 @@ class y extends l {
     return super.render(t);
   }
 }
-function q(e) {
-  return new y(e);
+function $(e) {
+  return new g(e);
 }
-class f extends l {
+class _ extends l {
   constructor(t = []) {
     super(t), this.style({ display: "flex" });
   }
@@ -296,26 +296,26 @@ class f extends l {
     return this._style.alignItems = "center", this._style.justifyContent = "center", this;
   }
 }
-function D(e = []) {
-  return new f(e);
+function j(e = []) {
+  return new _(e);
 }
-class g extends f {
+class E extends _ {
   constructor(t = []) {
     super(t), this.style({ flexDirection: "column" });
   }
 }
-function H(e) {
-  return new g(e);
+function q(e) {
+  return new E(e);
 }
-class E extends f {
+class w extends _ {
   constructor(t = []) {
     super(t), this.style({ flexDirection: "row" });
   }
 }
-function M(e) {
-  return new E(e);
+function D(e) {
+  return new w(e);
 }
-class w extends l {
+class A extends l {
   _children;
   constructor(t = []) {
     super(), this._children = t, this._children.forEach((s) => {
@@ -324,30 +324,11 @@ class w extends l {
   }
 }
 function z(e) {
-  return new w(e);
-}
-class A extends o {
-  _type = "textarea";
-  _model;
-  constructor(t) {
-    super(), this._model = t, t && this.event({
-      input: (s) => {
-        t.value = s.target.value;
-      }
-    });
-  }
-  render() {
-    const t = document.createElement("textarea");
-    return t.value = this._model?.value || "", this._model?.subscribe((s) => {
-      t.value = s;
-    }), super.render(t);
-  }
-}
-function G(e) {
   return new A(e);
 }
-class C extends o {
+class b extends o {
   _type = "input";
+  _tag = "input";
   _model;
   constructor(t) {
     super(), t && (this._model = t, this.attribute({ value: t.value }), this.event({
@@ -357,10 +338,23 @@ class C extends o {
     }));
   }
   render() {
-    const t = document.createElement("input");
-    return this._model?.subscribe((s) => {
-      t.value = s;
-    }), super.render(t);
+    const t = document.createElement(this._tag);
+    return (t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement || t instanceof HTMLSelectElement || t instanceof HTMLButtonElement) && (this._model?.subscribe((s) => {
+      t && (t.value = s);
+    }), t.value = this._model?.value ?? ""), super.render(t);
+  }
+}
+function G(e) {
+  return new b(e);
+}
+class C extends b {
+  _type = "textarea";
+  _tag = "textarea";
+  constructor(t) {
+    super(t);
+  }
+  render() {
+    return super.render();
   }
 }
 function J(e) {
@@ -407,7 +401,7 @@ class N extends l {
     });
   }
   build() {
-    this._instanceElement && _(this._instanceElement, this.render());
+    this._instanceElement && f(this._instanceElement, this.render());
   }
   render() {
     let t = 0;
@@ -425,34 +419,35 @@ function X(e, t, s) {
 }
 export {
   d as BuderState,
-  b as BuderUnits,
+  m as BuderUnits,
   o as BuderWidget,
-  O as Builder,
-  q as Button,
-  H as Col,
-  D as Flex,
+  W as Builder,
+  $ as Button,
+  q as Col,
+  j as Flex,
   X as ForEach,
   K as H,
   V as Image,
-  J as Input,
-  M as Row,
+  G as Input,
+  D as Row,
   z as Stack,
-  m as State,
-  j as Text,
-  G as TextArea,
+  x as State,
+  O as Text,
+  J as TextArea,
   k as Theme,
-  $ as View,
+  F as View,
   Q as W,
   v as _Builder,
-  f as _Flex,
+  _ as _Flex,
   N as _ForEach,
+  b as _Input,
   l as _View,
   p as _currentBuilder,
-  _ as diffApply,
-  P as em,
-  F as percent,
+  f as diffApply,
+  H as em,
+  R as percent,
   B as px,
-  R as rem,
-  W as vh,
+  M as rem,
+  P as vh,
   S as vw
 };

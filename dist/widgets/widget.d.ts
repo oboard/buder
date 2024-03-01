@@ -9,7 +9,7 @@ export declare class BuderWidget {
     _children?: BuderWidget[];
     _style: BuderStyle;
     _events: {
-        [key: string]: (e: any) => void;
+        [key: string]: ((e: any) => void)[];
     };
     _id?: string;
     _classes: BuderClassType[] | any;

@@ -1,4 +1,13 @@
-import { Button, Col, Input, State, Text, TextArea, Theme, px } from "./index.ts";
+import {
+  Button,
+  Col,
+  Input,
+  State,
+  Text,
+  TextArea,
+  Theme,
+  px,
+} from "./index.ts";
 
 let a = State("14px");
 
@@ -7,7 +16,11 @@ Theme(
     button: "btn",
   },
   Col([
-    Input(a),
+    Input(a).event({
+      input: (_) => {
+        console.log(a.value);
+      },
+    }),
     TextArea(a),
     Text(a),
     Button("Reset")

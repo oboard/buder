@@ -11,7 +11,7 @@ export class BuderWidget {
 
   _children?: BuderWidget[];
   _style: BuderStyle = {};
-  _events: { [key: string]: (e: any) => void } = {};
+  _events: { [key: string]: ((e: any) => void)[] } = {};
   _id?: string;
   _classes: BuderClassType[] | any = [];
   _tag?: string;
@@ -54,7 +54,9 @@ export class BuderWidget {
 
     // Add event listeners
     for (const key in this._events) {
-      el.addEventListener(key, this._events[key]);
+      for (const event of this._events[key]) {
+        el.addEventListener(key, event);
+      }
     }
 
     // Add id and classes and attributes
@@ -201,7 +203,14 @@ export class BuderWidget {
   }
 
   event(events: BuderEvents): BuderWidget {
-    this._events = Object.assign(this._events, events);
+    // this._events = Object.assign(this._events, events);
+    for (const key in events) {
+      if (!this._events[key]) {
+        this._events[key] = [];
+      }
+      // @ts-ignore
+      this._events[key].push(events[key]);
+    }
     return this;
   }
 }

@@ -1,4 +1,4 @@
-function k(e, t) {
+function N(e, t) {
   console.log(e);
   function s(n) {
     n._children && n._children.forEach(s);
@@ -85,7 +85,7 @@ function x(e) {
     }
   });
 }
-class o {
+class a {
   constructor() {
   }
   _children;
@@ -111,7 +111,8 @@ class o {
       }) : t.style[s] = `${n.value}${n.unit}` : t.style[s] = n;
     }
     for (const s in this._events)
-      t.addEventListener(s, this._events[s]);
+      for (const n of this._events[s])
+        t.addEventListener(s, n);
     this._id && (t.id = this._id), this._classes.forEach((s) => {
       typeof s == "string" ? s && t && t.classList.add(s) : s instanceof Array ? t.classList.add(...s) : s instanceof d && s.subscribe((n) => {
         if (t) {
@@ -180,11 +181,13 @@ class o {
     return this.style({ flex: "1" });
   }
   event(t) {
-    return this._events = Object.assign(this._events, t), this;
+    for (const s in t)
+      this._events[s] || (this._events[s] = []), this._events[s].push(t[s]);
+    return this;
   }
 }
 let p = null;
-class v extends o {
+class v extends a {
   // _key: number;
   _func;
   _instanceElement;
@@ -218,12 +221,12 @@ function f(e, t) {
   const s = e.attributes, n = t.attributes;
   if (s && n) {
     for (let r = 0; r < s.length; r++) {
-      const a = s[r], h = n.getNamedItem(a.name);
-      h ? h.value !== a.value && e.setAttribute(a.name, h.value) : e.removeAttribute(a.name);
+      const o = s[r], h = n.getNamedItem(o.name);
+      h ? h.value !== o.value && e.setAttribute(o.name, h.value) : e.removeAttribute(o.name);
     }
     for (let r = 0; r < n.length; r++) {
-      const a = n[r];
-      s.getNamedItem(a.name) || e.setAttribute(a.name, a.value);
+      const o = n[r];
+      s.getNamedItem(o.name) || e.setAttribute(o.name, o.value);
     }
   }
   const i = e.childNodes, u = t.childNodes, c = Math.max(i.length, u.length);
@@ -246,7 +249,7 @@ function f(e, t) {
 function W(e, t) {
   return new v(e, t);
 }
-class l extends o {
+class l extends a {
   constructor(t = []) {
     super(), typeof t == "string" ? this.text(t) : this._children = t;
   }
@@ -259,7 +262,7 @@ class l extends o {
 function F(e) {
   return new l(e);
 }
-class y extends o {
+class y extends a {
   _type = "text";
   constructor(t) {
     super(), this._text = t;
@@ -272,7 +275,7 @@ class y extends o {
     return this._style.verticalAlign = "middle", this._style.textAlign = "center", this;
   }
 }
-function O(e) {
+function $(e) {
   return new y(e);
 }
 class g extends l {
@@ -285,7 +288,7 @@ class g extends l {
     return super.render(t);
   }
 }
-function $(e) {
+function O(e) {
   return new g(e);
 }
 class _ extends l {
@@ -326,7 +329,7 @@ class A extends l {
 function z(e) {
   return new A(e);
 }
-class b extends o {
+class b extends a {
   _type = "input";
   _tag = "input";
   _model;
@@ -360,7 +363,7 @@ class C extends b {
 function J(e) {
   return new C(e);
 }
-class L extends o {
+class L extends a {
   constructor(t) {
     super(), this.style({ height: t });
   }
@@ -368,7 +371,7 @@ class L extends o {
 function K(e) {
   return new L(e);
 }
-class T extends o {
+class T extends a {
   constructor(t) {
     super(), this.style({ width: t });
   }
@@ -376,7 +379,7 @@ class T extends o {
 function Q(e) {
   return new T(e);
 }
-class I extends o {
+class I extends a {
   _type = "image";
   _src;
   constructor(t) {
@@ -390,7 +393,7 @@ class I extends o {
 function V(e) {
   return new I(e);
 }
-class N extends l {
+class k extends l {
   _state;
   _builder;
   _instanceElement;
@@ -415,14 +418,14 @@ class N extends l {
   }
 }
 function X(e, t, s) {
-  return new N(e, t, s);
+  return new k(e, t, s);
 }
 export {
   d as BuderState,
   m as BuderUnits,
-  o as BuderWidget,
+  a as BuderWidget,
   W as Builder,
-  $ as Button,
+  O as Button,
   q as Col,
   j as Flex,
   X as ForEach,
@@ -432,14 +435,14 @@ export {
   D as Row,
   z as Stack,
   x as State,
-  O as Text,
+  $ as Text,
   J as TextArea,
-  k as Theme,
+  N as Theme,
   F as View,
   Q as W,
   v as _Builder,
   _ as _Flex,
-  N as _ForEach,
+  k as _ForEach,
   b as _Input,
   l as _View,
   p as _currentBuilder,

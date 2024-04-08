@@ -8,7 +8,7 @@ Buder is a UI framework that provides a concise syntax for defining components, 
 pnpm i buder
 ```
 
-### Counter Example
+### State Binding Example
 
 ```typescript
 import { Button, Col, Input, State, Text, px } from "./index.ts";

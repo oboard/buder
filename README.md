@@ -11,11 +11,11 @@ pnpm i buder
 ### State Binding Example
 
 ```typescript
-import { Button, Col, Input, State, Text, px } from "./index.ts";
+import { Button, Column, Input, State, Text, px } from "./index.ts";
 
 let a = State("14px");
 
-Col([
+Column(
   Input(a),
   Text(a),
   Button("Reset")
@@ -24,11 +24,10 @@ Col([
       click: () => {
         a.set("14px");
       },
-    }),
-])
+    })
+)
   .center.style({ gap: px(10) })
   .mount("#app");
-
 ```
 
 ## How to build

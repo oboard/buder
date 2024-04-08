@@ -1,13 +1,13 @@
 import { _Flex } from "./flex";
 import { BuderWidget } from "./widget";
 
-class _Row extends _Flex {
-  constructor(children: BuderWidget[] = []) {
+export class _Row extends _Flex {
+  constructor(children:  BuderWidget[]) {
     super(children);
     this.style({ flexDirection: "row" });
   }
 }
 
-export function Row(children?: BuderWidget[]) {
+export function Row(...children: BuderWidget[]) {
   return new _Row(children);
 }

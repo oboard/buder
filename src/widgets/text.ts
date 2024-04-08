@@ -1,7 +1,7 @@
 import { BuderState } from "../state";
 import { BuderWidget } from "./widget";
 
-class _Text extends BuderWidget {
+export class _Text extends BuderWidget {
   _type = "text";
 
   constructor(text: string | BuderState<any>) {
@@ -10,7 +10,7 @@ class _Text extends BuderWidget {
   }
 
   render() {
-    const el = document.createElement("span");
+    const el = document.createElement(this._tag ?? "span");
     return super.render(el);
   }
 

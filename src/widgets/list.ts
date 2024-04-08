@@ -3,25 +3,26 @@ import { BuderWidget } from "./widget";
 
 class _List extends _View {
   _type = "list";
-  _order?: boolean;
-  constructor(children?: BuderWidget[], order?: boolean) {
+  // _order?: boolean;
+  constructor(children: BuderWidget[]) {
     super(children);
-    this._order = order;
+    // this._order = order;
   }
 
   render() {
-    const el = document.createElement(this._order ?? false ? "ol" : "ul");
+    // const el = document.createElement(this._order ?? false ? "ol" : "ul");
+    const el = document.createElement("ul");
     return super.render(el);
   }
 }
 
-export function List(children?: BuderWidget[], order?: boolean) {
-  return new _List(children, order);
+export function List(...children: BuderWidget[]) {
+  return new _List(children);
 }
 
 class _ListItem extends _View {
   _type = "list-item";
-  constructor(children?: BuderWidget[]) {
+  constructor(children: BuderWidget[]) {
     super(children);
   }
 
@@ -31,6 +32,6 @@ class _ListItem extends _View {
   }
 }
 
-export function ListItem(children?: BuderWidget[]) {
+export function ListItem(...children: BuderWidget[]) {
   return new _ListItem(children);
 }

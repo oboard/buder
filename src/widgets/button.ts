@@ -1,9 +1,8 @@
-import { _View } from "./view";
-import { BuderWidget } from "./widget";
+import { _View, ChildrenProps } from "./view";
 
-class _Button extends _View {
+export class _Button extends _View {
   _type = "button";
-  constructor(children: BuderWidget[] | string = []) {
+  constructor(children: ChildrenProps = []) {
     super(children);
   }
 
@@ -13,6 +12,6 @@ class _Button extends _View {
   }
 }
 
-export function Button(children?: BuderWidget[] | string) {
+export function Button(...children: ChildrenProps) {
   return new _Button(children);
 }

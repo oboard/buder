@@ -7,7 +7,6 @@ export function Theme(
   theme: Record<string, BuderClassType>,
   widget: BuderWidget
 ) {
-  console.log(theme);
   function applyTheme(widget: BuderWidget) {
     if (widget._children) {
       widget._children.forEach(applyTheme);

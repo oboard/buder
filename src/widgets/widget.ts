@@ -15,7 +15,7 @@ export class BuderWidget {
   _id?: string;
   _classes: BuderClassType[] | any = [];
   _tag?: string;
-  _attribute: AttributesType = {};
+  _attr: AttributesType = {};
   _text?: string | BuderState<any>;
   _type?: string;
 
@@ -88,15 +88,15 @@ export class BuderWidget {
       }
     });
 
-    for (const key in this._attribute) {
-      if (typeof this._attribute[key] === "string") {
+    for (const key in this._attr) {
+      if (typeof this._attr[key] === "string") {
         // @ts-ignore
-        el.setAttribute(key, this._attribute[key]);
+        el.setAttribute(key, this._attr[key]);
       } else {
         // @ts-ignore
-        el.setAttribute(key, this._attribute[key].value);
+        el.setAttribute(key, this._attr[key].value);
         // @ts-ignore
-        this._attribute[key].subscribe((newValue: string) => {
+        this._attr[key].subscribe((newValue: string) => {
           if (el) {
             el.setAttribute(key, newValue);
           }
@@ -134,8 +134,8 @@ export class BuderWidget {
     return this;
   }
 
-  attribute(s: AttributesType): BuderWidget {
-    this._attribute = Object.assign(this._attribute, s);
+  attr(s: AttributesType): BuderWidget {
+    this._attr = Object.assign(this._attr, s);
     return this;
   }
 
@@ -214,12 +214,6 @@ export class BuderWidget {
     return this;
   }
 }
-
-// import { BuderState } from "../state";
-// import { _View } from "./view";
-// import { BuderWidget } from "./widget";
-
-// let _globalBuilder: BuderWidget[] = [];
 
 export let _currentBuilder: _Builder | null = null;
 
@@ -331,20 +325,3 @@ export function Builder(
 ) {
   return new _Builder(childFunc, states);
 }
-
-// export function queryRefresh(selector: string) {
-//   const targets = document.querySelectorAll(selector);
-//   for (const target of targets) {
-//     const key = target.getAttribute("bud");
-//     if (!key) continue;
-//     const builder = _globalBuilder[Number(key)];
-//     if (builder) {
-//       // target.replaceWith(builder.render());
-//       diffApply(target as HTMLElement, builder.render());
-//     }
-//   }
-// }
-
-// export function bud(...classNames: string[]) {
-//   return queryRefresh("." + classNames.join(",."));
-// }

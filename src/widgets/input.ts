@@ -12,7 +12,7 @@ export class _Input extends BuderWidget {
 
     this._model = model;
 
-    this.attribute({ value: model.value });
+    this.attr({ value: model.value });
     this.event({
       input: (e: any) => {
         model.value = (e.target as HTMLInputElement).value;

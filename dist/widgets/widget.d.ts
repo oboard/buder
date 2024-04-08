@@ -14,7 +14,7 @@ export declare class BuderWidget {
     _id?: string;
     _classes: BuderClassType[] | any;
     _tag?: string;
-    _attribute: AttributesType;
+    _attr: AttributesType;
     _text?: string | BuderState<any>;
     _type?: string;
     mount(selector: string): BuderWidget;
@@ -22,7 +22,7 @@ export declare class BuderWidget {
     id(id: string): BuderWidget;
     class(classes: BuderClassType): BuderWidget;
     tag(tag: string): BuderWidget;
-    attribute(s: AttributesType): BuderWidget;
+    attr(s: AttributesType): BuderWidget;
     style(s: BuderStyle): BuderWidget;
     text(text: string): BuderWidget;
     type(type: string): BuderWidget;

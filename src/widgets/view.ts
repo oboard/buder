@@ -1,14 +1,16 @@
 import { BuderWidget } from "./widget";
 
+export type ChildrenProps = BuderWidget[] | string[];
+
 // View is a widget that contains other widgets.
 export class _View extends BuderWidget {
-
-  constructor(children: string | BuderWidget[] = []) {
+  constructor(children?: ChildrenProps) {
     super();
 
-    if (typeof children === "string") {
-      this.text(children);
+    if (children && typeof children[0] === "string") {
+      this.text(children[0]);
     } else {
+      // @ts-ignore
       this._children = children;
     }
   }
@@ -24,6 +26,6 @@ export class _View extends BuderWidget {
   }
 }
 
-export function View(children?: BuderWidget[]) {
+export function View(...children: BuderWidget[]) {
   return new _View(children);
 }

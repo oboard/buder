@@ -4,9 +4,9 @@ import { BuderWidget } from "./widget";
 class _Link extends _View {
   _type = "link";
 
-  constructor(href: string, children?: BuderWidget[]) {
+  constructor(href: string, children: BuderWidget[]) {
     super(children);
-    this.attribute({ href });
+    this.attr({ href });
   }
 
   render() {
@@ -15,6 +15,6 @@ class _Link extends _View {
   }
 }
 
-export function Link(href: string, children?: BuderWidget[]) {
+export function Link(href: string, children: BuderWidget[]) {
   return new _Link(href, children);
 }

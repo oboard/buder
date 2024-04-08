@@ -1,11 +1,11 @@
 import { BuderWidget } from "./widget";
 
-class _Image extends BuderWidget {
-  _type = "image";
+class _Picture extends BuderWidget {
+  _type = "picture";
   _src?: string;
   constructor(src: string) {
     super();
-    this.attribute({ src });
+    this.attr({ src });
   }
 
   render() {
@@ -14,6 +14,6 @@ class _Image extends BuderWidget {
   }
 }
 
-export function Image(src: string) {
-  return new _Image(src);
+export function Picture(src: string) {
+  return new _Picture(src);
 }

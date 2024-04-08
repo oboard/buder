@@ -1,6 +1,6 @@
 import { _Flex } from "./flex";
-import { BuderWidget } from "./widget";
+import { ChildrenProps } from "./view";
 export declare class _Column extends _Flex {
-    constructor(children: BuderWidget[]);
+    constructor(children: ChildrenProps);
 }
-export declare function Column(...children: BuderWidget[]): _Column;
+export declare function Column(...children: ChildrenProps): _Column;

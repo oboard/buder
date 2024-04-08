@@ -1,4 +1,4 @@
-import { BuderState } from "./state";
+import { StateValue } from "./state";
 export declare enum BuderUnits {
     px = "px",
     em = "em",
@@ -7,7 +7,7 @@ export declare enum BuderUnits {
     vh = "vh",
     percent = "%"
 }
-type BuderUnitType = number | BuderState<number> | BuderState<string>;
+type BuderUnitType = StateValue<number> | StateValue<string>;
 export interface BuderUnit {
     value: BuderUnitType;
     unit: BuderUnits;

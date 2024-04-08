@@ -1,10 +1,10 @@
 import { BuderWidget } from "./widget";
-import { BuderState } from "../state";
+import { StateValue } from "../state";
 export declare class _Input extends BuderWidget {
     _type: string;
     _tag: string;
-    _model?: BuderState<string>;
-    constructor(model?: BuderState<string>);
+    _model?: StateValue<string>;
+    constructor(model?: StateValue<string>);
     render(): HTMLElement;
 }
-export declare function Input(model?: BuderState<string>): _Input;
+export declare function Input(model?: StateValue<string>): _Input;

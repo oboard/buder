@@ -1,92 +1,7 @@
-function I(e, t) {
-  function s(n) {
-    n._children && n._children.forEach(s);
-    const r = n._type;
-    if (r) {
-      const u = e[r];
-      u && n.class(u);
-    }
-  }
-  return s(t), t;
-}
-var v = /* @__PURE__ */ ((e) => (e.px = "px", e.em = "em", e.rem = "rem", e.vw = "vw", e.vh = "vh", e.percent = "%", e))(v || {});
-function M(e) {
-  return {
-    value: e,
-    unit: "px"
-    /* px */
-  };
-}
-function R(e) {
-  return {
-    value: e,
-    unit: "em"
-    /* em */
-  };
-}
-function W(e) {
-  return {
-    value: e,
-    unit: "rem"
-    /* rem */
-  };
-}
-function F(e) {
-  return {
-    value: e,
-    unit: "vw"
-    /* vw */
-  };
-}
-function O(e) {
-  return {
-    value: e,
-    unit: "vh"
-    /* vh */
-  };
-}
-function $(e) {
-  return {
-    value: e,
-    unit: "%"
-    /* percent */
-  };
-}
-class d {
-  value;
-  builder;
-  callbacks = [];
-  constructor(t, s) {
-    this.value = t, this.builder = s;
-  }
-  // 重载“.”
-  get(t) {
-    const s = x(this.value[t]);
-    return s.subscribe(() => {
-      this.value[t] = s.value;
-    }), s;
-  }
-  subscribe(t) {
-    this.callbacks.push(t);
-  }
-  set(t) {
-    this.value = t, this.callbacks.forEach((s) => {
-      s(t);
-    });
-  }
-}
-function x(e) {
-  const t = p;
-  let s = 0;
-  return t && (s = t._statePointer, t._statePointer++, t._states.has(s) ? e = t._states.get(s) : t._states.set(s, e)), new Proxy(new d(e, t), {
-    set(n, r, u, o) {
-      return n.builder?._states.set(s, u), r == "value" ? n.set(u) : Reflect.set(n, r, u, o), n.builder?.build(), !0;
-    }
-  });
-}
-class c {
+class a {
   constructor() {
   }
+  _instanceElement;
   _children;
   _style = {};
   _events = {};
@@ -101,35 +16,37 @@ class c {
   }
   render(t) {
     t || (t = document.createElement(this._tag ?? "div"));
-    for (const s in this._style) {
-      const n = this._style[s];
-      n instanceof Object ? n.value.subscribe ? n.value.subscribe((r) => {
-        t && (t.style[s] = `${r}${n.unit}`);
-      }) : n.subscribe ? n.subscribe((r) => {
-        t && (t.style[s] = r);
-      }) : t.style[s] = `${n.value}${n.unit}` : t.style[s] = n;
+    for (const n in this._style) {
+      const s = this._style[n];
+      s instanceof Object ? s.value instanceof o ? s.value.init((i) => {
+        t && (t.style[n] = `${i}${s.unit}`);
+      }) : s instanceof o ? s.init((i) => {
+        t && (t.style[n] = i);
+      }) : t.style[n] = `${s.value}${s.unit}` : t.style[n] = s;
     }
-    for (const s in this._events)
-      for (const n of this._events[s])
-        t.addEventListener(s, n);
-    this._id && (t.id = this._id), this._classes.forEach((s) => {
-      typeof s == "string" ? s && t && t.classList.add(s) : s instanceof Array ? t.classList.add(...s) : s instanceof d && s.subscribe((n) => {
+    for (const n in this._events)
+      for (const s of this._events[n])
+        t.addEventListener(n, s);
+    this._id && (t.id = this._id), this._classes.forEach((n) => {
+      typeof n == "string" ? n && t && t.classList.add(n) : n instanceof Array ? t.classList.add(...n) : n instanceof o && n.subscribe((s) => {
         if (t) {
           t.classList.add(
-            ...n.filter((r) => t && !t.classList.contains(r))
+            ...s.filter((i) => t && !t.classList.contains(i))
           );
-          for (const r of t.classList)
-            n.includes(r) || t.classList.remove(r);
+          for (const i of t.classList)
+            s.includes(i) || t.classList.remove(i);
         }
       });
     });
-    for (const s in this._attr)
-      typeof this._attr[s] == "string" ? t.setAttribute(s, this._attr[s]) : (t.setAttribute(s, this._attr[s].value), this._attr[s].subscribe((n) => {
-        t && t.setAttribute(s, n);
-      }));
-    return this._text && (typeof this._text == "string" ? t.textContent = this._text : (t.textContent = this._text.value, this._text.subscribe((s) => {
-      t && (t.textContent = s);
-    }))), t;
+    for (const n in this._attr) {
+      const s = this._attr[n];
+      s instanceof o ? s.init((i) => {
+        t && t.setAttribute(n, i);
+      }) : typeof s == "string" && t.setAttribute(n, s);
+    }
+    return this._text && (this._text instanceof o ? this._text.init((n) => {
+      t && (t.textContent = n);
+    }) : t.textContent = this._text), t;
   }
   id(t) {
     return this._id = t, this;
@@ -156,17 +73,17 @@ class c {
     if (t.unit)
       return this.style({ padding: t });
     {
-      const { top: s, left: n, right: r, bottom: u, vertical: o, horizontal: i } = t;
-      return o || i ? this.style({
-        paddingTop: o,
-        paddingBottom: o,
-        paddingLeft: i,
-        paddingRight: i
-      }) : this.style({
-        paddingTop: s,
-        paddingBottom: u,
-        paddingLeft: n,
+      const { top: n, left: s, right: i, bottom: u, vertical: c, horizontal: r } = t;
+      return c || r ? this.style({
+        paddingTop: c,
+        paddingBottom: c,
+        paddingLeft: r,
         paddingRight: r
+      }) : this.style({
+        paddingTop: n,
+        paddingBottom: u,
+        paddingLeft: s,
+        paddingRight: i
       });
     }
   }
@@ -180,88 +97,196 @@ class c {
     return this.style({ flex: "1" });
   }
   event(t) {
-    for (const s in t)
-      this._events[s] || (this._events[s] = []), this._events[s].push(t[s]);
+    for (const n in t)
+      this._events[n] || (this._events[n] = []), this._events[n].push(t[n]);
     return this;
   }
 }
-let p = null;
-class y extends c {
+let m = null;
+class b extends a {
   // _key: number;
   _func;
-  _instanceElement;
   _states = /* @__PURE__ */ new Map();
   _statePointer = 0;
-  constructor(t, s) {
-    super(), p = this, this._func = t, s && s.forEach((n) => {
-      n.subscribe(() => {
+  constructor(t, n) {
+    super(), m = this, this._func = t, n && n.forEach((s) => {
+      s.subscribe(() => {
         this.build();
       });
     });
   }
+  bind(t) {
+    return t && t.subscribe(() => {
+      this.build();
+    }), this;
+  }
   subscribe(t) {
-    this._states.forEach((s, n) => {
-      const r = this._states.get(n);
-      r instanceof d && (r.builder = this, r.subscribe(t));
+    this._states.forEach((n, s) => {
+      const i = this._states.get(s);
+      i instanceof o && (i.builder = this, i.subscribe(t));
     });
   }
   render() {
     const t = super.render(this._func(this.build.bind(this)).render());
-    return this._instanceElement ? _(this._instanceElement, t) : this._instanceElement = t, this._statePointer = 0, t;
+    return this._instanceElement ? d(this._instanceElement, t) : this._instanceElement = t, this._statePointer = 0, t;
   }
   build() {
     this.render();
   }
 }
-function _(e, t) {
+function d(e, t) {
   if (!e || !t || e.isEqualNode(t))
     return;
   e.tagName !== t.tagName && e.replaceWith(t);
-  const s = e.attributes, n = t.attributes;
-  if (s && n) {
-    for (let i = 0; i < s.length; i++) {
-      const a = s[i], h = n.getNamedItem(a.name);
-      h ? h.value !== a.value && e.setAttribute(a.name, h.value) : e.removeAttribute(a.name);
+  const n = e.attributes, s = t.attributes;
+  if (n && s) {
+    for (let r = 0; r < n.length; r++) {
+      const l = n[r], f = s.getNamedItem(l.name);
+      f ? f.value !== l.value && e.setAttribute(l.name, f.value) : e.removeAttribute(l.name);
     }
-    for (let i = 0; i < n.length; i++) {
-      const a = n[i];
-      s.getNamedItem(a.name) || e.setAttribute(a.name, a.value);
+    for (let r = 0; r < s.length; r++) {
+      const l = s[r];
+      n.getNamedItem(l.name) || e.setAttribute(l.name, l.value);
     }
   }
-  const r = e.childNodes, u = t.childNodes, o = Math.max(r.length, u.length);
-  if (o == 0)
+  const i = e.childNodes, u = t.childNodes, c = Math.max(i.length, u.length);
+  if (c == 0)
     e.textContent !== t.textContent && (e.textContent = t.textContent);
   else
-    for (let i = 0; i < o; i++) {
-      if (i >= r.length) {
-        e.appendChild(u[i]);
+    for (let r = 0; r < c; r++) {
+      if (r >= i.length) {
+        e.appendChild(u[r]);
         continue;
       }
-      if (i >= u.length) {
-        e.removeChild(r[i]);
+      if (r >= u.length) {
+        e.removeChild(i[r]);
         continue;
       }
-      _(r[i], u[i]);
+      d(i[r], u[r]);
     }
   return e;
 }
-function j(e, t) {
-  return new y(e, t);
+function I(e, t) {
+  return new b(e, t);
 }
-class l extends c {
+class o {
+  value;
+  builder;
+  callbacks = [];
+  constructor(t, n) {
+    this.value = t, this.builder = n;
+  }
+  // 重载“.”
+  get(t) {
+    const n = p(this.value[t]);
+    return n.subscribe(() => {
+      this.value[t] = n.value;
+    }), n;
+  }
+  init(t) {
+    return this.subscribe(t), t(this.value), this;
+  }
+  subscribe(t) {
+    return this.callbacks.push(t), this;
+  }
+  computed(t) {
+    const n = p(t(this.value));
+    return this.subscribe(() => {
+      n.set(t(this.value));
+    }), n;
+  }
+  set(t) {
+    this.value = t, this.callbacks.forEach((n) => {
+      n(t);
+    });
+  }
+}
+function p(e) {
+  const t = m;
+  let n = 0;
+  return t && (n = t._statePointer, t._statePointer++, t._states.has(n) ? e = t._states.get(n) : t._states.set(n, e)), new Proxy(new o(e, t), {
+    set(s, i, u, c) {
+      return s.builder?._states.set(n, u), i == "value" ? s.set(u) : Reflect.set(s, i, u, c), s.builder?.build(), !0;
+    }
+  });
+}
+function M(e, t) {
+  function n(s) {
+    s._children && s._children.forEach(n);
+    const i = s._type;
+    function u(c) {
+      c && s.class(c);
+    }
+    i && (e instanceof o ? e.init((c) => {
+      u(c[i]);
+    }) : u(e[i]));
+  }
+  return n(t), t;
+}
+var y = /* @__PURE__ */ ((e) => (e.px = "px", e.em = "em", e.rem = "rem", e.vw = "vw", e.vh = "vh", e.percent = "%", e))(y || {});
+function R(e) {
+  return {
+    value: e,
+    unit: "px"
+    /* px */
+  };
+}
+function W(e) {
+  return {
+    value: e,
+    unit: "em"
+    /* em */
+  };
+}
+function F(e) {
+  return {
+    value: e,
+    unit: "rem"
+    /* rem */
+  };
+}
+function O(e) {
+  return {
+    value: e,
+    unit: "vw"
+    /* vw */
+  };
+}
+function $(e) {
+  return {
+    value: e,
+    unit: "vh"
+    /* vh */
+  };
+}
+function j(e) {
+  return {
+    value: e,
+    unit: "%"
+    /* percent */
+  };
+}
+class h extends a {
   constructor(t) {
     super(), t && typeof t[0] == "string" ? this.text(t[0]) : this._children = t;
   }
   render(t) {
-    return t || (t = document.createElement("div")), this._children?.forEach((s) => {
-      t?.appendChild(s.render());
+    return t || (t = document.createElement("div")), this._children?.forEach((n) => {
+      if (n instanceof o) {
+        const s = n.value;
+        s instanceof a && n.init((i) => {
+          const u = i.render();
+          s._instanceElement ? d(s._instanceElement, u) : (s._instanceElement = u, t?.appendChild(u));
+        });
+      } else
+        t?.appendChild(n.render());
     }), super.render(t);
   }
 }
 function q(...e) {
-  return new l(e);
+  return new h(e);
 }
-class m extends c {
+class v extends a {
   _type = "text";
   constructor(t) {
     super(), this._text = t;
@@ -275,9 +300,9 @@ class m extends c {
   }
 }
 function D(e) {
-  return new m(e);
+  return new v(e);
 }
-class g extends l {
+class g extends h {
   _type = "button";
   constructor(t = []) {
     super(t);
@@ -290,7 +315,7 @@ class g extends l {
 function z(...e) {
   return new g(e);
 }
-class f extends l {
+class _ extends h {
   constructor(t) {
     super(t), this.style({ display: "flex" });
   }
@@ -298,57 +323,57 @@ class f extends l {
     return this._style.alignItems = "center", this._style.justifyContent = "center", this;
   }
 }
-function G(...e) {
-  return new f(e);
+function V(...e) {
+  return new _(e);
 }
-class E extends f {
+class E extends _ {
   constructor(t) {
     super(t), this.style({ flexDirection: "column" });
   }
 }
-function J(...e) {
+function G(...e) {
   return new E(e);
 }
-class w extends f {
+class w extends _ {
   constructor(t) {
     super(t), this.style({ flexDirection: "row" });
   }
 }
-function K(...e) {
+function J(...e) {
   return new w(e);
 }
-class C extends l {
+class C extends h {
   constructor(t = []) {
-    super(t), this._children?.forEach((s) => {
-      s.style({ position: "absolute" });
+    super(t), this._children?.forEach((n) => {
+      n.style({ position: "absolute" });
     }), this.style({ position: "relative" });
   }
 }
-function Q(e) {
+function K(e) {
   return new C(e);
 }
-class b extends c {
+class x extends a {
   _type = "input";
   _tag = "input";
   _model;
   constructor(t) {
-    super(), t && (this._model = t, this.attr({ value: t.value }), this.event({
-      input: (s) => {
-        t.value = s.target.value;
+    super(), t && (this._model = t, t instanceof o ? (this.attr({ value: t.value }), this.event({
+      input: (n) => {
+        t.value = n.target.value;
       }
-    }));
+    })) : this.attr({ value: t }));
   }
   render() {
     const t = document.createElement(this._tag);
-    return (t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement || t instanceof HTMLSelectElement || t instanceof HTMLButtonElement) && (this._model?.subscribe((s) => {
-      t && (t.value = s);
-    }), t.value = this._model?.value ?? ""), super.render(t);
+    return (t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement || t instanceof HTMLSelectElement || t instanceof HTMLButtonElement) && this._model instanceof o && this._model?.init((n) => {
+      t && (t.value = n);
+    }), super.render(t);
   }
 }
-function V(e) {
-  return new b(e);
+function Q(e) {
+  return new x(e);
 }
-class A extends b {
+class S extends x {
   _type = "textarea";
   _tag = "textarea";
   constructor(t) {
@@ -359,25 +384,25 @@ class A extends b {
   }
 }
 function X(e) {
-  return new A(e);
+  return new S(e);
 }
-class S extends c {
+class A extends a {
   constructor(t) {
     super(), this.style({ height: t });
   }
 }
 function Y(e) {
-  return new S(e);
+  return new A(e);
 }
-class k extends c {
+class L extends a {
   constructor(t) {
     super(), this.style({ width: t });
   }
 }
 function Z(e) {
-  return new k(e);
+  return new L(e);
 }
-class L extends c {
+class T extends a {
   _type = "picture";
   _src;
   constructor(t) {
@@ -389,36 +414,35 @@ class L extends c {
   }
 }
 function U(e) {
-  return new L(e);
+  return new T(e);
 }
-class T extends l {
+class k extends h {
   _state;
   _builder;
-  _instanceElement;
   _parent;
-  constructor(t, s, n) {
-    super(), this._state = t, this._builder = s, this._parent = n, this._state.subscribe(() => {
+  constructor(t, n, s) {
+    super(), this._state = t, this._builder = n, this._parent = s, this._state.subscribe(() => {
       this.build();
     });
   }
   build() {
-    this._instanceElement && _(this._instanceElement, this.render());
+    this._instanceElement && d(this._instanceElement, this.render());
   }
   render() {
     let t = 0;
     this._children = [];
-    for (const n of this._state.value) {
-      const r = this._builder(n, t++);
-      this._children.push(r);
+    for (const s of this._state.value) {
+      const i = this._builder(s, t++, this._state.value);
+      this._children.push(i);
     }
-    const s = super.render(this._parent?.render());
-    return this._instanceElement ? s : this._instanceElement = s;
+    const n = super.render(this._parent?.render());
+    return this._instanceElement ? n : this._instanceElement = n;
   }
 }
-function tt(e, t, s) {
-  return new T(e, t, s);
+function tt(e, t, n) {
+  return new k(e, t, n);
 }
-class N extends m {
+class N extends v {
   _tag = "label";
   constructor(t) {
     super(t);
@@ -432,7 +456,7 @@ class N extends m {
 function et(e) {
   return new N(e);
 }
-class P extends c {
+class P extends a {
   _tag = "input";
   _model;
   _type = "checkbox";
@@ -441,111 +465,113 @@ class P extends c {
       type: "checkbox",
       checked: t.value ? "true" : "false"
     }), this.event({
-      input: (s) => {
-        t.value = !!s.target.checked;
+      input: (n) => {
+        t.value = !!n.target.checked;
       }
     }));
   }
   render() {
     const t = super.render();
-    return this._model?.subscribe((s) => {
-      t && (t.checked = s);
-    }), t.checked = this._model?.value ?? !1, t;
+    return this._model?.init((n) => {
+      t && (t.checked = n);
+    }), t;
   }
 }
-function st(e) {
+function nt(e) {
   return new P(e);
 }
-class B extends c {
+class B extends a {
   _options;
   _type = "slider";
   _tag = "input";
   _model;
-  constructor(t, s) {
-    super(), t && (this._model = t, this._options = s, this.attr({ value: t.value.toString() }), this.event({
-      input: (n) => {
-        t.value = Number(n.target.value);
+  constructor(t, n) {
+    super(), t && (this._model = t, this._options = n, this.attr({ value: t.value.toString() }), this.event({
+      input: (s) => {
+        t.value = Number(s.target.value);
       }
     }));
   }
   render() {
     const t = document.createElement(this._tag);
-    return t.type = "range", t.min = this._options?.min.toString() || "0", t.max = this._options?.max.toString() || "100", t.step = this._options?.step.toString() || "1", this._model?.subscribe((s) => {
-      t && (t.value = s.toString());
+    return t.type = "range", t.min = this._options?.min.toString() || "0", t.max = this._options?.max.toString() || "100", t.step = this._options?.step.toString() || "1", this._model?.subscribe((n) => {
+      t && (t.value = n.toString());
     }), t.value = (this._model?.value ?? "").toString(), super.render(t);
   }
 }
-const nt = (e, t) => new B(e, t);
-class H extends l {
+const st = (e, t) => new B(e, t);
+class H extends h {
   _type = "select";
   _model;
   _options;
   constructor(t) {
-    super(), this._options = t;
+    super(), t instanceof o ? t.init((n) => {
+      this._options = n;
+    }) : this._options = t;
   }
   bind(t) {
     return this._model = t, this.event({
-      change: (s) => {
-        t.set(s.target.value ?? "");
+      change: (n) => {
+        t.set(n.target.value ?? "");
       }
     }), this;
   }
   render() {
     const t = document.createElement("select");
-    return this._options && Object.entries(this._options).forEach(([s, n]) => {
-      const r = document.createElement("option");
-      r.value = s, r.text = n, t.appendChild(r);
-    }), this._model?.subscribe((s) => {
-      t.value = s;
+    return this._options && Object.entries(this._options).forEach(([n, s]) => {
+      const i = document.createElement("option");
+      i.value = n, i.text = s, t.appendChild(i);
+    }), this._model?.init((n) => {
+      t.value = n;
     }), super.render(t);
   }
 }
-function rt(e) {
+function it(e) {
   return new H(e);
 }
 export {
-  d as BuderState,
-  v as BuderUnits,
-  c as BuderWidget,
-  j as Builder,
+  o as BuderState,
+  y as BuderUnits,
+  a as BuderWidget,
+  I as Builder,
   z as Button,
-  st as Checkbox,
-  J as Column,
-  G as Flex,
+  nt as Checkbox,
+  G as Column,
+  V as Flex,
   tt as ForEach,
   Y as H,
-  V as Input,
+  Q as Input,
   et as Label,
   U as Picture,
-  K as Row,
-  rt as Select,
-  nt as Slider,
-  Q as Stack,
-  x as State,
+  J as Row,
+  it as Select,
+  st as Slider,
+  K as Stack,
+  p as State,
   D as Text,
   X as TextArea,
-  I as Theme,
+  M as Theme,
   q as View,
   Z as W,
-  y as _Builder,
+  b as _Builder,
   g as _Button,
   P as _Checkbox,
   E as _Column,
-  f as _Flex,
-  T as _ForEach,
-  b as _Input,
+  _ as _Flex,
+  k as _ForEach,
+  x as _Input,
   N as _Label,
   w as _Row,
   H as _Select,
   B as _Slider,
-  m as _Text,
-  l as _View,
-  p as _currentBuilder,
-  _ as diffApply,
-  R as em,
-  $ as percent,
-  M as px,
-  W as rem,
-  O as vh,
-  F as vw
+  v as _Text,
+  h as _View,
+  m as _currentBuilder,
+  d as diffApply,
+  W as em,
+  j as percent,
+  R as px,
+  F as rem,
+  $ as vh,
+  O as vw
 };

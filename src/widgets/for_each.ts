@@ -2,14 +2,14 @@ import { BuderState } from "../state";
 import { _View } from "./view";
 import { BuderWidget, diffApply } from "./widget";
 
+type BuilderType<T> = (item: T, index: number, array: Array<T>) => BuderWidget;
 export class _ForEach<T> extends _View {
   _state: BuderState<Array<T>>;
-  _builder: (item: T, index: number) => BuderWidget;
-  _instanceElement?: HTMLElement;
+  _builder: BuilderType<T>;
   _parent?: BuderWidget;
   constructor(
     state: BuderState<Array<T>>,
-    builder: (item: T, index: number) => BuderWidget,
+    builder: BuilderType<T>,
     parent?: BuderWidget
   ) {
     super();
@@ -30,9 +30,9 @@ export class _ForEach<T> extends _View {
 
   render(): HTMLElement {
     let index = 0;
-    this._children = [];
+    this._children = [] as BuderWidget[];
     for (const item of this._state.value) {
-      const child = this._builder(item, index++);
+      const child = this._builder(item, index++, this._state.value);
       this._children.push(child);
     }
     const el = super.render(this._parent?.render());
@@ -46,7 +46,7 @@ export class _ForEach<T> extends _View {
 
 export function ForEach<T>(
   state: BuderState<Array<T>>,
-  builder: (item: T, index: number) => BuderWidget,
+  builder: BuilderType<T>,
   parent?: BuderWidget
 ) {
   return new _ForEach(state, builder, parent);

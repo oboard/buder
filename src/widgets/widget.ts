@@ -91,14 +91,15 @@ export class BuderWidget {
     });
 
     for (const key in this._attr) {
-      if (this._attr[key] instanceof BuderState) {
-        this._attr[key].init((newValue: string) => {
+      const a = this._attr[key];
+      if (a instanceof BuderState) {
+        a.init((newValue: string) => {
           if (el) {
             el.setAttribute(key, newValue);
           }
         });
-      } else {
-        el.setAttribute(key, this._attr[key]);
+      } else if (typeof a === "string") {
+        el.setAttribute(key, a);
       }
     }
     if (this._text) {

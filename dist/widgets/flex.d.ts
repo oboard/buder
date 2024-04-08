@@ -1,7 +1,6 @@
-import { _View } from "./view";
-import { BuderWidget } from "./widget";
+import { _View, ChildrenProps } from "./view";
 export declare class _Flex extends _View {
-    constructor(children: BuderWidget[]);
+    constructor(children: ChildrenProps);
     get center(): this;
 }
-export declare function Flex(...children: BuderWidget[]): _Flex;
+export declare function Flex(...children: ChildrenProps): _Flex;

@@ -1,8 +1,7 @@
-import { _View } from "./view";
-import { BuderWidget } from "./widget";
+import { _View, ChildrenProps } from "./view";
 
 export class _Flex extends _View {
-  constructor(children: BuderWidget[]) {
+  constructor(children: ChildrenProps) {
     super(children);
     this.style({ display: "flex" });
   }
@@ -14,6 +13,6 @@ export class _Flex extends _View {
   }
 }
 
-export function Flex(...children: BuderWidget[]) {
+export function Flex(...children: ChildrenProps) {
   return new _Flex(children);
 }

@@ -1,22 +1,24 @@
 import { BuderEvents } from "../events";
-import { BuderState } from "../state";
+import { BuderState, StateValue } from "../state";
 import { BuderStyle } from "../styles";
 import { BuderUnit } from "../units";
 import { BuderClassType } from "./theme";
+import { ChildrenProps } from "./view";
 
-type AttributesType = Record<string, string | BuderState<string>>;
+type AttributesType = Record<string, StateValue<string>>;
 
 export class BuderWidget {
   constructor() {}
 
-  _children?: BuderWidget[];
+  _instanceElement?: HTMLElement;
+  _children?: ChildrenProps;
   _style: BuderStyle = {};
   _events: { [key: string]: ((e: any) => void)[] } = {};
   _id?: string;
   _classes: BuderClassType[] | any = [];
   _tag?: string;
   _attr: AttributesType = {};
-  _text?: string | BuderState<any>;
+  _text?: StateValue<string>;
   _type?: string;
 
   mount(selector: string): BuderWidget {
@@ -32,14 +34,14 @@ export class BuderWidget {
     for (const key in this._style) {
       const value = (this._style as any)[key];
       if (value instanceof Object) {
-        if (value.value.subscribe) {
-          value.value.subscribe((newValue: BuderUnit) => {
+        if (value.value instanceof BuderState) {
+          value.value.init((newValue: BuderUnit) => {
             if (el) {
               (el.style as any)[key] = `${newValue}${value.unit}`;
             }
           });
-        } else if (value.subscribe) {
-          value.subscribe((newValue: string) => {
+        } else if (value instanceof BuderState) {
+          value.init((newValue: string) => {
             if (el) {
               (el.style as any)[key] = newValue;
             }
@@ -89,67 +91,61 @@ export class BuderWidget {
     });
 
     for (const key in this._attr) {
-      if (typeof this._attr[key] === "string") {
-        // @ts-ignore
-        el.setAttribute(key, this._attr[key]);
-      } else {
-        // @ts-ignore
-        el.setAttribute(key, this._attr[key].value);
-        // @ts-ignore
-        this._attr[key].subscribe((newValue: string) => {
+      if (this._attr[key] instanceof BuderState) {
+        this._attr[key].init((newValue: string) => {
           if (el) {
             el.setAttribute(key, newValue);
           }
         });
+      } else {
+        el.setAttribute(key, this._attr[key]);
       }
     }
     if (this._text) {
-      // @ts-ignore
-      if (typeof this._text === "string") {
-        el.textContent = this._text;
-      } else {
-        el.textContent = this._text.value;
-        this._text.subscribe((newValue) => {
+      if (this._text instanceof BuderState) {
+        this._text.init((newValue) => {
           if (el) {
             el.textContent = newValue;
           }
         });
+      } else {
+        el.textContent = this._text;
       }
     }
     return el;
   }
 
-  id(id: string): BuderWidget {
+  id(id: string) {
     this._id = id;
     return this;
   }
 
-  class(classes: BuderClassType): BuderWidget {
+  class(classes: BuderClassType) {
     this._classes.push(classes);
     return this;
   }
 
-  tag(tag: string): BuderWidget {
+  tag(tag: string) {
     this._tag = tag;
     return this;
   }
 
-  attr(s: AttributesType): BuderWidget {
+  attr(s: AttributesType) {
     this._attr = Object.assign(this._attr, s);
     return this;
   }
 
-  style(s: BuderStyle): BuderWidget {
+  style(s: BuderStyle) {
     this._style = Object.assign(this._style, s);
     return this;
   }
 
-  text(text: string): BuderWidget {
+  text(text: string) {
     this._text = text;
     return this;
   }
 
-  type(type: string): BuderWidget {
+  type(type: string) {
     this._type = type;
     return this;
   }
@@ -165,7 +161,7 @@ export class BuderWidget {
           vertical?: BuderUnit;
           horizontal?: BuderUnit;
         }
-  ): BuderWidget {
+  ) {
     // @ts-ignore
     if (value.unit) {
       // @ts-ignore
@@ -191,18 +187,18 @@ export class BuderWidget {
     }
   }
 
-  get full(): BuderWidget {
+  get full() {
     return this.style({
       width: "100%",
       height: "100%",
     });
   }
 
-  get expand(): BuderWidget {
+  get expand() {
     return this.style({ flex: "1" });
   }
 
-  event(events: BuderEvents): BuderWidget {
+  event(events: BuderEvents) {
     // this._events = Object.assign(this._events, events);
     for (const key in events) {
       if (!this._events[key]) {
@@ -220,7 +216,6 @@ export let _currentBuilder: _Builder | null = null;
 export class _Builder extends BuderWidget {
   // _key: number;
   _func: (refresh: () => void) => BuderWidget;
-  _instanceElement?: HTMLElement;
   _states: Map<number, any> = new Map();
   _statePointer = 0;
 
@@ -238,6 +233,15 @@ export class _Builder extends BuderWidget {
         });
       });
     }
+  }
+
+  bind(state: BuderState<any>) {
+    if (state) {
+      state.subscribe(() => {
+        this.build();
+      });
+    }
+    return this;
   }
 
   subscribe(callback: () => void) {

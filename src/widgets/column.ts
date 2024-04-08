@@ -1,13 +1,13 @@
 import { _Flex } from "./flex";
-import { BuderWidget } from "./widget";
+import { ChildrenProps } from "./view";
 
 export class _Column extends _Flex {
-  constructor(children: BuderWidget[]) {
+  constructor(children: ChildrenProps) {
     super(children);
     this.style({ flexDirection: "column" });
   }
 }
 
-export function Column(...children: BuderWidget[]) {
+export function Column(...children: ChildrenProps) {
   return new _Column(children);
 }

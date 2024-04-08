@@ -1,6 +1,8 @@
-import { BuderWidget } from "./widget";
+import { BuderState, StateValue } from "../state";
+import { _Text } from "./text";
+import { BuderWidget, diffApply } from "./widget";
 
-export type ChildrenProps = BuderWidget[] | string[];
+export type ChildrenProps = StateValue<BuderWidget | any>[] | string[];
 
 // View is a widget that contains other widgets.
 export class _View extends BuderWidget {
@@ -10,7 +12,6 @@ export class _View extends BuderWidget {
     if (children && typeof children[0] === "string") {
       this.text(children[0]);
     } else {
-      // @ts-ignore
       this._children = children;
     }
   }
@@ -20,12 +21,28 @@ export class _View extends BuderWidget {
       el = document.createElement("div");
     }
     this._children?.forEach((child) => {
-      el?.appendChild(child.render());
+      if (child instanceof BuderState) {
+        const childValue = child.value;
+        if (childValue instanceof BuderWidget) {
+          child.init((v: BuderWidget) => {
+            const rendered = v.render();
+            if (childValue._instanceElement) {
+              diffApply(childValue._instanceElement, rendered);
+            } else {
+              childValue._instanceElement = rendered;
+              el?.appendChild(rendered);
+            }
+          });
+        }
+      } else {
+        // add to parent dom
+        el?.appendChild(child.render());
+      }
     });
     return super.render(el);
   }
 }
 
-export function View(...children: BuderWidget[]) {
+export function View(...children: ChildrenProps) {
   return new _View(children);
 }

@@ -1,23 +1,26 @@
 import { BuderWidget } from "./widget";
-import { BuderState } from "../state";
+import { BuderState, StateValue } from "../state";
 
 export class _Input extends BuderWidget {
   _type = "input";
   _tag = "input";
 
-  _model?: BuderState<string>;
-  constructor(model?: BuderState<string>) {
+  _model?: StateValue<string>;
+  constructor(model?: StateValue<string>) {
     super();
     if (!model) return;
 
     this._model = model;
-
-    this.attr({ value: model.value });
-    this.event({
-      input: (e: any) => {
-        model.value = (e.target as HTMLInputElement).value;
-      },
-    });
+    if (model instanceof BuderState) {
+      this.attr({ value: model.value });
+      this.event({
+        input: (e: any) => {
+          model.value = (e.target as HTMLInputElement).value;
+        },
+      });
+    } else {
+      this.attr({ value: model });
+    }
   }
 
   render() {
@@ -28,17 +31,18 @@ export class _Input extends BuderWidget {
       el instanceof HTMLSelectElement ||
       el instanceof HTMLButtonElement
     ) {
-      this._model?.subscribe((newValue) => {
-        if (el) {
-          el.value = newValue;
-        }
-      });
-      el.value = this._model?.value ?? "";
+      if (this._model instanceof BuderState) {
+        this._model?.init((newValue) => {
+          if (el) {
+            el.value = newValue;
+          }
+        });
+      }
     }
     return super.render(el);
   }
 }
 
-export function Input(model?: BuderState<string>) {
+export function Input(model?: StateValue<string>) {
   return new _Input(model);
 }

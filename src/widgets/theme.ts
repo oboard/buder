@@ -1,10 +1,10 @@
-import { BuderState } from "../state";
+import { BuderState, StateValue } from "../state";
 import { BuderWidget } from "./widget";
 
 export type BuderClassType = string | string[] | BuderState<string[]>;
 
 export function Theme(
-  theme: Record<string, BuderClassType>,
+  theme: StateValue<Record<string, BuderClassType>>,
   widget: BuderWidget
 ) {
   function applyTheme(widget: BuderWidget) {
@@ -12,10 +12,19 @@ export function Theme(
       widget._children.forEach(applyTheme);
     }
     const type = widget._type;
-    if (type) {
-      const classes = theme[type];
+
+    function apply(classes: BuderClassType) {
       if (classes) {
         widget.class(classes);
+      }
+    }
+    if (type) {
+      if (theme instanceof BuderState) {
+        theme.init((t) => {
+          apply(t[type]);
+        });
+      } else {
+        apply(theme[type]);
       }
     }
   }

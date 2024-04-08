@@ -2,6 +2,8 @@
 
 import { _Builder, _currentBuilder } from "./widgets/widget";
 
+export type StateValue<T> = T | BuderState<T>;
+
 export class BuderState<T> {
   value: T;
   builder?: _Builder | null;
@@ -15,15 +17,29 @@ export class BuderState<T> {
   // 重载“.”
   get(key: any) {
     const state = State((this.value as any)[key]);
-    // state.builder = this.builder;
     state.subscribe(() => {
       (this.value as any)[key] = state.value;
     });
     return state;
   }
 
+  init(callback: (value: T) => void) {
+    this.subscribe(callback);
+    callback(this.value);
+    return this;
+  }
+
   subscribe(callback: (value: T) => void) {
     this.callbacks.push(callback);
+    return this;
+  }
+
+  computed<U>(callback: (value: T) => U): BuderState<U> {
+    const state = State(callback(this.value));
+    this.subscribe(() => {
+      state.set(callback(this.value));
+    });
+    return state;
   }
 
   set(newValue: T) {

@@ -1,7 +1,7 @@
-import { BuderState } from "./state";
+import { StateValue } from "./state";
 import { BuderUnit } from "./units";
 
-type BuderStyleType = string | BuderUnit | BuderState<string>;
+type BuderStyleType = BuderUnit | StateValue<any>;
 
 export interface BuderStyle {
   /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/accent-color) */

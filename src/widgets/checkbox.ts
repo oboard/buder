@@ -25,12 +25,11 @@ export class _Checkbox extends BuderWidget {
 
   render() {
     const el = super.render() as HTMLInputElement;
-    this._model?.subscribe((newValue) => {
+    this._model?.init((newValue) => {
       if (el) {
         el.checked = newValue;
       }
     });
-    el.checked = this._model?.value ?? false;
 
     return el;
   }

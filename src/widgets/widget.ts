@@ -18,10 +18,10 @@ export class BuderWidget {
   _classes: BuderClassType[] | any = [];
   _tag?: string;
   _attr: AttributesType = {};
-  _text?: StateValue<string>;
+  _text?: StateValue<any>;
   _type?: string;
 
-  mount(selector: string): BuderWidget {
+  mount(selector: string) {
     const target = document.querySelector(selector);
     target?.replaceWith(this.render());
     return this;

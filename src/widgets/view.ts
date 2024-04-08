@@ -36,7 +36,10 @@ export class _View extends BuderWidget {
         }
       } else {
         // add to parent dom
-        el?.appendChild(child.render());
+
+        if (child.render instanceof Function) {
+          el?.appendChild(child.render());
+        }
       }
     });
     return super.render(el);

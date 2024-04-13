@@ -2,9 +2,9 @@ import { BuderState } from "../state";
 import { BuderWidget } from "./widget";
 
 export interface SliderOptions {
-  min: number;
-  max: number;
-  step: number;
+  min?: number;
+  max?: number;
+  step?: number;
 }
 
 export class _Slider extends BuderWidget {
@@ -23,7 +23,7 @@ export class _Slider extends BuderWidget {
     this.attr({ value: model.value.toString() });
     this.event({
       input: (e: any) => {
-        model.value = Number((e.target as HTMLInputElement).value);
+        model.set(Number((e.target as HTMLInputElement).value));
       },
     });
   }
@@ -31,9 +31,9 @@ export class _Slider extends BuderWidget {
   render() {
     const el = document.createElement(this._tag) as HTMLInputElement;
     el.type = "range";
-    el.min = this._options?.min.toString() || "0";
-    el.max = this._options?.max.toString() || "100";
-    el.step = this._options?.step.toString() || "1";
+    el.min = this._options?.min?.toString() || "0";
+    el.max = this._options?.max?.toString() || "100";
+    el.step = this._options?.step?.toString() || "1";
 
     this._model?.subscribe((newValue) => {
       if (el) {
@@ -46,5 +46,5 @@ export class _Slider extends BuderWidget {
   }
 }
 
-export const Slider = (value: BuderState<number>, options: SliderOptions) =>
+export const Slider = (value: BuderState<number>, options?: SliderOptions) =>
   new _Slider(value, options);

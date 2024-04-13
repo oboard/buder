@@ -9,7 +9,17 @@ export class BuderApp {
 
     const loc = window.location.pathname;
     console.log(loc);
-    const widgetFunction = routerMap[loc];
+    let widgetFunction = routerMap[loc];
+    // 正则匹配widgetFunction
+    if (!widgetFunction) {
+      for (let word in routerMap) {
+        if (new RegExp(word).test(loc)) {
+          widgetFunction = routerMap[word];
+          break;
+        }
+      }
+    }
+
     if (widgetFunction instanceof Function) {
       const widget = widgetFunction();
       if (!widget) {

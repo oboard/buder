@@ -5,6 +5,7 @@ import {
   Column,
   Input,
   Label,
+  Slider,
   State,
   Text,
   TextArea,
@@ -16,6 +17,11 @@ import { Router } from "./router.ts";
 import { Select } from "./widgets/select.ts";
 
 class App extends BuderApp {
+  @Router("/*")
+  Example2() {
+    return Text("Example2");
+  }
+
   @Router("/")
   Example() {
     let a = State("14px");
@@ -27,8 +33,7 @@ class App extends BuderApp {
       },
       Column(
         Input(a).event({
-          input: (_) => {
-            console.log(a.value);
+          input: () => {
             c.set(Text(a).style({ color: "red" }));
           },
         }),
@@ -40,6 +45,17 @@ class App extends BuderApp {
           "24px": "large",
           "14px": "small",
         }).bind(a),
+        Slider(
+          a.transform(
+            (v) => parseInt(v.replace("px", "")),
+            (v) => `${v}px`
+          ),
+          {
+            min: 10,
+            max: 20,
+            step: 1,
+          }
+        ),
         c,
         View(Checkbox(b).id("checkbox"), Label(" Bold").for("checkbox")),
         Button(Column(Text(a), Text("重置")))

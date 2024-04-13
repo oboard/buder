@@ -5,7 +5,7 @@ export const routerMap: Record<string, () => BuderWidget> = {};
 
 export const Router =
   (level: any) => (target: BuderApp, name: any, descriptor: any) => {
-    console.log("入参：", target, name, descriptor);
+    // console.log("入参：", target, name, descriptor);
     routerMap[level] = descriptor.value;
 
     // // 缓存之前的值

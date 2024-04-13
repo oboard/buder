@@ -23,6 +23,20 @@ export class BuderState<T> {
     return state;
   }
 
+  transform<U>(
+    forward: (value: T) => U,
+    backward: (value: U) => T
+  ): BuderState<U> {
+    const state = new BuderState(forward(this.value));
+    this.subscribe(() => {
+      state.value = forward(this.value);
+    });
+    state.subscribe((value) => {
+      this.value = backward(value);
+    });
+    return state;
+  }
+
   init(callback: (value: T) => void) {
     this.subscribe(callback);
     callback(this.value);
@@ -47,6 +61,9 @@ export class BuderState<T> {
     this.callbacks.forEach((callback) => {
       callback(newValue);
     });
+  }
+  _set(newValue: T) {
+    this.value = newValue;
   }
 }
 

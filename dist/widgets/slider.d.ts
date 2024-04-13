@@ -1,9 +1,9 @@
 import { BuderState } from "../state";
 import { BuderWidget } from "./widget";
 export interface SliderOptions {
-    min: number;
-    max: number;
-    step: number;
+    min?: number;
+    max?: number;
+    step?: number;
 }
 export declare class _Slider extends BuderWidget {
     _options?: SliderOptions;
@@ -13,4 +13,4 @@ export declare class _Slider extends BuderWidget {
     constructor(model?: BuderState<number>, options?: SliderOptions);
     render(): HTMLElement;
 }
-export declare const Slider: (value: BuderState<number>, options: SliderOptions) => _Slider;
+export declare const Slider: (value: BuderState<number>, options?: SliderOptions) => _Slider;

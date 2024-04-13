@@ -27,12 +27,18 @@ export class BuderState<T> {
     forward: (value: T) => U,
     backward: (value: U) => T
   ): BuderState<U> {
-    const state = new BuderState(forward(this.value));
+    const state = State(forward(this.value));
     this.subscribe(() => {
-      state.value = forward(this.value);
+      const newValue = forward(this.value);
+      if (state.value !== newValue) {
+        state.value = newValue;
+      }
     });
     state.subscribe((value) => {
-      this.value = backward(value);
+      const newValue = backward(value);
+      if (this.value !== newValue) {
+        this.value = newValue;
+      }
     });
     return state;
   }

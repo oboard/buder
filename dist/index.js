@@ -128,13 +128,13 @@ class b extends a {
   }
   render() {
     const t = super.render(this._func(this.build.bind(this)).render());
-    return this._instanceElement ? d(this._instanceElement, t) : this._instanceElement = t, this._statePointer = 0, t;
+    return this._instanceElement ? p(this._instanceElement, t) : this._instanceElement = t, this._statePointer = 0, t;
   }
   build() {
     this.render();
   }
 }
-function d(e, t) {
+function p(e, t) {
   if (!e || !t || e.isEqualNode(t))
     return;
   e.tagName !== t.tagName && e.replaceWith(t);
@@ -162,7 +162,7 @@ function d(e, t) {
         e.removeChild(i[u]);
         continue;
       }
-      d(i[u], r[u]);
+      p(i[u], r[u]);
     }
   return e;
 }
@@ -178,10 +178,20 @@ class o {
   }
   // 重载“.”
   get(t) {
-    const n = p(this.value[t]);
+    const n = d(this.value[t]);
     return n.subscribe(() => {
       this.value[t] = n.value;
     }), n;
+  }
+  transform(t, n) {
+    const s = d(t(this.value));
+    return this.subscribe(() => {
+      const i = t(this.value);
+      s.value !== i && (s.value = i);
+    }), s.subscribe((i) => {
+      const r = n(i);
+      this.value !== r && (this.value = r);
+    }), s;
   }
   init(t) {
     return this.subscribe(t), t(this.value), this;
@@ -190,7 +200,7 @@ class o {
     return this.callbacks.push(t), this;
   }
   computed(t) {
-    const n = p(t(this.value));
+    const n = d(t(this.value));
     return this.subscribe(() => {
       n.set(t(this.value));
     }), n;
@@ -200,8 +210,11 @@ class o {
       n(t);
     });
   }
+  _set(t) {
+    this.value = t;
+  }
 }
-function p(e) {
+function d(e) {
   const t = m;
   let n = 0;
   return t && (n = t._statePointer, t._statePointer++, t._states.has(n) ? e = t._states.get(n) : t._states.set(n, e)), new Proxy(new o(e, t), {
@@ -233,7 +246,7 @@ class h extends a {
         const s = n.value;
         s instanceof a && n.init((i) => {
           const r = i.render();
-          s._instanceElement ? d(s._instanceElement, r) : (s._instanceElement = r, t?.appendChild(r));
+          s._instanceElement ? p(s._instanceElement, r) : (s._instanceElement = r, t?.appendChild(r));
         });
       } else
         n.render instanceof Function && t?.appendChild(n.render());
@@ -243,7 +256,7 @@ class h extends a {
 function R(...e) {
   return new h(e);
 }
-class v extends a {
+class x extends a {
   _type = "text";
   constructor(t) {
     super(), this._text = t;
@@ -256,10 +269,10 @@ class v extends a {
     return this._style.verticalAlign = "middle", this._style.textAlign = "center", this;
   }
 }
-function $(e) {
-  return new v(e);
+function F(e) {
+  return new x(e);
 }
-class g extends h {
+class y extends h {
   _type = "button";
   constructor(t = []) {
     super(t);
@@ -269,10 +282,10 @@ class g extends h {
     return super.render(t);
   }
 }
-function O(...e) {
-  return new g(e);
+function $(...e) {
+  return new y(e);
 }
-class _ extends h {
+class v extends h {
   constructor(t) {
     super(t), this.style({ display: "flex" });
   }
@@ -280,36 +293,36 @@ class _ extends h {
     return this._style.alignItems = "center", this._style.justifyContent = "center", this;
   }
 }
-function j(...e) {
-  return new _(e);
+function O(...e) {
+  return new v(e);
 }
-class y extends _ {
+class w extends v {
   constructor(t) {
     super(t), this.style({ flexDirection: "column" });
   }
 }
-function q(...e) {
-  return new y(e);
+function j(...e) {
+  return new w(e);
 }
-class E extends _ {
+class E extends v {
   constructor(t) {
     super(t), this.style({ flexDirection: "row" });
   }
 }
-function D(...e) {
+function q(...e) {
   return new E(e);
 }
-class w extends h {
+class C extends h {
   constructor(t = []) {
     super(t), this._children?.forEach((n) => {
       n.style({ position: "absolute" });
     }), this.style({ position: "relative" });
   }
 }
-function z(e) {
-  return new w(e);
+function V(e) {
+  return new C(e);
 }
-class x extends a {
+class g extends a {
   _type = "input";
   _tag = "input";
   _model;
@@ -327,10 +340,10 @@ class x extends a {
     }), super.render(t);
   }
 }
-function V(e) {
-  return new x(e);
+function D(e) {
+  return new g(e);
 }
-class C extends x {
+class S extends g {
   _type = "textarea";
   _tag = "textarea";
   constructor(t) {
@@ -340,26 +353,26 @@ class C extends x {
     return super.render();
   }
 }
-function G(e) {
-  return new C(e);
-}
-class S extends a {
-  constructor(t) {
-    super(), this.style({ height: t });
-  }
-}
-function J(e) {
+function z(e) {
   return new S(e);
 }
 class A extends a {
   constructor(t) {
-    super(), this.style({ width: t });
+    super(), this.style({ height: t });
   }
 }
-function K(e) {
+function G(e) {
   return new A(e);
 }
 class L extends a {
+  constructor(t) {
+    super(), this.style({ width: t });
+  }
+}
+function J(e) {
+  return new L(e);
+}
+class k extends a {
   _type = "picture";
   _src;
   constructor(t) {
@@ -370,36 +383,10 @@ class L extends a {
     return super.render(t);
   }
 }
-function Q(e) {
-  return new L(e);
+function K(e) {
+  return new k(e);
 }
-class T extends h {
-  _state;
-  _builder;
-  _parent;
-  constructor(t, n, s) {
-    super(), this._state = t, this._builder = n, this._parent = s, this._state.subscribe(() => {
-      this.build();
-    });
-  }
-  build() {
-    this._instanceElement && d(this._instanceElement, this.render());
-  }
-  render() {
-    let t = 0;
-    this._children = [];
-    for (const s of this._state.value) {
-      const i = this._builder(s, t++, this._state.value);
-      this._children.push(i);
-    }
-    const n = super.render(this._parent?.render());
-    return this._instanceElement ? n : this._instanceElement = n;
-  }
-}
-function X(e, t, n) {
-  return new T(e, t, n);
-}
-class k extends v {
+class T extends x {
   _tag = "label";
   constructor(t) {
     super(t);
@@ -410,8 +397,8 @@ class k extends v {
     });
   }
 }
-function Y(e) {
-  return new k(e);
+function Q(e) {
+  return new T(e);
 }
 class N extends a {
   _tag = "input";
@@ -434,7 +421,7 @@ class N extends a {
     }), t;
   }
 }
-function Z(e) {
+function X(e) {
   return new N(e);
 }
 class B extends a {
@@ -445,19 +432,19 @@ class B extends a {
   constructor(t, n) {
     super(), t && (this._model = t, this._options = n, this.attr({ value: t.value.toString() }), this.event({
       input: (s) => {
-        t.value = Number(s.target.value);
+        t.set(Number(s.target.value));
       }
     }));
   }
   render() {
     const t = document.createElement(this._tag);
-    return t.type = "range", t.min = this._options?.min.toString() || "0", t.max = this._options?.max.toString() || "100", t.step = this._options?.step.toString() || "1", this._model?.subscribe((n) => {
+    return t.type = "range", t.min = this._options?.min?.toString() || "0", t.max = this._options?.max?.toString() || "100", t.step = this._options?.step?.toString() || "1", this._model?.subscribe((n) => {
       t && (t.value = n.toString());
     }), t.value = (this._model?.value ?? "").toString(), super.render(t);
   }
 }
-const U = (e, t) => new B(e, t);
-class F extends h {
+const Y = (e, t) => new B(e, t);
+class M extends h {
   _type = "select";
   _model;
   _options;
@@ -483,10 +470,10 @@ class F extends h {
     }), super.render(t);
   }
 }
-function tt(e) {
-  return new F(e);
+function Z(e) {
+  return new M(e);
 }
-class M extends a {
+class P extends a {
   context;
   width;
   height;
@@ -498,58 +485,65 @@ class M extends a {
     return this.context = t.getContext("2d"), t.width = this.width, t.height = this.height, super.render(t);
   }
 }
-const et = (e, t) => new M(e, t);
-var P = /* @__PURE__ */ ((e) => (e.px = "px", e.em = "em", e.rem = "rem", e.vw = "vw", e.vh = "vh", e.percent = "%", e))(P || {});
-function nt(e) {
+const U = (e, t) => new P(e, t);
+var W = /* @__PURE__ */ ((e) => (e.px = "px", e.em = "em", e.rem = "rem", e.vw = "vw", e.vh = "vh", e.percent = "%", e))(W || {});
+function tt(e) {
   return {
     value: e,
     unit: "px"
     /* px */
   };
 }
-function st(e) {
+function et(e) {
   return {
     value: e,
     unit: "em"
     /* em */
   };
 }
-function it(e) {
+function nt(e) {
   return {
     value: e,
     unit: "rem"
     /* rem */
   };
 }
-function rt(e) {
+function st(e) {
   return {
     value: e,
     unit: "vw"
     /* vw */
   };
 }
-function ut(e) {
+function it(e) {
   return {
     value: e,
     unit: "vh"
     /* vh */
   };
 }
-function ct(e) {
+function rt(e) {
   return {
     value: e,
     unit: "%"
     /* percent */
   };
 }
-const W = {};
-class ot {
+const _ = {};
+class ut {
   constructor() {
   }
   mount(t) {
     const n = document.querySelector(t), s = window.location.pathname;
     console.log(s);
-    const i = W[s];
+    let i = _[s];
+    if (!i) {
+      for (let r in _)
+        if (new RegExp(r).test(s)) {
+          i = _[r];
+          break;
+        }
+    }
     if (i instanceof Function) {
       const r = i();
       if (r)
@@ -561,50 +555,48 @@ class ot {
   }
 }
 export {
-  ot as BuderApp,
+  ut as BuderApp,
   o as BuderState,
-  P as BuderUnits,
+  W as BuderUnits,
   a as BuderWidget,
   H as Builder,
-  O as Button,
-  et as Canvas,
-  Z as Checkbox,
-  q as Column,
-  j as Flex,
-  X as ForEach,
-  J as H,
-  V as Input,
-  Y as Label,
-  Q as Picture,
-  D as Row,
-  tt as Select,
-  U as Slider,
-  z as Stack,
-  p as State,
-  $ as Text,
-  G as TextArea,
+  $ as Button,
+  U as Canvas,
+  X as Checkbox,
+  j as Column,
+  O as Flex,
+  G as H,
+  D as Input,
+  Q as Label,
+  K as Picture,
+  q as Row,
+  Z as Select,
+  Y as Slider,
+  V as Stack,
+  d as State,
+  F as Text,
+  z as TextArea,
   I as Theme,
   R as View,
-  K as W,
+  J as W,
   b as _Builder,
-  g as _Button,
+  y as _Button,
   N as _Checkbox,
-  y as _Column,
-  _ as _Flex,
-  T as _ForEach,
-  x as _Input,
-  k as _Label,
+  w as _Column,
+  v as _Flex,
+  g as _Input,
+  T as _Label,
   E as _Row,
-  F as _Select,
+  M as _Select,
   B as _Slider,
-  v as _Text,
+  x as _Text,
   h as _View,
   m as _currentBuilder,
-  d as diffApply,
-  st as em,
-  ct as percent,
-  nt as px,
-  it as rem,
-  ut as vh,
-  rt as vw
+  p as diffApply,
+  et as em,
+  rt as percent,
+  tt as px,
+  nt as rem,
+  it as vh,
+  st as vw
 };

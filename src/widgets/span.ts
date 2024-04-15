@@ -1,7 +1,7 @@
 import { StateValue } from "../state";
 import { BuderWidget } from "./widget";
 
-export class _Text extends BuderWidget {
+export class _Span extends BuderWidget {
   _type = "text";
 
   constructor(text: StateValue<any>) {
@@ -21,6 +21,6 @@ export class _Text extends BuderWidget {
   }
 }
 
-export function Text(text: StateValue<any>) {
-  return new _Text(text);
+export function Span(text: StateValue<any>) {
+  return new _Span(text);
 }

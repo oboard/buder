@@ -18,9 +18,9 @@ class a {
     t || (t = document.createElement(this._tag ?? "div"));
     for (const n in this._style) {
       const s = this._style[n];
-      s instanceof Object ? s.value instanceof o ? s.value.init((i) => {
+      s instanceof Object ? s.value instanceof c ? s.value.init((i) => {
         t && (t.style[n] = `${i}${s.unit}`);
-      }) : s instanceof o ? s.init((i) => {
+      }) : s instanceof c ? s.init((i) => {
         t && (t.style[n] = i);
       }) : t.style[n] = `${s.value}${s.unit}` : t.style[n] = s;
     }
@@ -28,7 +28,7 @@ class a {
       for (const s of this._events[n])
         t.addEventListener(n, s);
     this._id && (t.id = this._id), this._classes.forEach((n) => {
-      typeof n == "string" ? n && t && t.classList.add(n) : n instanceof Array ? t.classList.add(...n) : n instanceof o && n.subscribe((s) => {
+      typeof n == "string" ? n && t && t.classList.add(n) : n instanceof Array ? t.classList.add(...n) : n instanceof c && n.subscribe((s) => {
         if (t) {
           t.classList.add(
             ...s.filter((i) => t && !t.classList.contains(i))
@@ -40,11 +40,11 @@ class a {
     });
     for (const n in this._attr) {
       const s = this._attr[n];
-      s instanceof o ? s.init((i) => {
+      s instanceof c ? s.init((i) => {
         t && t.setAttribute(n, i);
       }) : typeof s == "string" && t.setAttribute(n, s);
     }
-    return this._text && (this._text instanceof o ? this._text.init((n) => {
+    return this._text && (this._text instanceof c ? this._text.init((n) => {
       t && (t.textContent = n);
     }) : t.textContent = this._text), t;
   }
@@ -73,10 +73,10 @@ class a {
     if (t.unit)
       return this.style({ padding: t });
     {
-      const { top: n, left: s, right: i, bottom: r, vertical: c, horizontal: u } = t;
-      return c || u ? this.style({
-        paddingTop: c,
-        paddingBottom: c,
+      const { top: n, left: s, right: i, bottom: r, vertical: o, horizontal: u } = t;
+      return o || u ? this.style({
+        paddingTop: o,
+        paddingBottom: o,
         paddingLeft: u,
         paddingRight: u
       }) : this.style({
@@ -103,7 +103,7 @@ class a {
   }
 }
 let m = null;
-class b extends a {
+class g extends a {
   // _key: number;
   _func;
   _states = /* @__PURE__ */ new Map();
@@ -123,7 +123,7 @@ class b extends a {
   subscribe(t) {
     this._states.forEach((n, s) => {
       const i = this._states.get(s);
-      i instanceof o && (i.builder = this, i.subscribe(t));
+      i instanceof c && (i.builder = this, i.subscribe(t));
     });
   }
   render() {
@@ -141,19 +141,19 @@ function p(e, t) {
   const n = e.attributes, s = t.attributes;
   if (n && s) {
     for (let u = 0; u < n.length; u++) {
-      const l = n[u], f = s.getNamedItem(l.name);
-      f ? f.value !== l.value && e.setAttribute(l.name, f.value) : e.removeAttribute(l.name);
+      const l = n[u], d = s.getNamedItem(l.name);
+      d ? d.value !== l.value && e.setAttribute(l.name, d.value) : e.removeAttribute(l.name);
     }
     for (let u = 0; u < s.length; u++) {
       const l = s[u];
       n.getNamedItem(l.name) || e.setAttribute(l.name, l.value);
     }
   }
-  const i = e.childNodes, r = t.childNodes, c = Math.max(i.length, r.length);
-  if (c == 0)
+  const i = e.childNodes, r = t.childNodes, o = Math.max(i.length, r.length);
+  if (o == 0)
     e.textContent !== t.textContent && (e.textContent = t.textContent);
   else
-    for (let u = 0; u < c; u++) {
+    for (let u = 0; u < o; u++) {
       if (u >= i.length) {
         e.appendChild(r[u]);
         continue;
@@ -166,10 +166,10 @@ function p(e, t) {
     }
   return e;
 }
-function H(e, t) {
-  return new b(e, t);
+function W(e, t) {
+  return new g(e, t);
 }
-class o {
+class c {
   value;
   builder;
   callbacks = [];
@@ -178,13 +178,13 @@ class o {
   }
   // 重载“.”
   get(t) {
-    const n = d(this.value[t]);
+    const n = _(this.value[t]);
     return n.subscribe(() => {
       this.value[t] = n.value;
     }), n;
   }
   transform(t, n) {
-    const s = d(t(this.value));
+    const s = _(t(this.value));
     return this.subscribe(() => {
       const i = t(this.value);
       s.value !== i && (s.value = i);
@@ -200,7 +200,7 @@ class o {
     return this.callbacks.push(t), this;
   }
   computed(t) {
-    const n = d(t(this.value));
+    const n = _(t(this.value));
     return this.subscribe(() => {
       n.set(t(this.value));
     }), n;
@@ -214,24 +214,24 @@ class o {
     this.value = t;
   }
 }
-function d(e) {
+function _(e) {
   const t = m;
   let n = 0;
-  return t && (n = t._statePointer, t._statePointer++, t._states.has(n) ? e = t._states.get(n) : t._states.set(n, e)), new Proxy(new o(e, t), {
-    set(s, i, r, c) {
-      return s.builder?._states.set(n, r), i == "value" ? s.set(r) : Reflect.set(s, i, r, c), s.builder?.build(), !0;
+  return t && (n = t._statePointer, t._statePointer++, t._states.has(n) ? e = t._states.get(n) : t._states.set(n, e)), new Proxy(new c(e, t), {
+    set(s, i, r, o) {
+      return s.builder?._states.set(n, r), i == "value" ? s.set(r) : Reflect.set(s, i, r, o), s.builder?.build(), !0;
     }
   });
 }
-function I(e, t) {
+function H(e, t) {
   function n(s) {
     s._children && s._children.forEach(n);
     const i = s._type;
-    function r(c) {
-      c && s.class(c);
+    function r(o) {
+      typeof o == "object" ? s.style(o) : s.class(o);
     }
-    i && (e instanceof o ? e.init((c) => {
-      r(c[i]);
+    i && (e instanceof c ? e.init((o) => {
+      r(o[i]);
     }) : r(e[i]));
   }
   return n(t), t;
@@ -242,7 +242,7 @@ class h extends a {
   }
   render(t) {
     return t || (t = document.createElement("div")), this._children?.forEach((n) => {
-      if (n instanceof o) {
+      if (n instanceof c) {
         const s = n.value;
         s instanceof a && n.init((i) => {
           const r = i.render();
@@ -253,7 +253,7 @@ class h extends a {
     }), super.render(t);
   }
 }
-function R(...e) {
+function I(...e) {
   return new h(e);
 }
 class x extends a {
@@ -293,7 +293,7 @@ class v extends h {
     return this._style.alignItems = "center", this._style.justifyContent = "center", this;
   }
 }
-function O(...e) {
+function j(...e) {
   return new v(e);
 }
 class w extends v {
@@ -301,7 +301,7 @@ class w extends v {
     super(t), this.style({ flexDirection: "column" });
   }
 }
-function j(...e) {
+function O(...e) {
   return new w(e);
 }
 class E extends v {
@@ -322,12 +322,12 @@ class C extends h {
 function V(e) {
   return new C(e);
 }
-class g extends a {
+class b extends a {
   _type = "input";
   _tag = "input";
   _model;
   constructor(t) {
-    super(), t && (this._model = t, t instanceof o ? (this.attr({ value: t.value }), this.event({
+    super(), t && (this._model = t, t instanceof c ? (this.attr({ value: t.value }), this.event({
       input: (n) => {
         t.value = n.target.value;
       }
@@ -335,15 +335,15 @@ class g extends a {
   }
   render() {
     const t = document.createElement(this._tag);
-    return (t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement || t instanceof HTMLSelectElement || t instanceof HTMLButtonElement) && this._model instanceof o && this._model?.init((n) => {
+    return (t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement || t instanceof HTMLSelectElement || t instanceof HTMLButtonElement) && this._model instanceof c && this._model?.init((n) => {
       t && (t.value = n);
     }), super.render(t);
   }
 }
 function D(e) {
-  return new g(e);
+  return new b(e);
 }
-class S extends g {
+class S extends b {
   _type = "textarea";
   _tag = "textarea";
   constructor(t) {
@@ -449,7 +449,7 @@ class M extends h {
   _model;
   _options;
   constructor(t) {
-    super(), t instanceof o ? t.init((n) => {
+    super(), t instanceof c ? t.init((n) => {
       this._options = n;
     }) : this._options = t;
   }
@@ -485,62 +485,63 @@ class P extends a {
     return this.context = t.getContext("2d"), t.width = this.width, t.height = this.height, super.render(t);
   }
 }
-const U = (e, t) => new P(e, t);
-var W = /* @__PURE__ */ ((e) => (e.px = "px", e.em = "em", e.rem = "rem", e.vw = "vw", e.vh = "vh", e.percent = "%", e))(W || {});
-function tt(e) {
+const U = (e, t) => new P(e, t), f = {}, tt = (e) => (t, n, s) => {
+  f[e] = s.value;
+};
+var R = /* @__PURE__ */ ((e) => (e.px = "px", e.em = "em", e.rem = "rem", e.vw = "vw", e.vh = "vh", e.percent = "%", e))(R || {});
+function et(e) {
   return {
     value: e,
     unit: "px"
     /* px */
   };
 }
-function et(e) {
+function nt(e) {
   return {
     value: e,
     unit: "em"
     /* em */
   };
 }
-function nt(e) {
+function st(e) {
   return {
     value: e,
     unit: "rem"
     /* rem */
   };
 }
-function st(e) {
+function it(e) {
   return {
     value: e,
     unit: "vw"
     /* vw */
   };
 }
-function it(e) {
+function rt(e) {
   return {
     value: e,
     unit: "vh"
     /* vh */
   };
 }
-function rt(e) {
+function ut(e) {
   return {
     value: e,
     unit: "%"
     /* percent */
   };
 }
-const _ = {};
-class ut {
+class ot {
   constructor() {
   }
   mount(t) {
     const n = document.querySelector(t), s = window.location.pathname;
     console.log(s);
-    let i = _[s];
+    let i = f[s];
     if (!i) {
-      for (let r in _)
+      for (let r in f)
         if (new RegExp(r).test(s)) {
-          i = _[r];
+          i = f[r];
           break;
         }
     }
@@ -555,48 +556,50 @@ class ut {
   }
 }
 export {
-  ut as BuderApp,
-  o as BuderState,
-  W as BuderUnits,
+  ot as BuderApp,
+  c as BuderState,
+  R as BuderUnits,
   a as BuderWidget,
-  H as Builder,
+  W as Builder,
   $ as Button,
   U as Canvas,
   X as Checkbox,
-  j as Column,
-  O as Flex,
+  O as Column,
+  j as Flex,
   G as H,
   D as Input,
   Q as Label,
   K as Picture,
+  tt as Router,
   q as Row,
   Z as Select,
   Y as Slider,
+  F as Span,
   V as Stack,
-  d as State,
-  F as Text,
+  _ as State,
   z as TextArea,
-  I as Theme,
-  R as View,
+  H as Theme,
+  I as View,
   J as W,
-  b as _Builder,
+  g as _Builder,
   y as _Button,
   N as _Checkbox,
   w as _Column,
   v as _Flex,
-  g as _Input,
+  b as _Input,
   T as _Label,
   E as _Row,
   M as _Select,
   B as _Slider,
-  x as _Text,
+  x as _Span,
   h as _View,
   m as _currentBuilder,
   p as diffApply,
-  et as em,
-  rt as percent,
-  tt as px,
-  nt as rem,
-  it as vh,
-  st as vw
+  nt as em,
+  ut as percent,
+  et as px,
+  st as rem,
+  f as routerMap,
+  rt as vh,
+  it as vw
 };

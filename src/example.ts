@@ -7,7 +7,7 @@ import {
   Label,
   Slider,
   State,
-  Text,
+  Span,
   TextArea,
   Theme,
   View,
@@ -19,26 +19,33 @@ import { Select } from "./widgets/select.ts";
 class App extends BuderApp {
   @Router("/*")
   Example2() {
-    return Text("Example2");
+    return Span("Example2");
   }
 
   @Router("/")
   Example() {
     let a = State("14px");
     let b = State(false);
-    let c = State(Text("Hello"));
+    let c = State(Span("Hello"));
     return Theme(
       {
-        button: "btn",
+        button: {
+          borderRadius: "5px",
+          padding: "10px",
+          backgroundColor: "blue",
+          color: "white",
+          border: "none",
+          cursor: "pointer",
+        },
       },
       Column(
         Input(a).event({
           input: () => {
-            c.set(Text(a).style({ color: "red" }));
+            c.set(Span(a).style({ color: "red" }));
           },
         }),
         TextArea(a),
-        Text(a),
+        Span(a),
         Checkbox(b),
         Select({
           "18px": "medium",
@@ -58,7 +65,7 @@ class App extends BuderApp {
         ),
         c,
         View(Checkbox(b).id("checkbox"), Label(" Bold").for("checkbox")),
-        Button(Column(Text(a), Text("重置")))
+        Button(Column(Span(a), Span("重置")))
           .style({
             backgroundColor: "red",
             color: "white",

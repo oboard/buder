@@ -1,5 +1,5 @@
-import { _Text } from "./text";
-export declare class _Label extends _Text {
+import { _Span } from "./span";
+export declare class _Label extends _Span {
     _tag: string;
     constructor(text: string);
     for(id: string): this;

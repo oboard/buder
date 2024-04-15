@@ -1,5 +1,5 @@
 import { BuderState, StateValue } from "../state";
-import { _Text } from "./text";
+import { _Span } from "./span";
 import { BuderWidget, diffApply } from "./widget";
 
 export type ChildrenProps = StateValue<BuderWidget | any>[] | string[];

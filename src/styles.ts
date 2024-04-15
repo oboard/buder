@@ -4,6 +4,16 @@ import { BuderUnit } from "./units";
 type BuderStyleType = BuderUnit | StateValue<any>;
 
 export interface BuderStyle {
+  hover?: BuderStyle;
+  active?: BuderStyle;
+  focus?: BuderStyle;
+  visited?: BuderStyle;
+  target?: BuderStyle;
+  disabled?: BuderStyle;
+  checked?: BuderStyle;
+  focusVisible?: BuderStyle;
+  focusWithin?: BuderStyle;
+
   /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/accent-color) */
   accentColor?: BuderStyleType;
   /** [MDN Reference](https://developer.mozilla.org/docs/Web/CSS/align-content) */

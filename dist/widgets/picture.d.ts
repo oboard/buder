@@ -1,5 +1,6 @@
-import { StateValue } from "../state";
-import { BuderWidget } from "./widget";
+import { StateValue } from '../state';
+import { BuderWidget } from './widget';
+
 declare class _Picture extends BuderWidget {
     _type: string;
     _src?: string;

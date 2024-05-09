@@ -1,4 +1,4 @@
-import { _View, ChildrenProps } from "./view";
+import { _View, type ChildrenProps } from "./view";
 
 export class _Flex extends _View {
   constructor(children: ChildrenProps) {

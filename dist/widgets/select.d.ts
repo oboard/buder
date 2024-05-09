@@ -1,5 +1,6 @@
-import { BuderState, StateValue } from "../state";
-import { _View } from "./view";
+import { BuderState, StateValue } from '../state';
+import { _View } from './view';
+
 export declare class _Select extends _View {
     _type: string;
     _model?: BuderState<string>;

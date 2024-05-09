@@ -1,5 +1,6 @@
-import { BuderWidget } from "./widget";
-import { StateValue } from "../state";
+import { BuderWidget } from './widget';
+import { StateValue } from '../state';
+
 export declare class _Input extends BuderWidget {
     _type: string;
     _tag: string;

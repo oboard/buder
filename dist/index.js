@@ -18,9 +18,9 @@ class a {
     t || (t = document.createElement(this._tag ?? "div"));
     for (const n in this._style) {
       const s = this._style[n];
-      s instanceof Object ? s.value instanceof c ? s.value.init((i) => {
+      s instanceof Object ? s.value instanceof o ? s.value.init((i) => {
         t && (t.style[n] = `${i}${s.unit}`);
-      }) : s instanceof c ? s.init((i) => {
+      }) : s instanceof o ? s.init((i) => {
         t && (t.style[n] = i);
       }) : t.style[n] = `${s.value}${s.unit}` : t.style[n] = s;
     }
@@ -28,7 +28,7 @@ class a {
       for (const s of this._events[n])
         t.addEventListener(n, s);
     this._id && (t.id = this._id), this._classes.forEach((n) => {
-      typeof n == "string" ? n && t && t.classList.add(n) : n instanceof Array ? t.classList.add(...n) : n instanceof c && n.subscribe((s) => {
+      typeof n == "string" ? n && t && t.classList.add(n) : n instanceof Array ? t.classList.add(...n) : n instanceof o && n.subscribe((s) => {
         if (t) {
           t.classList.add(
             ...s.filter((i) => t && !t.classList.contains(i))
@@ -40,11 +40,11 @@ class a {
     });
     for (const n in this._attr) {
       const s = this._attr[n];
-      s instanceof c ? s.init((i) => {
+      s instanceof o ? s.init((i) => {
         t && t.setAttribute(n, i);
       }) : typeof s == "string" && t.setAttribute(n, s);
     }
-    return this._text && (this._text instanceof c ? this._text.init((n) => {
+    return this._text && (this._text instanceof o ? this._text.init((n) => {
       t && (t.textContent = n);
     }) : t.textContent = this._text), t;
   }
@@ -73,10 +73,10 @@ class a {
     if (t.unit)
       return this.style({ padding: t });
     {
-      const { top: n, left: s, right: i, bottom: r, vertical: o, horizontal: u } = t;
-      return o || u ? this.style({
-        paddingTop: o,
-        paddingBottom: o,
+      const { top: n, left: s, right: i, bottom: r, vertical: c, horizontal: u } = t;
+      return c || u ? this.style({
+        paddingTop: c,
+        paddingBottom: c,
         paddingLeft: u,
         paddingRight: u
       }) : this.style({
@@ -123,7 +123,7 @@ class g extends a {
   subscribe(t) {
     this._states.forEach((n, s) => {
       const i = this._states.get(s);
-      i instanceof c && (i.builder = this, i.subscribe(t));
+      i instanceof o && (i.builder = this, i.subscribe(t));
     });
   }
   render() {
@@ -149,11 +149,11 @@ function p(e, t) {
       n.getNamedItem(l.name) || e.setAttribute(l.name, l.value);
     }
   }
-  const i = e.childNodes, r = t.childNodes, o = Math.max(i.length, r.length);
-  if (o == 0)
+  const i = e.childNodes, r = t.childNodes, c = Math.max(i.length, r.length);
+  if (c == 0)
     e.textContent !== t.textContent && (e.textContent = t.textContent);
   else
-    for (let u = 0; u < o; u++) {
+    for (let u = 0; u < c; u++) {
       if (u >= i.length) {
         e.appendChild(r[u]);
         continue;
@@ -166,10 +166,10 @@ function p(e, t) {
     }
   return e;
 }
-function W(e, t) {
+function R(e, t) {
   return new g(e, t);
 }
-class c {
+class o {
   value;
   builder;
   callbacks = [];
@@ -217,21 +217,21 @@ class c {
 function _(e) {
   const t = m;
   let n = 0;
-  return t && (n = t._statePointer, t._statePointer++, t._states.has(n) ? e = t._states.get(n) : t._states.set(n, e)), new Proxy(new c(e, t), {
-    set(s, i, r, o) {
-      return s.builder?._states.set(n, r), i == "value" ? s.set(r) : Reflect.set(s, i, r, o), s.builder?.build(), !0;
+  return t && (n = t._statePointer, t._statePointer++, t._states.has(n) ? e = t._states.get(n) : t._states.set(n, e)), new Proxy(new o(e, t), {
+    set(s, i, r, c) {
+      return s.builder?._states.set(n, r), i == "value" ? s.set(r) : Reflect.set(s, i, r, c), s.builder?.build(), !0;
     }
   });
 }
-function H(e, t) {
+function W(e, t) {
   function n(s) {
     s._children && s._children.forEach(n);
     const i = s._type;
-    function r(o) {
-      typeof o == "object" ? s.style(o) : s.class(o);
+    function r(c) {
+      typeof c == "object" ? s.style(c) : s.class(c);
     }
-    i && (e instanceof c ? e.init((o) => {
-      r(o[i]);
+    i && (e instanceof o ? e.init((c) => {
+      r(c[i]);
     }) : r(e[i]));
   }
   return n(t), t;
@@ -242,7 +242,7 @@ class h extends a {
   }
   render(t) {
     return t || (t = document.createElement("div")), this._children?.forEach((n) => {
-      if (n instanceof c) {
+      if (n instanceof o) {
         const s = n.value;
         s instanceof a && n.init((i) => {
           const r = i.render();
@@ -253,7 +253,7 @@ class h extends a {
     }), super.render(t);
   }
 }
-function I(...e) {
+function H(...e) {
   return new h(e);
 }
 class x extends a {
@@ -269,7 +269,7 @@ class x extends a {
     return this._style.verticalAlign = "middle", this._style.textAlign = "center", this;
   }
 }
-function F(e) {
+function I(e) {
   return new x(e);
 }
 class y extends h {
@@ -327,7 +327,7 @@ class b extends a {
   _tag = "input";
   _model;
   constructor(t) {
-    super(), t && (this._model = t, t instanceof c ? (this.attr({ value: t.value }), this.event({
+    super(), t && (this._model = t, t instanceof o ? (this.attr({ value: t.value }), this.event({
       input: (n) => {
         t.value = n.target.value;
       }
@@ -335,7 +335,7 @@ class b extends a {
   }
   render() {
     const t = document.createElement(this._tag);
-    return (t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement || t instanceof HTMLSelectElement || t instanceof HTMLButtonElement) && this._model instanceof c && this._model?.init((n) => {
+    return (t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement || t instanceof HTMLSelectElement || t instanceof HTMLButtonElement) && this._model instanceof o && this._model?.init((n) => {
       t && (t.value = n);
     }), super.render(t);
   }
@@ -400,7 +400,7 @@ class T extends x {
 function Q(e) {
   return new T(e);
 }
-class N extends a {
+class F extends a {
   _tag = "input";
   _model;
   _type = "checkbox";
@@ -422,9 +422,9 @@ class N extends a {
   }
 }
 function X(e) {
-  return new N(e);
+  return new F(e);
 }
-class B extends a {
+class N extends a {
   _options;
   _type = "slider";
   _tag = "input";
@@ -443,13 +443,13 @@ class B extends a {
     }), t.value = (this._model?.value ?? "").toString(), super.render(t);
   }
 }
-const Y = (e, t) => new B(e, t);
-class M extends h {
+const Y = (e, t) => new N(e, t);
+class B extends h {
   _type = "select";
   _model;
   _options;
   constructor(t) {
-    super(), t instanceof c ? t.init((n) => {
+    super(), t instanceof o ? t.init((n) => {
       this._options = n;
     }) : this._options = t;
   }
@@ -471,24 +471,25 @@ class M extends h {
   }
 }
 function Z(e) {
-  return new M(e);
+  return new B(e);
 }
-class P extends a {
+class M extends a {
   context;
   width;
   height;
-  constructor(t, n) {
-    super(), this.width = t, this.height = n;
+  _initFunc;
+  constructor(t, n, s) {
+    super(), this.width = t, this.height = n, this._initFunc = s;
   }
   render() {
     const t = document.createElement("canvas");
-    return this.context = t.getContext("2d"), t.width = this.width, t.height = this.height, super.render(t);
+    return this.context = t.getContext("2d"), this._initFunc && this._initFunc(this.context), t.width = this.width ?? 0, t.height = this.height ?? 0, super.render(t);
   }
 }
-const U = (e, t) => new P(e, t), f = {}, tt = (e) => (t, n, s) => {
+const U = (e, t, n) => new M(e, t, n), f = {}, tt = (e) => (t, n, s) => {
   f[e] = s.value;
 };
-var R = /* @__PURE__ */ ((e) => (e.px = "px", e.em = "em", e.rem = "rem", e.vw = "vw", e.vh = "vh", e.percent = "%", e))(R || {});
+var P = /* @__PURE__ */ ((e) => (e.px = "px", e.em = "em", e.rem = "rem", e.vw = "vw", e.vh = "vh", e.percent = "%", e))(P || {});
 function et(e) {
   return {
     value: e,
@@ -531,7 +532,7 @@ function ut(e) {
     /* percent */
   };
 }
-class ot {
+class ct {
   constructor() {
   }
   mount(t) {
@@ -556,11 +557,11 @@ class ot {
   }
 }
 export {
-  ot as BuderApp,
-  c as BuderState,
-  R as BuderUnits,
+  ct as BuderApp,
+  o as BuderState,
+  P as BuderUnits,
   a as BuderWidget,
-  W as Builder,
+  R as Builder,
   $ as Button,
   U as Canvas,
   X as Checkbox,
@@ -574,23 +575,23 @@ export {
   q as Row,
   Z as Select,
   Y as Slider,
-  F as Span,
+  I as Span,
   V as Stack,
   _ as State,
   z as TextArea,
-  H as Theme,
-  I as View,
+  W as Theme,
+  H as View,
   J as W,
   g as _Builder,
   y as _Button,
-  N as _Checkbox,
+  F as _Checkbox,
   w as _Column,
   v as _Flex,
   b as _Input,
   T as _Label,
   E as _Row,
-  M as _Select,
-  B as _Slider,
+  B as _Select,
+  N as _Slider,
   x as _Span,
   h as _View,
   m as _currentBuilder,

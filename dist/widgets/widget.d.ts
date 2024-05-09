@@ -1,9 +1,10 @@
-import { BuderEvents } from "../events";
-import { BuderState, StateValue } from "../state";
-import { BuderStyle } from "../styles";
-import { BuderUnit } from "../units";
-import { BuderClassType } from "./theme";
-import { ChildrenProps } from "./view";
+import { BuderEvents } from '../events';
+import { BuderState, StateValue } from '../state';
+import { BuderStyle } from '../styles';
+import { BuderUnit } from '../units';
+import { BuderClassType } from './theme';
+import { ChildrenProps } from './view';
+
 type AttributesType = Record<string, StateValue<string>>;
 export declare class BuderWidget {
     constructor();

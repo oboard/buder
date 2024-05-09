@@ -1,5 +1,6 @@
-import { _View } from "./view";
-import { BuderWidget } from "./widget";
+import { _View } from './view';
+import { BuderWidget } from './widget';
+
 declare class _List extends _View {
     _type: string;
     constructor(children: BuderWidget[]);

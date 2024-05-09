@@ -1,4 +1,5 @@
-import { _View, ChildrenProps } from "./view";
+import { _View, ChildrenProps } from './view';
+
 export declare class _Button extends _View {
     _type: string;
     constructor(children?: ChildrenProps);

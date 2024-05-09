@@ -1,5 +1,6 @@
-import { _Flex } from "./flex";
-import { BuderWidget } from "./widget";
+import { _Flex } from './flex';
+import { BuderWidget } from './widget';
+
 export declare class _Row extends _Flex {
     constructor(children: BuderWidget[]);
 }

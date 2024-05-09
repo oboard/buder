@@ -1,6 +1,6 @@
-import { BuderState, StateValue } from "../state";
-import { BuderStyle } from "../styles";
-import { BuderWidget } from "./widget";
+import { BuderState, type StateValue } from "../state";
+import type { BuderStyle } from "../styles";
+import type { BuderWidget } from "./widget";
 
 export type BuderClassType = string | string[] | BuderState<string[]>;
 

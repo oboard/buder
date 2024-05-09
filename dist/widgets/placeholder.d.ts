@@ -1,5 +1,6 @@
-import { BuderUnit } from "../units";
-import { BuderWidget } from "./widget";
+import { BuderUnit } from '../units';
+import { BuderWidget } from './widget';
+
 declare class _H extends BuderWidget {
     constructor(height: BuderUnit);
 }

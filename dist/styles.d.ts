@@ -1,5 +1,6 @@
-import { StateValue } from "./state";
-import { BuderUnit } from "./units";
+import { StateValue } from './state';
+import { BuderUnit } from './units';
+
 type BuderStyleType = BuderUnit | StateValue<any>;
 export interface BuderStyle {
     hover?: BuderStyle;

@@ -1,5 +1,6 @@
-import { _Flex } from "./flex";
-import { ChildrenProps } from "./view";
+import { _Flex } from './flex';
+import { ChildrenProps } from './view';
+
 export declare class _Column extends _Flex {
     constructor(children: ChildrenProps);
 }

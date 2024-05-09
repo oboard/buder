@@ -1,5 +1,6 @@
-import { BuderState } from "../state";
-import { BuderWidget } from "./widget";
+import { BuderState } from '../state';
+import { BuderWidget } from './widget';
+
 export declare class _Checkbox extends BuderWidget {
     _tag: string;
     _model?: BuderState<boolean>;

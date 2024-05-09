@@ -1,5 +1,6 @@
-import { BuderState } from "../state";
-import { BuderWidget } from "./widget";
+import { BuderState } from '../state';
+import { BuderWidget } from './widget';
+
 export interface SliderOptions {
     min?: number;
     max?: number;

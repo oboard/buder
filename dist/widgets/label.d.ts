@@ -1,4 +1,5 @@
-import { _Span } from "./span";
+import { _Span } from './span';
+
 export declare class _Label extends _Span {
     _tag: string;
     constructor(text: string);

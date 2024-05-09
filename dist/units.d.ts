@@ -1,4 +1,5 @@
-import { StateValue } from "./state";
+import { StateValue } from './state';
+
 export declare enum BuderUnits {
     px = "px",
     em = "em",

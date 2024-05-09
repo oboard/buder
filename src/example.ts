@@ -24,9 +24,9 @@ class App extends BuderApp {
 
   @Router("/")
   Example() {
-    let a = State("14px");
-    let b = State(false);
-    let c = State(Span("Hello"));
+    const a = State("14px");
+    const b = State(false);
+    const c = State(Span("Hello"));
     return Theme(
       {
         button: {
@@ -54,7 +54,7 @@ class App extends BuderApp {
         }).bind(a),
         Slider(
           a.transform(
-            (v) => parseInt(v.replace("px", "")),
+            (v) => +v.replace("px", ""),
             (v) => `${v}px`
           ),
           {

@@ -1,5 +1,6 @@
-import { BuderState } from "../state";
-import { _Input } from "./input";
+import { BuderState } from '../state';
+import { _Input } from './input';
+
 declare class _TextArea extends _Input {
     _type: string;
     _tag: string;
